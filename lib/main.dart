@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:water_overflow/screens/mainScreen.dart';
-import 'package:water_overflow/utils/constants.dart';
+import 'package:water_overflow/screens/MainScreen.dart';
+import 'package:water_overflow/utils/Constants.dart';
 
 void main() {
   runApp(MyApp());

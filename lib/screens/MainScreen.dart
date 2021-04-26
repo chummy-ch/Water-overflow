@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:water_overflow/custom/panelButton.dart';
-import 'package:water_overflow/utils/constants.dart';
+import 'package:water_overflow/custom/PanelButton.dart';
+import 'package:water_overflow/utils/Constants.dart';
 
 class mainScreen extends StatelessWidget{
   @override
