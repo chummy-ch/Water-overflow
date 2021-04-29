@@ -6,7 +6,7 @@ const COLOR_BUTTON = Color.fromRGBO(162,220,233,1.0);
 const COLOR_WATER = Color.fromRGBO(37,144,249,1.0);
 const COLOR_DARK_BLUE = Color.fromRGBO(0,84,166,1.0);
 const COLOR_WHITE = Color.fromRGBO(255,255,255, 0.3);
-const COLOR_BLUE_WHITE = Color.fromRGBO(223,248,254,1.0);
+const COLOR_BLUE_WHITE = Color.fromRGBO(202,245,255,1.0);
 
 const TextTheme TEXT_THEME = TextTheme(
   headline1: TextStyle(

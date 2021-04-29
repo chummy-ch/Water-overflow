@@ -7,6 +7,7 @@ class PanelButton extends StatelessWidget{
 
   const PanelButton({Key key, this.height, this.width,
     @required this.child}) : super(key: key);
+
   @override
   Widget build(BuildContext context){
     return Container(
