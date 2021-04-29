@@ -8,7 +8,7 @@ abstract class Container {
   bool AddLiquid(Liquid liquid);
 }
 
-class Cup implements Container{
+class Cup implements Container {
   @override
   String name;
 
@@ -23,5 +23,4 @@ class Cup implements Container{
     // TODO: implement AddLiquid
     throw UnimplementedError();
   }
-
 }
