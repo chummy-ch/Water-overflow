@@ -1,8 +1,9 @@
-class Bottle{
-  String Welcome(){
+class Bottle {
+  String Welcome() {
     return "Sit down";
   }
-  String SpecialWelcomeForMySenpi(){
+
+  String SpecialWelcomeForMySenpi() {
     return "Sit down, please, Artem♥";
   }
 }
