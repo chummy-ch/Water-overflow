@@ -24,4 +24,19 @@ const TextTheme TEXT_THEME = TextTheme(
       fontWeight: FontWeight.normal,
       fontSize: 18,
       fontFamily: 'SairaCondensed'),
+  headline4: TextStyle(
+      color: COLOR_BLACK,
+      fontWeight: FontWeight.bold,
+      fontSize: 18,
+      fontFamily: 'SairaCondensed'),
+  headline5: TextStyle(
+      color: COLOR_BLACK,
+      fontWeight: FontWeight.normal,
+      fontSize: 12,
+      fontFamily: 'SairaCondensed'),
+  headline6: TextStyle(
+      color: COLOR_BLACK,
+      fontWeight: FontWeight.normal,
+      fontSize: 16,
+      fontFamily: 'SairaCondensed'),
 );
