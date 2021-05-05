@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -37,9 +38,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         child: Container(
           child: Align(
             child: Text(
-              PROJECT_NAME.toUpperCase(),
+              "title".tr().toString().toUpperCase(),
               style: TextStyle(
-                  fontSize: 40,
+                  fontSize: 35,
                   fontWeight: FontWeight.bold,
                   color: COLOR_WATER),
             ),
@@ -100,14 +101,20 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: 20, top: 70),
-              child:
-                  _input(Icon(Icons.email), 'EMAIL', _emailController, false),
+              padding: EdgeInsets.only(bottom: 20, top: 0),
+              child: _input(
+                  Icon(Icons.email),
+                  "WelcomeScreen.email".tr().toString().toUpperCase(),
+                  _emailController,
+                  false),
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 20, top: 0),
               child: _input(
-                  Icon(Icons.lock), 'PASSWORD', _passwordController, true),
+                  Icon(Icons.lock),
+                  "WelcomeScreen.password".tr().toString().toUpperCase(),
+                  _passwordController,
+                  true),
             ),
             SizedBox(
               height: 20,
@@ -140,18 +147,19 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
       _password = _passwordController.text.trim();
 
       if (!EmailValidator.validate(_email)) {
-        showToast("Please check email\nThen repeat again");
+        showToast("WelcomeScreen.validation.checkEmail".tr().toString());
         return;
       }
       if (!passwordValidator.validate(_password)) {
-        showToast("Please check password\nThen repeat again");
+        showToast("WelcomeScreen.validation.checkPassword".tr().toString());
         return;
       }
 
       MyUser.User user =
           await _authService.signInWithEmailAndPassword(_email, _password);
       if (user == null) {
-        showToast("Please check email and password\nThen repeat again");
+        showToast(
+            "WelcomeScreen.validation.checkEmailAndPassword".tr().toString());
         return;
       } else {
         _emailController.clear();
@@ -164,19 +172,24 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
       _password = _passwordController.text.trim();
 
       if (!EmailValidator.validate(_email)) {
-        showToast("Email is not correct");
+        showToast("WelcomeScreen.validation.incorrectEmail".tr().toString());
         return;
       }
       if (!passwordValidator.validate(_password)) {
-        showToast(
-            "Password must contain:\nMinimal length: 8\nMaximal length: 50\nUppercase letter: 1\nDigits: 2");
+        showToast("WelcomeScreen.validation.incorrectPassword".tr(namedArgs: {
+          'minLen': passwordValidator.min.toString(),
+          'maxLen': passwordValidator.max.toString(),
+          'upperLet': passwordValidator.uppercase.toString(),
+          'digits': passwordValidator.digits.toString()
+        }).toString());
         return;
       }
 
       MyUser.User user =
           await _authService.signUpWithEmailAndPassword(_email, _password);
       if (user == null) {
-        showToast("The account already exists for that email.");
+        showToast(
+            "WelcomeScreen.validation.alreadyCreatedAccount".tr().toString());
         return;
       } else {
         _emailController.clear();
@@ -184,19 +197,42 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
       }
     }
 
+    Widget _languageForm(String lang) {
+      return Padding(
+        padding: EdgeInsets.only(right: 10, bottom: 5),
+        child: GestureDetector(
+          child: Text(
+            lang == 'en' ? 'English' : 'Русский',
+            style: TextStyle(
+                fontWeight:
+                    EasyLocalization.of(context).currentLocale == Locale(lang)
+                        ? FontWeight.bold
+                        : FontWeight.normal),
+          ),
+          onTap: () {
+            setState(() {
+              context.setLocale(Locale(lang));
+            });
+          },
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: COLOR_BACKGROUND,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _showLogo(),
           (_isLogin
               ? Column(children: [
-                  _form('LOG IN', _loginUser),
+                  _form(
+                      "WelcomeScreen.logIn.logIn".tr().toString(), _loginUser),
                   Padding(
                     padding: EdgeInsets.only(top: 10),
                     child: GestureDetector(
                       child: Text(
-                        'Don`t have account? Sign in!',
+                        "WelcomeScreen.logIn.change".tr().toString(),
                       ),
                       onTap: () {
                         setState(() {
@@ -207,12 +243,13 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                   )
                 ])
               : Column(children: [
-                  _form('SIGN IN', _registerUser),
+                  _form("WelcomeScreen.signIn.signIn".tr().toString(),
+                      _registerUser),
                   Padding(
                     padding: EdgeInsets.only(top: 10),
                     child: GestureDetector(
                       child: Text(
-                        'Already have account? Log in!',
+                        "WelcomeScreen.signIn.change".tr().toString(),
                       ),
                       onTap: () {
                         setState(() {
@@ -222,6 +259,10 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                     ),
                   )
                 ])),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [_languageForm('en'), _languageForm('ru')],
+          )
         ],
       ),
     );

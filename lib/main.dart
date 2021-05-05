@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,9 +7,18 @@ import 'package:water_overflow/screens/WelcomePage.dart';
 import 'package:water_overflow/utils/AuthService.dart';
 import 'package:water_overflow/utils/Constants.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
+      child: MyApp(),
+      supportedLocales: [Locale('ru'), Locale('en')],
+      path: 'assets/translations',
+      fallbackLocale: Locale('en'),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -18,9 +28,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       theme: ThemeData(
           scaffoldBackgroundColor: COLOR_BACKGROUND,
           textTheme: TEXT_THEME,
+          //TODO: TO Constants
           fontFamily: "SairaCondensed-Light"),
       home: FutureBuilder(
         future: _initialization,

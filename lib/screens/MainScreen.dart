@@ -5,7 +5,6 @@ import 'package:water_overflow/custom/Block.dart';
 import 'package:water_overflow/custom/HistoryButton.dart';
 import 'package:water_overflow/custom/LiquidButton.dart';
 import 'package:water_overflow/custom/PanelButton.dart';
-import 'package:water_overflow/custom/SimpleButton.dart';
 import 'package:water_overflow/utils/AuthService.dart';
 import 'package:water_overflow/screens/StatisticsScreen.dart';
 import 'package:water_overflow/utils/Constants.dart';

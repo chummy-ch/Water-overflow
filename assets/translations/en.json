@@ -1,0 +1,25 @@
+{
+  "language" : "English",
+  "title": "Water Overflow",
+  "WelcomeScreen": {
+    "email" : "Email",
+    "password":"Password",
+    "logIn": {
+      "logIn": "Log in",
+      "change": "Don`t have account? @:WelcomeScreen.signIn.signIn!"
+    },
+    "signIn": {
+      "signIn": "Sign in",
+      "change": "Already have account? @:WelcomeScreen.logIn.logIn!"
+    },
+    "validation" : {
+      "repeat" : "Then repeat again",
+      "checkEmail" : "Please check email\n@:WelcomeScreen.validation.repeat",
+      "checkPassword" : "Please check password\nThen repeat again",
+      "checkEmailAndPassword" : "Please check email and password\nThen repeat again",
+      "incorrectEmail" : "Email is not correct",
+      "incorrectPassword" : "Password must contain:\nMinimal length: {minLen}\nMaximal length: {maxLen}\nUppercase letter: {upperLet}\nDigits: {digits}",
+      "alreadyCreatedAccount": "The account already exists for that email."
+    }
+  }
+}
