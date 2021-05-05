@@ -6,7 +6,9 @@ import 'package:water_overflow/custom/HistoryButton.dart';
 import 'package:water_overflow/custom/LiquidButton.dart';
 import 'package:water_overflow/custom/PanelButton.dart';
 import 'package:water_overflow/screens/StatisticsScreen.dart';
+import 'package:water_overflow/utils/AuthService.dart';
 import 'package:water_overflow/utils/Constants.dart';
+
 import 'AlarmScreen.dart';
 import 'SettingsScreen.dart';
 
@@ -22,7 +24,6 @@ class MainScreen extends StatelessWidget {
           height: size.height,
           child: Column(
             children: [
-
               //PanelButtons
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -31,6 +32,23 @@ class MainScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    //////////TODO: DELETE
+                    ElevatedButton(
+                      onPressed: () {
+                        AuthService().logOut();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: COLOR_BLUE_WHITE,
+                        shadowColor: COLOR_BLACK,
+                        onPrimary: COLOR_BUTTON,
+                      ),
+                      child: Icon(
+                        Icons.close,
+                        color: COLOR_BLACK,
+                      ),
+                    ),
+                    SizedBox(width: SizeConfig.blockSizeHorizontal * 4),
+                    //////////TODO: DELETE
                     PanelButton(
                       screen: SettingsScreen(),
                       child: Icon(AppIcons.settings, size: 24),

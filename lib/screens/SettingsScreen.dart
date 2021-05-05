@@ -19,7 +19,6 @@ class SettingsScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-
               //PanelButton
               Padding(
                 padding: EdgeInsets.symmetric(
