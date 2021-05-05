@@ -4,6 +4,7 @@
   "WelcomeScreen": {
     "email" : "Email",
     "password":"Password",
+    "enterByGoogle" : "Войти через Google",
     "logIn": {
       "logIn": "Войти",
       "change": "Еще нет аккаунта? @:WelcomeScreen.signIn.signIn!"

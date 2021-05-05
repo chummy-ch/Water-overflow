@@ -30,6 +30,7 @@ dependencies:
   fluttertoast: ^8.0.6
   email_validator: ^2.0.1
   password_validator: ^0.0.1
+  google_sign_in: ^5.0.2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -62,6 +63,7 @@ flutter:
          - asset: assets/icons/MainMenuIcons.ttf
   assets:
     - assets/translations/
+    - assets/icons/google_icon.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

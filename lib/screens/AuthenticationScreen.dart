@@ -34,7 +34,8 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   Widget build(BuildContext context) {
     Widget _showLogo() {
       return Padding(
-        padding: EdgeInsets.only(top: 100),
+        padding:
+            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.12),
         child: Container(
           child: Align(
             child: Text(
@@ -52,7 +53,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
     Widget _input(Icon icon, String hint,
         TextEditingController textEditingController, bool isSecure) {
       return Container(
-        padding: EdgeInsets.only(left: 20, right: 20),
+        padding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width * 0.05,
+            right: MediaQuery.of(context).size.width * 0.05),
         child: TextField(
           controller: textEditingController,
           obscureText: isSecure,
@@ -68,7 +71,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
               enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: COLOR_WHITE, width: 1)),
               prefixIcon: Padding(
-                padding: EdgeInsets.only(left: 10, right: 10),
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.05,
+                    right: MediaQuery.of(context).size.width * 0.05),
                 child: IconTheme(
                   data: IconThemeData(color: COLOR_WATER),
                   child: icon,
@@ -78,7 +83,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
       );
     }
 
-    Widget _button(String text, void foo()) {
+    Widget _button(String text, void foo(), {bool googleLogo = false}) {
       return ElevatedButton(
         onPressed: foo,
         style: ElevatedButton.styleFrom(
@@ -86,12 +91,23 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           shadowColor: COLOR_BLACK,
           onPrimary: COLOR_BUTTON,
         ),
-        child: Text(
-          text,
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: COLOR_DARK_BLUE,
-              fontSize: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            googleLogo
+                ? Image.asset(
+                    'assets/icons/google_icon.png',
+                  )
+                : SizedBox.shrink(),
+            Text(
+              text,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: COLOR_DARK_BLUE,
+                  fontSize: 20),
+            ),
+            SizedBox.shrink(),
+          ],
         ),
       );
     }
@@ -101,7 +117,8 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: 20, top: 0),
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.width * 0.05, top: 0),
               child: _input(
                   Icon(Icons.email),
                   "WelcomeScreen.email".tr().toString().toUpperCase(),
@@ -109,7 +126,8 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                   false),
             ),
             Padding(
-              padding: EdgeInsets.only(bottom: 20, top: 0),
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.width * 0.05, top: 0),
               child: _input(
                   Icon(Icons.lock),
                   "WelcomeScreen.password".tr().toString().toUpperCase(),
@@ -120,9 +138,12 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
               height: 20,
             ),
             Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, bottom: 5),
+              padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.05,
+                  right: MediaQuery.of(context).size.width * 0.05,
+                  bottom: MediaQuery.of(context).size.width * 0.05),
               child: Container(
-                height: 50,
+                height: MediaQuery.of(context).size.height * 0.08,
                 width: MediaQuery.of(context).size.width,
                 child: _button(label, foo),
               ),
@@ -140,6 +161,34 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 50);
+    }
+
+    void _signGoogle() async {
+      MyUser.User user = await _authService.signInWithGoogle();
+      if (user == null) {
+        showToast(
+            "WelcomeScreen.validation.checkEmailAndPassword".tr().toString());
+        return;
+      } else {
+        _emailController.clear();
+        _passwordController.clear();
+      }
+    }
+
+    Widget _googleForm() {
+      return Padding(
+        padding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width * 0.05,
+            right: MediaQuery.of(context).size.width * 0.05,
+            bottom: MediaQuery.of(context).size.width * 0.05),
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.08,
+          width: MediaQuery.of(context).size.width,
+          child: _button(
+              "WelcomeScreen.enterByGoogle".tr().toString(), _signGoogle,
+              googleLogo: true),
+        ),
+      );
     }
 
     void _loginUser() async {
@@ -228,6 +277,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
               ? Column(children: [
                   _form(
                       "WelcomeScreen.logIn.logIn".tr().toString(), _loginUser),
+                  _googleForm(),
                   Padding(
                     padding: EdgeInsets.only(top: 10),
                     child: GestureDetector(
@@ -245,6 +295,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
               : Column(children: [
                   _form("WelcomeScreen.signIn.signIn".tr().toString(),
                       _registerUser),
+                  _googleForm(),
                   Padding(
                     padding: EdgeInsets.only(top: 10),
                     child: GestureDetector(
@@ -257,7 +308,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                         });
                       },
                     ),
-                  )
+                  ),
                 ])),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
