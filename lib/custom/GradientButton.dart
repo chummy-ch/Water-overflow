@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:water_overflow/utils/Constants.dart';
 
-class SimpleButton extends StatelessWidget {
+class GradientButton extends StatelessWidget {
   final Widget child;
   final double height, width;
+  final EdgeInsetsGeometry margin;
 
-  const SimpleButton({Key key, this.height, this.width, @required this.child})
+  const GradientButton(
+      {Key key, this.height, this.width, this.margin, @required this.child})
       : super(key: key);
 
   @override
@@ -13,6 +15,7 @@ class SimpleButton extends StatelessWidget {
     return Container(
       width: width,
       height: height,
+      margin: margin,
       decoration: BoxDecoration(
         color: COLOR_BUTTON,
         boxShadow: [

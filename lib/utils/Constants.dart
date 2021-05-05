@@ -6,7 +6,7 @@ const COLOR_BUTTON = Color.fromRGBO(162, 220, 233, 1.0);
 const COLOR_WATER = Color.fromRGBO(37, 144, 249, 1.0);
 const COLOR_DARK_BLUE = Color.fromRGBO(0, 84, 166, 1.0);
 const COLOR_WHITE = Color.fromRGBO(255, 255, 255, 0.3);
-const COLOR_BLUE_WHITE = Color.fromRGBO(223, 248, 254, 1.0);
+const COLOR_BLUE_WHITE = Color.fromRGBO(202, 245, 255, 1.0);
 
 const TextTheme TEXT_THEME = TextTheme(
   headline1: TextStyle(
@@ -24,4 +24,35 @@ const TextTheme TEXT_THEME = TextTheme(
       fontWeight: FontWeight.normal,
       fontSize: 18,
       fontFamily: 'SairaCondensed'),
+  headline4: TextStyle(
+      color: COLOR_BLACK,
+      fontWeight: FontWeight.bold,
+      fontSize: 18,
+      fontFamily: 'SairaCondensed'),
+  headline5: TextStyle(
+      color: COLOR_BLACK,
+      fontWeight: FontWeight.normal,
+      fontSize: 12,
+      fontFamily: 'SairaCondensed'),
+  headline6: TextStyle(
+      color: COLOR_BLACK,
+      fontWeight: FontWeight.normal,
+      fontSize: 16,
+      fontFamily: 'SairaCondensed'),
 );
+
+class SizeConfig {
+  static MediaQueryData _mediaQueryData;
+  static double screenWidth;
+  static double screenHeight;
+  static double blockSizeHorizontal;
+  static double blockSizeVertical;
+
+  void init(BuildContext context) {
+    _mediaQueryData = MediaQuery.of(context);
+    screenWidth = _mediaQueryData.size.width;
+    screenHeight = _mediaQueryData.size.height;
+    blockSizeHorizontal = screenWidth / 100;
+    blockSizeVertical = screenHeight / 100;
+  }
+}
