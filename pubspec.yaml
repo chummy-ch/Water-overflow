@@ -44,6 +44,21 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  fonts:
+    - family: SairaCondensed
+      fonts:
+         - asset: assets/fonts/SairaCondensed-Black.ttf
+         - asset: assets/fonts/SairaCondensed-Bold.ttf
+         - asset: assets/fonts/SairaCondensed-ExtraBold.ttf
+         - asset: assets/fonts/SairaCondensed-ExtraLight.ttf
+         - asset: assets/fonts/SairaCondensed-Light.ttf
+         - asset: assets/fonts/SairaCondensed-Medium.ttf
+         - asset: assets/fonts/SairaCondensed-Regular.ttf
+         - asset: assets/fonts/SairaCondensed-SemiBold.ttf
+         - asset: assets/fonts/SairaCondensed-Thin.ttf
+    - family: AppIcons
+      fonts:
+         - asset: assets/icons/MainMenuIcons.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -67,6 +82,17 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   # fonts:
+  #  - family: SairaCondensed
+  #    fonts:
+  #       - asset: assets/SairaCondensed-Black.ttf
+  #       - asset: assets/SairaCondensed-Bold.ttf
+  #       - asset: assets/SairaCondensed-ExtraBold.ttf
+  #       - asset: assets/SairaCondensed-ExtraLight.ttf
+  #       - asset: assets/SairaCondensed-Light.ttf
+  #       - asset: assets/SairaCondensed-Medium.ttf
+  #       - asset: assets/SairaCondensed-Regular.ttf
+  #       - asset: assets/SairaCondensed-SemiBold.ttf
+  #       - asset: assets/SairaCondensed-Thin.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
@@ -77,9 +103,6 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #  - family: SairaCondensed
-  #      fonts:
-  #        - asset: fonts/SairaCondensed-Light.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
