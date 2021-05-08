@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "372920051101",
+    "firebase_url": "https://water-overflow-c1a22-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "water-overflow-c1a22",
+    "storage_bucket": "water-overflow-c1a22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372920051101:android:e502e27b0dbf237f8f7b74",
+        "android_client_info": {
+          "package_name": "com.example.water_overflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372920051101-0s350ot6qlc11rpkvl45ldptbjj84k1a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.water_overflow",
+            "certificate_hash": "cee4b7ab03e8ffbf0979c3fadbf160734060da79"
+          }
+        },
+        {
+          "client_id": "372920051101-8so9ij1fc5bmhdmrqvdg18mn9pgad1t2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaSzzheNpmt2Zc-KJ1m3cO0wmDyZ7hYRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372920051101-8so9ij1fc5bmhdmrqvdg18mn9pgad1t2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

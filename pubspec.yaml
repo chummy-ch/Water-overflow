@@ -23,11 +23,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  easy_localization: ^3.0.0
+  cloud_firestore: ^2.0.0
+  firebase_auth: ^1.1.3
+  provider: ^5.0.0
+  fluttertoast: ^8.0.6
+  email_validator: ^2.0.1
+  password_validator: ^0.0.1
+  google_sign_in: ^5.0.2
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  # cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -38,6 +46,24 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  fonts:
+    - family: SairaCondensed
+      fonts:
+         - asset: assets/fonts/SairaCondensed-Black.ttf
+         - asset: assets/fonts/SairaCondensed-Bold.ttf
+         - asset: assets/fonts/SairaCondensed-ExtraBold.ttf
+         - asset: assets/fonts/SairaCondensed-ExtraLight.ttf
+         - asset: assets/fonts/SairaCondensed-Light.ttf
+         - asset: assets/fonts/SairaCondensed-Medium.ttf
+         - asset: assets/fonts/SairaCondensed-Regular.ttf
+         - asset: assets/fonts/SairaCondensed-SemiBold.ttf
+         - asset: assets/fonts/SairaCondensed-Thin.ttf
+    - family: AppIcons
+      fonts:
+         - asset: assets/icons/MainMenuIcons.ttf
+  assets:
+    - assets/translations/
+    - assets/icons/google_icon.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -61,6 +87,17 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   # fonts:
+  #  - family: SairaCondensed
+  #    fonts:
+  #       - asset: assets/SairaCondensed-Black.ttf
+  #       - asset: assets/SairaCondensed-Bold.ttf
+  #       - asset: assets/SairaCondensed-ExtraBold.ttf
+  #       - asset: assets/SairaCondensed-ExtraLight.ttf
+  #       - asset: assets/SairaCondensed-Light.ttf
+  #       - asset: assets/SairaCondensed-Medium.ttf
+  #       - asset: assets/SairaCondensed-Regular.ttf
+  #       - asset: assets/SairaCondensed-SemiBold.ttf
+  #       - asset: assets/SairaCondensed-Thin.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
