@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:water_overflow/custom/Block.dart';
-import 'package:water_overflow/custom/PSettingsButton.dart';
-import 'package:water_overflow/custom/PanelButton.dart';
-import 'package:water_overflow/custom/SettingsButton.dart';
+import 'package:water_overflow/widgets/Block.dart';
+import 'package:water_overflow/widgets/PSettingsButton.dart';
+import 'package:water_overflow/widgets/PanelButton.dart';
+import 'package:water_overflow/widgets/SettingsButton.dart';
 import 'package:water_overflow/utils/Constants.dart';
 
 import 'MainScreen.dart';
@@ -36,7 +36,7 @@ class SettingsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Block(
+              ButtonsBackgroundRectangle(
                 height: SizeConfig.blockSizeVertical * 41.7,
                 child: Column(
                   children: [
@@ -57,17 +57,17 @@ class SettingsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    PSettingsButton(
+                    PersonalSettingsButton(
                         name: "SettingsScreen.personalInfo.gender.gender"
                             .tr()
                             .toString(),
                         data: "SettingsScreen.personalInfo.gender.male"
                             .tr()
                             .toString()),
-                    PSettingsButton(
-                        name: "SettingsScreen.personalInfo.age".tr().toString(),
+                    PersonalSettingsButton(
+                        name: "SettingsScreen.personalInfo.age".tr(),
                         data: "18"),
-                    PSettingsButton(
+                    PersonalSettingsButton(
                         name: "SettingsScreen.personalInfo.weight.weight"
                             .tr()
                             .toString(),
@@ -75,7 +75,7 @@ class SettingsScreen extends StatelessWidget {
                             "SettingsScreen.personalInfo.weight.kg"
                                 .tr()
                                 .toString()),
-                    PSettingsButton(
+                    PersonalSettingsButton(
                         name: "SettingsScreen.personalInfo.height.height"
                             .tr()
                             .toString(),
@@ -83,7 +83,7 @@ class SettingsScreen extends StatelessWidget {
                             "SettingsScreen.personalInfo.height.cm"
                                 .tr()
                                 .toString()),
-                    PSettingsButton(
+                    PersonalSettingsButton(
                         name: "SettingsScreen.personalInfo.activity.activity"
                             .tr()
                             .toString(),
@@ -93,7 +93,7 @@ class SettingsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Block(
+              ButtonsBackgroundRectangle(
                   height: SizeConfig.blockSizeVertical * 35.6,
                   child: Column(
                     children: [
@@ -106,7 +106,7 @@ class SettingsScreen extends StatelessWidget {
                                 top: SizeConfig.blockSizeVertical * 2.5,
                                 bottom: SizeConfig.blockSizeVertical * 2),
                             child: Text(
-                              'SettingsScreen.info.info'.tr().toString(),
+                              'SettingsScreen.info.info'.tr(),
                               style: TEXT_THEME.headline2,
                             ),
                           ),
@@ -117,11 +117,11 @@ class SettingsScreen extends StatelessWidget {
                               .tr()
                               .toString()),
                       SettingsButton(
-                          name: "SettingsScreen.info.about".tr().toString()),
+                          name: "SettingsScreen.info.about".tr()),
                       SettingsButton(
-                          name: "SettingsScreen.info.contact".tr().toString()),
+                          name: "SettingsScreen.info.contact".tr()),
                       SettingsButton(
-                          name: "SettingsScreen.info.private".tr().toString()),
+                          name: "SettingsScreen.info.private".tr()),
                     ],
                   )),
             ],

@@ -1,14 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:water_overflow/custom/AppIcons.dart';
-import 'package:water_overflow/custom/Block.dart';
-import 'package:water_overflow/custom/HistoryButton.dart';
-import 'package:water_overflow/custom/LiquidButton.dart';
-import 'package:water_overflow/custom/PanelButton.dart';
 import 'package:water_overflow/screens/StatisticsScreen.dart';
 import 'package:water_overflow/utils/AuthService.dart';
 import 'package:water_overflow/utils/Constants.dart';
+import 'package:water_overflow/widgets/AppIcons.dart';
+import 'package:water_overflow/widgets/Block.dart';
+import 'package:water_overflow/widgets/HistoryButton.dart';
+import 'package:water_overflow/widgets/LiquidButton.dart';
+import 'package:water_overflow/widgets/PanelButton.dart';
 
 import 'AlarmScreen.dart';
 import 'SettingsScreen.dart';
@@ -50,7 +50,6 @@ class MainScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: SizeConfig.blockSizeHorizontal * 4),
-                    //////////TODO: DELETE
                     PanelButton(
                       screen: SettingsScreen(),
                       child: Icon(AppIcons.settings, size: 24),
@@ -102,7 +101,7 @@ class MainScreen extends StatelessWidget {
               Padding(
                 padding:
                     EdgeInsets.only(top: SizeConfig.blockSizeVertical * 2.2),
-                child: Block(
+                child: ButtonsBackgroundRectangle(
                   height: SizeConfig.blockSizeVertical * 13.17,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
@@ -159,7 +158,7 @@ class MainScreen extends StatelessWidget {
 
               //history block
 
-              Block(
+              ButtonsBackgroundRectangle(
                 height: SizeConfig.blockSizeVertical * 25.6,
                 child: ListView(
                   scrollDirection: Axis.vertical,

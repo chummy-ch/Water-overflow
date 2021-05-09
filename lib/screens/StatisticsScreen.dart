@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:water_overflow/custom/Block.dart';
-import 'package:water_overflow/custom/PanelButton.dart';
+import 'package:water_overflow/widgets/Block.dart';
+import 'package:water_overflow/widgets/PanelButton.dart';
 import 'package:water_overflow/utils/Constants.dart';
 
 import 'MainScreen.dart';
@@ -37,34 +37,34 @@ class StatisticsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Block(
+              ButtonsBackgroundRectangle(
                 height: SizeConfig.blockSizeVertical * 15.7,
                 child: Column(
                   children: [
                     Text(
-                      'StatisticsScreen.weekly'.tr().toString(),
+                      'StatisticsScreen.weekly'.tr(),
                       style: TEXT_THEME.headline2,
                     ),
                   ],
                 ),
               ),
-              Block(
+              ButtonsBackgroundRectangle(
                 height: SizeConfig.blockSizeVertical * 60.7,
                 child: Column(
                   children: [
                     Text(
-                      'StatisticsScreen.report'.tr().toString(),
+                      'StatisticsScreen.report'.tr(),
                       style: TEXT_THEME.headline2,
                     ),
                   ],
                 ),
               ),
-              Block(
+              ButtonsBackgroundRectangle(
                 height: SizeConfig.blockSizeVertical * 41.7,
                 child: Column(
                   children: [
                     Text(
-                      'StatisticsScreen.diagrams'.tr().toString(),
+                      'StatisticsScreen.diagrams'.tr(),
                       style: TEXT_THEME.headline2,
                     ),
                   ],

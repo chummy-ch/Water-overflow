@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:water_overflow/utils/Constants.dart';
 
-import 'PSettingsButton.dart';
-
-class SettingsButton extends PSettingsButton {
+class PersonalSettingsButton extends StatelessWidget {
   final String name;
+  final String data;
 
-  const SettingsButton({Key key, @required this.name}) : super(key: key);
+  const PersonalSettingsButton({Key key, @required this.name, this.data})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +35,18 @@ class SettingsButton extends PSettingsButton {
         ),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(
             name,
             style: TEXT_THEME.subtitle1,
+          ),
+          SizedBox(
+            width: SizeConfig.blockSizeHorizontal * 20,
+          ),
+          Text(
+            data,
+            style: TEXT_THEME.headline3,
           ),
         ],
       ),

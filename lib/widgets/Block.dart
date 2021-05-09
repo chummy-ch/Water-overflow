@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:water_overflow/utils/Constants.dart';
 
-class Block extends StatelessWidget {
+class ButtonsBackgroundRectangle extends StatelessWidget {
   final Widget child;
   final double height, width;
 
-  const Block({
+  const ButtonsBackgroundRectangle({
     Key key,
     this.height,
     this.width,
