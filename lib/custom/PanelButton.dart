@@ -24,13 +24,13 @@ class PanelButton extends StatelessWidget {
           );
         },
         child: Container(
-          width: 34,
-          height: 34,
+          width: SizeConfig.blockSizeVertical * 4,
+          height: SizeConfig.blockSizeVertical * 4,
           decoration: BoxDecoration(color: COLOR_BUTTON, boxShadow: [
             BoxShadow(
-              offset: const Offset(1.0, 3.0),
+              offset: const Offset(0.5, 1.5),
               blurRadius: 4.0,
-              spreadRadius: 0.7,
+              spreadRadius: 0.5,
             )
           ]),
           child: Center(child: child),

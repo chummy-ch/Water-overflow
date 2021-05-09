@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:water_overflow/utils/Constants.dart';
 
-class GradientButton extends StatelessWidget {
-  final Widget child;
-  final double height, width;
-  final EdgeInsetsGeometry margin;
+import 'PSettingsButton.dart';
 
-  const GradientButton(
-      {Key key, this.height, this.width, this.margin, @required this.child})
-      : super(key: key);
+class SettingsButton extends PSettingsButton {
+  final String name;
+
+  const SettingsButton({Key key, @required this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: height,
-      margin: margin,
+      width: SizeConfig.blockSizeHorizontal * 80.73,
+      height: SizeConfig.blockSizeVertical * 5.19,
+      margin: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical * 0.89),
       decoration: BoxDecoration(
         color: COLOR_BUTTON,
         boxShadow: [
@@ -36,7 +34,15 @@ class GradientButton extends StatelessWidget {
           ],
         ),
       ),
-      child: Center(child: child),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            name,
+            style: TEXT_THEME.subtitle1,
+          ),
+        ],
+      ),
     );
   }
 }

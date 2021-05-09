@@ -1,7 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:water_overflow/custom/Block.dart';
+import 'package:water_overflow/custom/PSettingsButton.dart';
 import 'package:water_overflow/custom/PanelButton.dart';
+import 'package:water_overflow/custom/SettingsButton.dart';
 import 'package:water_overflow/utils/Constants.dart';
 
 import 'MainScreen.dart';
@@ -34,19 +37,93 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               Block(
-                height: SizeConfig.blockSizeVertical * 38.4,
-                child: Text(
-                  'Personal information',
-                  style: TEXT_THEME.headline2,
+                height: SizeConfig.blockSizeVertical * 41.7,
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: SizeConfig.blockSizeHorizontal * 4.9,
+                              top: SizeConfig.blockSizeVertical * 2.5,
+                              bottom: SizeConfig.blockSizeVertical * 2),
+                          child: Text(
+                            'SettingsScreen.personalInfo.personalInfo'
+                                .tr()
+                                .toString(),
+                            style: TEXT_THEME.headline2,
+                          ),
+                        ),
+                      ],
+                    ),
+                    PSettingsButton(
+                        name: "SettingsScreen.personalInfo.gender.gender"
+                            .tr()
+                            .toString(),
+                        data: "SettingsScreen.personalInfo.gender.male"
+                            .tr()
+                            .toString()),
+                    PSettingsButton(
+                        name: "SettingsScreen.personalInfo.age".tr().toString(),
+                        data: "18"),
+                    PSettingsButton(
+                        name: "SettingsScreen.personalInfo.weight.weight"
+                            .tr()
+                            .toString(),
+                        data: "70" +
+                            "SettingsScreen.personalInfo.weight.kg"
+                                .tr()
+                                .toString()),
+                    PSettingsButton(
+                        name: "SettingsScreen.personalInfo.height.height"
+                            .tr()
+                            .toString(),
+                        data: "174" +
+                            "SettingsScreen.personalInfo.height.cm"
+                                .tr()
+                                .toString()),
+                    PSettingsButton(
+                        name: "SettingsScreen.personalInfo.activity.activity"
+                            .tr()
+                            .toString(),
+                        data: "SettingsScreen.personalInfo.activity.low"
+                            .tr()
+                            .toString()),
+                  ],
                 ),
               ),
               Block(
-                height: SizeConfig.blockSizeVertical * 37.6,
-                child: Text(
-                  'Information',
-                  style: TEXT_THEME.headline2,
-                ),
-              )
+                  height: SizeConfig.blockSizeVertical * 35.6,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: SizeConfig.blockSizeHorizontal * 4.9,
+                                top: SizeConfig.blockSizeVertical * 2.5,
+                                bottom: SizeConfig.blockSizeVertical * 2),
+                            child: Text(
+                              'SettingsScreen.info.info'.tr().toString(),
+                              style: TEXT_THEME.headline2,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SettingsButton(
+                          name: "SettingsScreen.info.premiumVersion"
+                              .tr()
+                              .toString()),
+                      SettingsButton(
+                          name: "SettingsScreen.info.about".tr().toString()),
+                      SettingsButton(
+                          name: "SettingsScreen.info.contact".tr().toString()),
+                      SettingsButton(
+                          name: "SettingsScreen.info.private".tr().toString()),
+                    ],
+                  )),
             ],
           ),
         ),

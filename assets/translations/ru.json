@@ -1,26 +1,70 @@
 {
-  "language" : "Русский",
-  "title": "Bottle Overflow",
+  "language": "Русский",
+  "title": "Водичка полилась",
   "WelcomeScreen": {
-    "email" : "Email",
-    "password":"Password",
-    "enterByGoogle" : "Войти через Google",
+    "email": "Email",
+    "password": "Password",
+    "enterByGoogle": "Войти через Google",
     "logIn": {
       "logIn": "Войти",
       "change": "Еще нет аккаунта? @:WelcomeScreen.signIn.signIn!"
     },
     "signIn": {
-      "signIn": "Зарегестрироваться",
+      "signIn": "Зарегестрироватся",
       "change": "Есть аккаунт? @:WelcomeScreen.logIn.logIn!"
     },
-    "validation" : {
-      "repeat" : "Затем попробуйте снова",
-      "checkEmail" : "Проверьте корректность почтового адреса\n@:WelcomeScreen.validation.repeat",
-      "checkPassword" : "Проверьте корректность пароля\n@:WelcomeScreen.validation.repeat",
-      "checkEmailAndPassword" : "Проверьте корректность почтового адреса и пароля\nT@:WelcomeScreen.validation.repeat",
-      "incorrectEmail" : "Почтовый адрес не действителен",
-      "incorrectPassword" : "Пароль должен удволетворять требованиям:\nМинимальная длинна: {minLen}\nМаксимальная длинна: {maxLen}\nБуквы верхнего регистра: {upperLet}\nЦифры: {digits}",
+    "validation": {
+      "repeat": "Затем попробуйсте снова",
+      "checkEmail": "Проверьте коректность почтового адреса\n@:WelcomeScreen.validation.repeat",
+      "checkPassword": "Проверьте коректность пароля\n@:WelcomeScreen.validation.repeat",
+      "checkEmailAndPassword": "Проверьте коректность почтового адреса и пароля\nT@:WelcomeScreen.validation.repeat",
+      "incorrectEmail": "Почтовый адрес не действителен",
+      "incorrectPassword": "Пароль должен удволетворять требованиям:\nМинимальная длинна: {minLen}\nМаксимальная длинна: {maxLen}\nБуквы верхнего регистра: {upperLet}\nЦифры: {digits}",
       "alreadyCreatedAccount": "Данный почтовый адрес уже используется"
     }
+  },
+  "SettingsScreen": {
+    "personalInfo": {
+      "personalInfo": "Персональная информация",
+      "gender": {
+        "gender": "Пол",
+        "male": "женский",
+        "female": "мужской"
+      },
+      "age": "Возраст",
+      "weight": {
+        "weight": "Вес",
+        "kg": "кг"
+      },
+      "height": {
+        "height": "Рост",
+        "cm": "см"
+      },
+      "activity": {
+        "activity": "Активность",
+        "low": "низкая",
+        "middle": "средняя",
+        "high": "высокая"
+      }
+    },
+    "info": {
+      "info": "Информация",
+      "premiumVersion": "Премиум версия",
+      "about": "О приложении",
+      "contact": "Связаться с нами",
+      "private": "Политика конфеденциальности"
+    }
+  },
+  "MainScreen": {
+    "ml": "мл",
+    "history": "История"
+  },
+  "AlarmScreen": {
+    "alarms": "Будильники"
+  },
+  "StatisticsScreen": {
+    "weekly": "Недельное соревнование",
+    "report": "Отчёт",
+    "diagrams": "Диаграммы"
   }
 }

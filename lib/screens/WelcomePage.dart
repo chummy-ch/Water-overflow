@@ -13,5 +13,6 @@ class WelcomePage extends StatelessWidget {
     final bool isLoggedIn = user != null;
 
     return isLoggedIn ? MainScreen() : AuthenticationScreen();
+    // return MainScreen();
   }
 }

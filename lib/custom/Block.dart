@@ -17,11 +17,12 @@ class Block extends StatelessWidget {
     return Container(
       width: SizeConfig.blockSizeHorizontal * 90.5,
       height: height,
+      margin: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical * 1.7),
       decoration: BoxDecoration(color: COLOR_BUTTON, boxShadow: [
         BoxShadow(
-          offset: const Offset(1.0, 3.0),
+          offset: const Offset(0.5, 1.5),
           blurRadius: 4.0,
-          spreadRadius: 0.7,
+          spreadRadius: 0.5,
         )
       ]),
       child: child,
