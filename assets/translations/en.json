@@ -1,10 +1,10 @@
 {
-  "language" : "English",
+  "language": "English",
   "title": "Water Overflow",
   "WelcomeScreen": {
-    "email" : "Email",
-    "password":"Password",
-    "enterByGoogle" : "Enter with Google",
+    "email": "Email",
+    "password": "Password",
+    "enterByGoogle": "Enter with Google",
     "logIn": {
       "logIn": "Log in",
       "change": "Don`t have account? @:WelcomeScreen.signIn.signIn!"
@@ -13,14 +13,58 @@
       "signIn": "Sign in",
       "change": "Already have account? @:WelcomeScreen.logIn.logIn!"
     },
-    "validation" : {
-      "repeat" : "Then repeat again",
-      "checkEmail" : "Please check email\n@:WelcomeScreen.validation.repeat",
-      "checkPassword" : "Please check password\nThen repeat again",
-      "checkEmailAndPassword" : "Please check email and password\nThen repeat again",
-      "incorrectEmail" : "Email is not correct",
-      "incorrectPassword" : "Password must contain:\nMinimal length: {minLen}\nMaximal length: {maxLen}\nUppercase letter: {upperLet}\nDigits: {digits}",
+    "validation": {
+      "repeat": "Then repeat again",
+      "checkEmail": "Please check email\n@:WelcomeScreen.validation.repeat",
+      "checkPassword": "Please check password\nThen repeat again",
+      "checkEmailAndPassword": "Please check email and password\nThen repeat again",
+      "incorrectEmail": "Email is not correct",
+      "incorrectPassword": "Password must contain:\nMinimal length: {minLen}\nMaximal length: {maxLen}\nUppercase letter: {upperLet}\nDigits: {digits}",
       "alreadyCreatedAccount": "The account already exists for that email."
     }
+  },
+  "SettingsScreen": {
+    "personalInfo": {
+      "personalInfo": "Personal information",
+      "gender": {
+        "gender": "Gender",
+        "male": "male",
+        "female": "female"
+      },
+      "age": "Age",
+      "weight": {
+        "weight": "Weight",
+        "kg": "kg"
+      },
+      "height": {
+        "height": "Height",
+        "cm": "cm"
+      },
+      "activity": {
+        "activity": "Activity level",
+        "low": "low",
+        "middle": "middle",
+        "high": "high"
+      }
+    },
+    "info": {
+      "info": "Information",
+      "premiumVersion": "Premium version",
+      "about": "About the app",
+      "contact": "Contact us",
+      "private": "Privacy Policy"
+    }
+  },
+  "MainScreen": {
+    "ml": "ml",
+    "history": "History"
+  },
+  "AlarmScreen": {
+    "alarms": "Your Alarms"
+  },
+  "StatisticsScreen": {
+    "weekly": "Weekly completion",
+    "report": "Drink water report",
+    "diagrams": "Diagrams"
   }
 }

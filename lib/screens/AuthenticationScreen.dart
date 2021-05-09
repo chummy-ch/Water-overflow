@@ -39,7 +39,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         child: Container(
           child: Align(
             child: Text(
-              "title".tr().toString().toUpperCase(),
+              "title".tr().toUpperCase(),
               style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.bold,

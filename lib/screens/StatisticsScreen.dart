@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:water_overflow/custom/PanelButton.dart';
+import 'package:water_overflow/widgets/Block.dart';
+import 'package:water_overflow/widgets/PanelButton.dart';
 import 'package:water_overflow/utils/Constants.dart';
 
 import 'MainScreen.dart';
@@ -15,12 +17,15 @@ class StatisticsScreen extends StatelessWidget {
         body: Container(
           width: size.width,
           height: size.height,
-          child: Column(
-            children: [
+          child: ListView(
+            padding: EdgeInsets.symmetric(
+                horizontal: SizeConfig.blockSizeHorizontal * 4.7),
+            scrollDirection: Axis.vertical,
+            children: <Widget>[
               //PanelButton
               Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: SizeConfig.blockSizeHorizontal * 6.3,
+                    horizontal: SizeConfig.blockSizeHorizontal * 1.5,
                     vertical: SizeConfig.blockSizeVertical * 3.5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -32,7 +37,39 @@ class StatisticsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Text('Statistics'),
+              ButtonsBackgroundRectangle(
+                height: SizeConfig.blockSizeVertical * 15.7,
+                child: Column(
+                  children: [
+                    Text(
+                      'StatisticsScreen.weekly'.tr(),
+                      style: TEXT_THEME.headline2,
+                    ),
+                  ],
+                ),
+              ),
+              ButtonsBackgroundRectangle(
+                height: SizeConfig.blockSizeVertical * 60.7,
+                child: Column(
+                  children: [
+                    Text(
+                      'StatisticsScreen.report'.tr(),
+                      style: TEXT_THEME.headline2,
+                    ),
+                  ],
+                ),
+              ),
+              ButtonsBackgroundRectangle(
+                height: SizeConfig.blockSizeVertical * 41.7,
+                child: Column(
+                  children: [
+                    Text(
+                      'StatisticsScreen.diagrams'.tr(),
+                      style: TEXT_THEME.headline2,
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
