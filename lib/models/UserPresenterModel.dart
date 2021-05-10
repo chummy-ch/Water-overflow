@@ -35,4 +35,5 @@ class UserPresenterModel {
   }
 }
 
+//Enum class to display user activity
 enum Activity { few, normal, enough, much }
