@@ -108,10 +108,12 @@ class MainScreen extends StatelessWidget {
                     children: <Widget>[
                       SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                       new LiquidButton(
+                        onPressed: () {},
                         child: Icon(AppIcons.plus, size: 40),
                       ),
                       SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                       new LiquidButton(
+                        onPressed: () {},
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -122,6 +124,7 @@ class MainScreen extends StatelessWidget {
                       ),
                       SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                       new LiquidButton(
+                        onPressed: () {},
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -132,6 +135,7 @@ class MainScreen extends StatelessWidget {
                       ),
                       SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                       new LiquidButton(
+                        onPressed: () {},
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -142,6 +146,7 @@ class MainScreen extends StatelessWidget {
                       ),
                       SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                       new LiquidButton(
+                        onPressed: () {},
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
