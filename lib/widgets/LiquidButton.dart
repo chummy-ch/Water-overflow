@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:water_overflow/utils/Constants.dart';
 
-class LiquidButton extends StatelessWidget {
+class LiquidButton extends MaterialButton {
   final Widget child;
+  final VoidCallback onPressed;
 
-  const LiquidButton({Key key, @required this.child}) : super(key: key);
+  const LiquidButton({Key key, @required this.onPressed, @required this.child})
+      : super(key: key, onPressed: onPressed);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,10 @@ class LiquidButton extends StatelessWidget {
           ],
         ),
       ),
-      child: Center(child: child),
+      child: RawMaterialButton(
+        child: child,
+        onPressed: onPressed,
+      )
     );
   }
 }
