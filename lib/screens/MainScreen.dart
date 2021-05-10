@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:water_overflow/screens/StatisticsScreen.dart';
 import 'package:water_overflow/utils/AuthService.dart';
 import 'package:water_overflow/utils/Constants.dart';
@@ -18,9 +17,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    final Size size = MediaQuery
-        .of(context)
-        .size;
+    final Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -103,7 +100,7 @@ class MainScreen extends StatelessWidget {
               //liquid Block
               Padding(
                 padding:
-                EdgeInsets.only(top: SizeConfig.blockSizeVertical * 2.2),
+                    EdgeInsets.only(top: SizeConfig.blockSizeVertical * 2.2),
                 child: ButtonsBackgroundRectangle(
                   height: SizeConfig.blockSizeVertical * 13.17,
                   child: ListView(
@@ -111,14 +108,12 @@ class MainScreen extends StatelessWidget {
                     children: <Widget>[
                       SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                       new LiquidButton(
-                        onPressed: () {  },
+                        onPressed: () {},
                         child: Icon(AppIcons.plus, size: 40),
                       ),
                       SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                       new LiquidButton(
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -129,7 +124,7 @@ class MainScreen extends StatelessWidget {
                       ),
                       SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                       new LiquidButton(
-                        onPressed: () {  },
+                        onPressed: () {},
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -140,7 +135,7 @@ class MainScreen extends StatelessWidget {
                       ),
                       SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                       new LiquidButton(
-                        onPressed: () {  },
+                        onPressed: () {},
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -151,7 +146,7 @@ class MainScreen extends StatelessWidget {
                       ),
                       SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                       new LiquidButton(
-                        onPressed: () {  },
+                        onPressed: () {},
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
