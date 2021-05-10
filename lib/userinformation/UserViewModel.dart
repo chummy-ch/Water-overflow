@@ -15,4 +15,12 @@ class UserViewModel {
   static UserPresenterModel getUserModel() {
     return _userPresenterModel;
   }
+
+  static setUserPresenterModel(UserPresenterModel user) {
+    _userPresenterModel = user;
+  }
+
+  static setUser(User user){
+    _user = user;
+  }
 }
