@@ -6,8 +6,8 @@ import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/Alarm.dart';
 import 'package:water_overflow/widgets/CustomPicker.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
-import 'MainScreen.dart';
 
+import 'MainScreen.dart';
 
 class AlarmScreen extends StatelessWidget {
   @override
@@ -52,32 +52,31 @@ class AlarmScreen extends StatelessWidget {
                   ),
                 ],
               ),
-                      Alarm(),
-                      Alarm(),
-                      Alarm(),
-                      Alarm(),
-                      Alarm(),
-                      Alarm(),
-                      Alarm(),
-                      Alarm(),
-                      Alarm(),
+              Alarm(),
+              Alarm(),
+              Alarm(),
+              Alarm(),
+              Alarm(),
+              Alarm(),
+              Alarm(),
+              Alarm(),
+              Alarm(),
               RawMaterialButton(
                 onPressed: () {
                   DatePicker.showPicker(context, showTitleActions: true,
                       onChanged: (date) {
-                        print('change $date in time zone ' +
-                            date.timeZoneOffset.inHours.toString());
-                      }, onConfirm: (date) {
-                        print('confirm $date');
-                      },
+                    print('change $date in time zone ' +
+                        date.timeZoneOffset.inHours.toString());
+                  }, onConfirm: (date) {
+                    print('confirm $date');
+                  },
                       theme: DatePickerTheme(
                         backgroundColor: COLOR_BACKGROUND,
                         itemStyle: TEXT_THEME.headline2,
                         doneStyle: TextStyle(color: COLOR_BLACK),
                       ),
                       pickerModel: CustomPicker(currentTime: DateTime.now()),
-                      locale: lan()
-                  );
+                      locale: lan());
                 },
                 child: Container(
                   width: SizeConfig.blockSizeHorizontal * 15,
@@ -95,12 +94,12 @@ class AlarmScreen extends StatelessWidget {
       ),
     );
   }
-  LocaleType lan(){
+
+  LocaleType lan() {
     print('AlarmScreen.picker'.tr());
-    if('AlarmScreen.picker'.tr() == 'ru'){
+    if ('AlarmScreen.picker'.tr() == 'ru') {
       return LocaleType.ru;
-    }
-    else{
+    } else {
       return LocaleType.en;
     }
   }

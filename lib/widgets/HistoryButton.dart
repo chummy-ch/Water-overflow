@@ -18,35 +18,39 @@ class HistoryButton extends StatelessWidget {
           horizontal: SizeConfig.blockSizeHorizontal * 6.5),
       decoration: BoxDecoration(
         color: COLOR_BUTTON,
-        boxShadow: [
-          BASIC_SHADOW
-        ],
+        boxShadow: [BASIC_SHADOW],
         gradient: BASIC_GRADIENT,
       ),
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SizedBox(width: 10,),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+        SizedBox(
+          width: 10,
+        ),
         Icon(
           AppIcons.drop,
           size: 16,
         ),
-            SizedBox(width: 10,),
+        SizedBox(
+          width: 10,
+        ),
         Text(
           time,
           style: TEXT_THEME.headline6,
         ),
-            Spacer(flex: 1),
+        Spacer(flex: 1),
         Text(
           info,
           style: TEXT_THEME.headline6,
         ),
-            SizedBox(width: 10,),
+        SizedBox(
+          width: 10,
+        ),
         Icon(
           AppIcons.trash,
           size: 16,
         ),
-            SizedBox(width: 10,),
+        SizedBox(
+          width: 10,
+        ),
       ]),
     );
   }

@@ -17,9 +17,7 @@ class LiquidButton extends MaterialButton {
             EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 1.6),
         decoration: BoxDecoration(
           color: COLOR_BUTTON,
-          boxShadow: [
-            BASIC_SHADOW
-          ],
+          boxShadow: [BASIC_SHADOW],
           gradient: BASIC_GRADIENT,
         ),
         child: RawMaterialButton(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:water_overflow/models/User.dart' as MyUser;
-import 'package:water_overflow/screens/AuthenticationScreen.dart';
 import 'package:water_overflow/screens/MainScreen.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -13,6 +12,6 @@ class WelcomePage extends StatelessWidget {
     final bool isLoggedIn = user != null;
 
     //return isLoggedIn ? MainScreen() : AuthenticationScreen();
-     return MainScreen();
+    return MainScreen();
   }
 }

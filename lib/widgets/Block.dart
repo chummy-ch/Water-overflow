@@ -18,9 +18,7 @@ class ButtonsBackgroundRectangle extends StatelessWidget {
       width: SizeConfig.blockSizeHorizontal * 90.5,
       height: height,
       margin: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical * 1.7),
-      decoration: BoxDecoration(color: COLOR_BUTTON, boxShadow: [
-        BASIC_SHADOW
-      ]),
+      decoration: BoxDecoration(color: COLOR_BUTTON, boxShadow: [BASIC_SHADOW]),
       child: child,
     );
   }

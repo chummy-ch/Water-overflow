@@ -1,12 +1,12 @@
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class CustomPicker extends CommonPickerModel {
   String digits(int value, int length) {
     return '$value'.padLeft(length, "0");
   }
 
-  CustomPicker({DateTime currentTime, LocaleType locale}) : super(locale: locale) {
+  CustomPicker({DateTime currentTime, LocaleType locale})
+      : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
     this.setLeftIndex(this.currentTime.hour);
     this.setMiddleIndex(this.currentTime.minute);
@@ -33,7 +33,7 @@ class CustomPicker extends CommonPickerModel {
 
   @override
   String rightStringAtIndex(int index) {
-      return null;
+    return null;
   }
 
   @override
@@ -54,12 +54,19 @@ class CustomPicker extends CommonPickerModel {
   @override
   DateTime finalTime() {
     return currentTime.isUtc
-        ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day,
-        this.currentLeftIndex(), this.currentMiddleIndex(), this.currentRightIndex())
-        : DateTime(currentTime.year, currentTime.month, currentTime.day, this.currentLeftIndex(),
-        this.currentMiddleIndex(), this.currentRightIndex());
+        ? DateTime.utc(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
+            this.currentRightIndex())
+        : DateTime(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
+            this.currentRightIndex());
   }
-
-
-
 }

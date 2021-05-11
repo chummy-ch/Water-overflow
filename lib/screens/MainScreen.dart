@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:water_overflow/screens/StatisticsScreen.dart';
-import 'package:water_overflow/utils/AuthService.dart';
 import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/AppIcons.dart';
 import 'package:water_overflow/widgets/Block.dart';
@@ -114,8 +113,7 @@ class MainScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(AppIcons.glass, size: 40),
-                              Text('240 ' + 'MainScreen.ml'.tr()
-                                  ,
+                              Text('240 ' + 'MainScreen.ml'.tr(),
                                   style: TEXT_THEME.headline5),
                             ]),
                       ),
@@ -159,8 +157,7 @@ class MainScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           horizontal: SizeConfig.blockSizeHorizontal * 6.5,
                           vertical: SizeConfig.blockSizeVertical * 2.1),
-                      child: new Text(
-                          'MainScreen.history'.tr() + ':',
+                      child: new Text('MainScreen.history'.tr() + ':',
                           style: TEXT_THEME.headline4),
                     ),
                     SizedBox(width: SizeConfig.blockSizeVertical * 2.1),

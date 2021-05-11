@@ -18,9 +18,7 @@ class GradientButton extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
         color: COLOR_BUTTON,
-        boxShadow: [
-          BASIC_SHADOW
-        ],
+        boxShadow: [BASIC_SHADOW],
         gradient: BASIC_GRADIENT,
       ),
       child: Center(child: child),

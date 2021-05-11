@@ -16,9 +16,7 @@ class PersonalSettingsButton extends StatelessWidget {
       margin: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical * 0.89),
       decoration: BoxDecoration(
         color: COLOR_BUTTON,
-        boxShadow: [
-          BASIC_SHADOW
-        ],
+        boxShadow: [BASIC_SHADOW],
         gradient: BASIC_GRADIENT,
       ),
       child: Row(

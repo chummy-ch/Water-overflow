@@ -26,9 +26,8 @@ class PanelButton extends StatelessWidget {
         child: Container(
           width: SizeConfig.blockSizeVertical * 4,
           height: SizeConfig.blockSizeVertical * 4,
-          decoration: BoxDecoration(color: COLOR_BUTTON, boxShadow: [
-            BASIC_SHADOW
-          ]),
+          decoration:
+              BoxDecoration(color: COLOR_BUTTON, boxShadow: [BASIC_SHADOW]),
           child: Center(child: child),
         ));
   }
