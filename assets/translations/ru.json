@@ -60,7 +60,8 @@
     "history": "История"
   },
   "AlarmScreen": {
-    "alarms": "Будильники"
+    "alarms": "Будильники",
+    "picker": "ru"
   },
   "StatisticsScreen": {
     "weekly": "Недельное соревнование",

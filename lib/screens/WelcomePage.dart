@@ -12,7 +12,7 @@ class WelcomePage extends StatelessWidget {
     final MyUser.User user = Provider.of<MyUser.User>(context);
     final bool isLoggedIn = user != null;
 
-    return isLoggedIn ? MainScreen() : AuthenticationScreen();
-    // return MainScreen();
+    //return isLoggedIn ? MainScreen() : AuthenticationScreen();
+     return MainScreen();
   }
 }

@@ -60,7 +60,8 @@
     "history": "History"
   },
   "AlarmScreen": {
-    "alarms": "Your Alarms"
+    "alarms": "Your Alarms",
+    "picker": "en"
   },
   "StatisticsScreen": {
     "weekly": "Weekly completion",
