@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:water_overflow/screens/StatisticsScreen.dart';
 import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/AppIcons.dart';
@@ -8,7 +9,6 @@ import 'package:water_overflow/widgets/Block.dart';
 import 'package:water_overflow/widgets/HistoryButton.dart';
 import 'package:water_overflow/widgets/LiquidButton.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
-
 import 'AlarmScreen.dart';
 import 'SettingsScreen.dart';
 
@@ -51,7 +51,6 @@ class MainScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
               //Water Circle
               Container(
                   width: SizeConfig.blockSizeHorizontal * 68.3,
@@ -67,20 +66,30 @@ class MainScreen extends StatelessWidget {
                     ),
                     shape: BoxShape.circle,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '50%',
-                        style: TEXT_THEME.headline1,
+                    child: Center(child:Container(
+                      width: SizeConfig.blockSizeHorizontal * 60.3,
+                      height: SizeConfig.blockSizeVertical * 31.5,
+                      child:LiquidCircularProgressIndicator(
+                        value: 0.5, // Defaults to 0.5.
+                        valueColor: AlwaysStoppedAnimation(Colors.lightBlue[200]),
+                        backgroundColor: COLOR_TRANSPARENT,
+                        direction: Axis.vertical,
+                        center: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '50%',
+                              style: TEXT_THEME.headline1,
+                            ),
+                            Text(
+                              '1100/2200' + 'MainScreen.ml'.tr(),
+                              style: TEXT_THEME.headline2,
+                            ),
+                          ],
+                        ),
                       ),
-                      Text(
-                        '1100/2200' + 'MainScreen.ml'.tr(),
-                        style: TEXT_THEME.headline2,
-                      ),
-                    ],
-                  )),
-
+                    ),
+                    ),),
               //liquid Block
               Padding(
                 padding:
@@ -175,6 +184,7 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
             ],
+
           ),
         ),
       ),
