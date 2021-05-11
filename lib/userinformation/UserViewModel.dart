@@ -20,7 +20,7 @@ class UserViewModel {
     _userPresenterModel = user;
   }
 
-  static setUser(User user){
+  static setUser(User user) {
     _user = user;
   }
 }
