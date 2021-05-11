@@ -35,19 +35,18 @@ class PersonalSettingsButton extends StatelessWidget {
         ),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          SizedBox(width: 10),
           Text(
             name,
             style: TEXT_THEME.subtitle1,
           ),
-          SizedBox(
-            width: SizeConfig.blockSizeHorizontal * 20,
-          ),
+          Spacer(flex: 1),
           Text(
             data,
             style: TEXT_THEME.headline3,
           ),
+          SizedBox(width: 10),
         ],
       ),
     );

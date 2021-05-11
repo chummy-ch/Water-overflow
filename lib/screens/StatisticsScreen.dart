@@ -41,9 +41,19 @@ class StatisticsScreen extends StatelessWidget {
                 height: SizeConfig.blockSizeVertical * 15.7,
                 child: Column(
                   children: [
-                    Text(
-                      'StatisticsScreen.weekly'.tr(),
-                      style: TEXT_THEME.headline2,
+                    Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: SizeConfig.blockSizeHorizontal * 3,
+                              top: SizeConfig.blockSizeVertical * 1,
+                              bottom: SizeConfig.blockSizeVertical * 1),
+                          child: Text(
+                            'StatisticsScreen.weekly'.tr(),
+                            style: TEXT_THEME.headline2,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -52,9 +62,19 @@ class StatisticsScreen extends StatelessWidget {
                 height: SizeConfig.blockSizeVertical * 60.7,
                 child: Column(
                   children: [
-                    Text(
-                      'StatisticsScreen.report'.tr(),
-                      style: TEXT_THEME.headline2,
+                    Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: SizeConfig.blockSizeHorizontal * 3,
+                              top: SizeConfig.blockSizeVertical * 1,
+                              bottom: SizeConfig.blockSizeVertical * 1),
+                          child: Text(
+                            'StatisticsScreen.report'.tr(),
+                            style: TEXT_THEME.headline2,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -63,9 +83,19 @@ class StatisticsScreen extends StatelessWidget {
                 height: SizeConfig.blockSizeVertical * 41.7,
                 child: Column(
                   children: [
-                    Text(
-                      'StatisticsScreen.diagrams'.tr(),
-                      style: TEXT_THEME.headline2,
+                    Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: SizeConfig.blockSizeHorizontal * 3,
+                              top: SizeConfig.blockSizeVertical * 1,
+                              bottom: SizeConfig.blockSizeVertical * 1),
+                          child: Text(
+                            'StatisticsScreen.diagrams'.tr(),
+                            style: TEXT_THEME.headline2,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

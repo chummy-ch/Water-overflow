@@ -34,21 +34,6 @@ class MainScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    //////////TODO: DELETE
-                    ElevatedButton(
-                      onPressed: () {
-                        AuthService().logOut();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: COLOR_BLUE_WHITE,
-                        shadowColor: COLOR_BLACK,
-                        onPrimary: COLOR_BUTTON,
-                      ),
-                      child: Icon(
-                        Icons.close,
-                        color: COLOR_BLACK,
-                      ),
-                    ),
                     SizedBox(width: SizeConfig.blockSizeHorizontal * 4),
                     PanelButton(
                       screen: SettingsScreen(),

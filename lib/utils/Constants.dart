@@ -7,6 +7,7 @@ const COLOR_WATER = Color.fromRGBO(37, 144, 249, 1.0);
 const COLOR_DARK_BLUE = Color.fromRGBO(0, 84, 166, 1.0);
 const COLOR_WHITE = Color.fromRGBO(255, 255, 255, 0.3);
 const COLOR_BLUE_WHITE = Color.fromRGBO(202, 245, 255, 1.0);
+const COLOR_BLUE_DIRTY = Color.fromRGBO(1, 141, 171, 1.0);
 
 const TextTheme TEXT_THEME = TextTheme(
   headline1: TextStyle(

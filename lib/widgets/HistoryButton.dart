@@ -36,26 +36,30 @@ class HistoryButton extends StatelessWidget {
           ],
         ),
       ),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            SizedBox(width: 10,),
         Icon(
           AppIcons.drop,
           size: 16,
         ),
+            SizedBox(width: 10,),
         Text(
           time,
           style: TEXT_THEME.headline6,
         ),
-        SizedBox(
-          width: SizeConfig.blockSizeHorizontal * 15,
-        ),
+            Spacer(flex: 1),
         Text(
           info,
           style: TEXT_THEME.headline6,
         ),
+            SizedBox(width: 10,),
         Icon(
           AppIcons.trash,
           size: 16,
         ),
+            SizedBox(width: 10,),
       ]),
     );
   }

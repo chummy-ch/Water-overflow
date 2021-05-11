@@ -31,6 +31,7 @@ dependencies:
   email_validator: ^2.0.1
   password_validator: ^0.0.1
   google_sign_in: ^5.0.2
+  flutter_switch: ^0.3.1
 
 
   # The following adds the Cupertino Icons font to your application.
