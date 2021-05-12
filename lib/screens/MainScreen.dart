@@ -9,6 +9,7 @@ import 'package:water_overflow/widgets/Block.dart';
 import 'package:water_overflow/widgets/HistoryButton.dart';
 import 'package:water_overflow/widgets/LiquidButton.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
+
 import 'AlarmScreen.dart';
 import 'SettingsScreen.dart';
 
@@ -53,43 +54,46 @@ class MainScreen extends StatelessWidget {
               ),
               //Water Circle
               Container(
-                  width: SizeConfig.blockSizeHorizontal * 68.3,
-                  height: SizeConfig.blockSizeVertical * 35.5,
-                  decoration: new BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color.fromRGBO(126, 214, 234, 1.0),
-                        COLOR_WHITE,
-                      ],
-                    ),
-                    shape: BoxShape.circle,
+                width: SizeConfig.blockSizeVertical * 35.5,
+                height: SizeConfig.blockSizeVertical * 35.5,
+                decoration: new BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromRGBO(126, 214, 234, 1.0),
+                      COLOR_WHITE,
+                    ],
                   ),
-                    child: Center(child:Container(
-                      width: SizeConfig.blockSizeHorizontal * 60.3,
-                      height: SizeConfig.blockSizeVertical * 31.5,
-                      child:LiquidCircularProgressIndicator(
-                        value: 0.5, // Defaults to 0.5.
-                        valueColor: AlwaysStoppedAnimation(Colors.lightBlue[200]),
-                        backgroundColor: COLOR_TRANSPARENT,
-                        direction: Axis.vertical,
-                        center: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '50%',
-                              style: TEXT_THEME.headline1,
-                            ),
-                            Text(
-                              '1100/2200' + 'MainScreen.ml'.tr(),
-                              style: TEXT_THEME.headline2,
-                            ),
-                          ],
-                        ),
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: Container(
+                    width: SizeConfig.blockSizeVertical * 31.5,
+                    height: SizeConfig.blockSizeVertical * 31.5,
+                    child: LiquidCircularProgressIndicator(
+                      value: 0.5,
+                      // Defaults to 0.5.
+                      valueColor: AlwaysStoppedAnimation(Colors.lightBlue[200]),
+                      backgroundColor: COLOR_TRANSPARENT,
+                      direction: Axis.vertical,
+                      center: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '50%',
+                            style: TEXT_THEME.headline1,
+                          ),
+                          Text(
+                            '1100/2200' + 'MainScreen.ml'.tr(),
+                            style: TEXT_THEME.headline2,
+                          ),
+                        ],
                       ),
                     ),
-                    ),),
+                  ),
+                ),
+              ),
               //liquid Block
               Padding(
                 padding:
@@ -184,7 +188,6 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
             ],
-
           ),
         ),
       ),

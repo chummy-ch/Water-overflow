@@ -13,7 +13,7 @@ class SettingsButton extends PersonalSettingsButton {
     return Container(
       width: SizeConfig.blockSizeHorizontal * 80.73,
       height: SizeConfig.blockSizeVertical * 5.19,
-      margin: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical * 0.89),
+      margin: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical * 2),
       decoration: BoxDecoration(
         color: COLOR_BUTTON,
         boxShadow: [BASIC_SHADOW],
