@@ -7,8 +7,6 @@ import 'package:water_overflow/widgets/PSettingsButton.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
 import 'package:water_overflow/widgets/SettingsButton.dart';
 
-import 'MainScreen.dart';
-
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -32,7 +30,11 @@ class SettingsScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     PanelButton(
-                      screen: MainScreen(),
+                      tap: () {
+                        Navigator.pop(
+                          context,
+                        );
+                      },
                       child: Icon(Icons.arrow_back, size: 24),
                     ),
                   ],

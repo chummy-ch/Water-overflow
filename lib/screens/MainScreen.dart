@@ -37,17 +37,35 @@ class MainScreen extends StatelessWidget {
                   children: [
                     SizedBox(width: SizeConfig.blockSizeHorizontal * 4),
                     PanelButton(
-                      screen: SettingsScreen(),
+                      tap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SettingsScreen()),
+                        );
+                      },
                       child: Icon(AppIcons.settings, size: 24),
                     ),
                     SizedBox(width: SizeConfig.blockSizeHorizontal * 4),
                     PanelButton(
-                      screen: StatisticsScreen(),
+                      tap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StatisticsScreen()),
+                        );
+                      },
                       child: Icon(AppIcons.statistics, size: 24),
                     ),
                     SizedBox(width: SizeConfig.blockSizeHorizontal * 4),
                     PanelButton(
-                      screen: AlarmScreen(),
+                      tap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AlarmScreen()),
+                        );
+                      },
                       child: Icon(AppIcons.notification, size: 24),
                     ),
                   ],

@@ -7,8 +7,6 @@ import 'package:water_overflow/widgets/Alarm.dart';
 import 'package:water_overflow/widgets/CustomPicker.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
 
-import 'MainScreen.dart';
-
 class AlarmScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,11 @@ class AlarmScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     PanelButton(
-                      screen: MainScreen(),
+                      tap: () {
+                        Navigator.pop(
+                          context,
+                        );
+                      },
                       child: Icon(Icons.arrow_back, size: 24),
                     ),
                   ],
