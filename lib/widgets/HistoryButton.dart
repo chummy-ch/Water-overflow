@@ -15,7 +15,8 @@ class HistoryButton extends StatelessWidget {
       height: SizeConfig.blockSizeHorizontal * 8.3,
       width: SizeConfig.blockSizeVertical * 40.5,
       margin: EdgeInsets.symmetric(
-          horizontal: SizeConfig.blockSizeHorizontal * 6.5),
+          horizontal: SizeConfig.blockSizeHorizontal * 6.5,
+          vertical: SizeConfig.blockSizeVertical),
       decoration: BoxDecoration(
         color: COLOR_BUTTON,
         boxShadow: [BASIC_SHADOW],
