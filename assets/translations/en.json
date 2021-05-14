@@ -45,6 +45,15 @@
         "low": "low",
         "middle": "middle",
         "high": "high"
+      },
+      "language": {
+        "language": "Language",
+        "en": "english",
+        "ru": "russian"
+      },
+      "account": {
+        "account": "Account",
+        "leave": "sign out"
       }
     },
     "info": {
