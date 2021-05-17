@@ -16,6 +16,7 @@ import 'AlarmScreen.dart';
 import 'SettingsScreen.dart';
 
 class MainScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -42,8 +43,7 @@ class MainScreen extends StatelessWidget {
                       tap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingsScreen()),
+                          MaterialPageRoute(builder: (context) => Settings()),
                         );
                       },
                       child: Icon(AppIcons.settings, size: 24),
@@ -92,6 +92,11 @@ class Blocks extends StatefulWidget {
 class DynamicBlocks extends State<Blocks> {
   double v = 0;
   int volumeGoal = 2000;
+
+  void _loadFirestore() {
+    _saveProgress();
+    setState(() {});
+  }
 
   Future<void> _loadHistoryInfo() async {
     final pref = await SharedPreferences.getInstance();
@@ -144,6 +149,7 @@ class DynamicBlocks extends State<Blocks> {
   @override
   Widget build(BuildContext context) {
     _loadProgress();
+    _loadFirestore();
     Future<void> f = _loadHistoryInfo();
     f.whenComplete(() => setState(() {}));
 
