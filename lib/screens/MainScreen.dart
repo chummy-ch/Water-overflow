@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_overflow/models/HistoryModel.dart';
 import 'package:water_overflow/screens/StatisticsScreen.dart';
+import 'package:water_overflow/userinformation/UserViewModel.dart';
 import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/AppIcons.dart';
 import 'package:water_overflow/widgets/Block.dart';
@@ -43,8 +43,7 @@ class MainScreen extends StatelessWidget {
                       tap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingsScreen()),
+                          MaterialPageRoute(builder: (context) => Settings()),
                         );
                       },
                       child: Icon(AppIcons.settings, size: 24),
@@ -94,71 +93,27 @@ class DynamicBlocks extends State<Blocks> {
   double v = 0;
   int volumeGoal = 2000;
 
-  Future<void> _loadHistoryInfo() async {
-    final pref = await SharedPreferences.getInstance();
-    String history = pref.getString(HistoryModel.getStoreKeyWithDate());
-    if (history == null || history.length == 0) {
-      //TODO set default values
-    } else {
-      List<String> stringList = history.split(',');
-      historyList = [];
-      for (int i = 0; i < stringList.length; i++) {
-        String s = stringList[i].replaceAll("[", "").replaceAll("]", "");
-        List<String> valuesList = s.split('?');
-        DateTime time = DateTime.parse(valuesList[0]);
-        int volume = int.parse(valuesList[1]);
-        String liquid = valuesList[2];
-        historyList.add(HistoryModel(time, volume, liquid));
-      }
-    }
-  }
-
-  void _loadProgress() async {
-    final pref = await SharedPreferences.getInstance();
-    double progress = pref.getDouble(HistoryModel.getPogressKeyWithDate());
-    if (progress >= 0)
-      v = progress;
-    else
-      v = 0;
-  }
-
-  void _saveProgress() async {
-    final pref = await SharedPreferences.getInstance();
-    pref.setDouble(HistoryModel.getPogressKeyWithDate(), v);
-  }
-
-//  ["water", "soda", "black_tea", "coffee", "green_tea", "cola", "beer", "wine", "milk"];
-  double calculateCoef(int index){
-    if(index == 0) return 1.0; //"water"
-    else if(index == 1 || index == 2 ||index == 4) return 0.8; //"soda", "black_tea", "green_tea"
-    else if(index == 3) return 0.3; //"coffee"
-    else if(index == 5) return 0.6; //"cola"
-    else if(index == 6) return -0.5; //"beer"
-    else if(index == 7) return -0.6;  // "wine"
-    else if(index == 8) return 0.4;  //"milk"
-  }
-
-
-  Future<void> _addLiquid(int volume, double coef) async {
+  _addLiquid(int volume) {
     HistoryModel model = new HistoryModel(DateTime.now(), volume, "Water");
     historyList.add(model);
     v += volume*coef / volumeGoal;
-    _saveProgress();
+    UserViewModel.setProgress(v);
     setState(() {});
-    final pref = await SharedPreferences.getInstance();
-    String st = "";
-    for (int i = 0; i < historyList.length; i++) {
-      st += "[${historyList[i].toString()}]";
-      if (i != historyList.length - 1) st += ",";
-    }
-    pref.setString(HistoryModel.getStoreKeyWithDate(), st);
+    UserViewModel.setHistory(historyList);
   }
 
   @override
   Widget build(BuildContext context) {
-    _loadProgress();
-    Future<void> f = _loadHistoryInfo();
-    f.whenComplete(() => setState(() {}));
+    var p = UserViewModel.getProgress();
+    p.then((value) {
+      v = value;
+      setState(() {});
+    });
+    var f = UserViewModel.getHistory();
+    f.then((value) {
+      historyList = value;
+      setState(() {});
+    });
 
     return new Column(
       children: <Widget>[

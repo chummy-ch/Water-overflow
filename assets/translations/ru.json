@@ -1,5 +1,6 @@
 {
   "language": "Русский",
+  "ru": "@:language",
   "title": "Water Overflow",
   "WelcomeScreen": {
     "email": "Email",
@@ -28,8 +29,8 @@
       "personalInfo": "Персональная информация",
       "gender": {
         "gender": "Пол",
-        "male": "женский",
-        "female": "мужской"
+        "male": "мужской",
+        "female": "женский"
       },
       "age": "Возраст",
       "weight": {
@@ -42,9 +43,10 @@
       },
       "activity": {
         "activity": "Активность",
-        "low": "низкая",
-        "middle": "средняя",
-        "high": "высокая"
+        "few": "Низкая",
+        "normal": "Средняя",
+        "enough": "Высокая",
+        "much": "Очень высокая"
       },
       "language": {
         "language": "Язык",

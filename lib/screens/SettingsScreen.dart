@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:water_overflow/models/UserPresenterModel.dart';
 import 'package:water_overflow/screens/DialogScreen.dart';
+import 'package:water_overflow/userinformation/UserViewModel.dart';
 import 'package:water_overflow/utils/AuthService.dart';
 import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/Block.dart';
@@ -9,11 +11,61 @@ import 'package:water_overflow/widgets/PSettingsButton.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
 import 'package:water_overflow/widgets/SettingsButton.dart';
 
-class SettingsScreen extends StatelessWidget {
+class Settings extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => SettingsScreen();
+}
+
+class SettingsScreen extends State<Settings> {
+  UserPresenterModel _userModel = UserViewModel.getUserModel();
+
+  void _setActivity(double act) {
+    _userModel.setActivity(act.round());
+    _updateViewModelUserModel();
+  }
+
+  void _updateViewModelUserModel() {
+    UserViewModel.setUserPresenterModel(_userModel);
+    setState(() {});
+  }
+
+  void _setHeight(int height) {
+    _userModel.setHeight(height);
+    _updateViewModelUserModel();
+  }
+
+  void _setWeight(int weight) {
+    _userModel.setWeight(weight);
+    _updateViewModelUserModel();
+  }
+
+  int _getAgeFromDate(DateTime time) {
+    int days = DateTime.now().difference(time).inDays;
+    return (days / 365).round() - 1;
+  }
+
+  String _getGender() {
+    if (_userModel.getGender() == true)
+      return "SettingsScreen.personalInfo.gender.male".tr();
+    else
+      return "SettingsScreen.personalInfo.gender.female".tr();
+  }
+
+  void _setAge(int age) {
+    _userModel.setAge(age);
+    _updateViewModelUserModel();
+  }
+
+  void _setGender(bool gender) {
+    _userModel.setGender(gender);
+    _updateViewModelUserModel();
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     final Size size = MediaQuery.of(context).size;
+    UserPresenterModel model;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -63,61 +115,69 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     PersonalSettingsButton(
                       name: "SettingsScreen.personalInfo.gender.gender".tr(),
-                      data: "SettingsScreen.personalInfo.gender.male".tr(),
+                      data: _getGender(),
                       onTap: () => {
-                        Dialogs.showGender(context, true)
-                            .then((value) => {if (value != null) print(value)})
-                        //TODO: add current value
+                        Dialogs.showGender(context, _userModel.getGender())
+                            .then((value) =>
+                                {if (value != null) _setGender(value)})
                       },
                     ),
                     PersonalSettingsButton(
                       name: "SettingsScreen.personalInfo.age".tr(),
-                      data: "18",
+                      data: "${_userModel.getAge()}",
                       onTap: () => {
-                        Dialogs.selectDate(context)
-                            .then((value) => {if (value != null) print(value)})
+                        Dialogs.selectDate(context).then((value) => {
+                              if (value != null) _setAge(_getAgeFromDate(value))
+                            })
                       },
                     ),
                     PersonalSettingsButton(
                       name: "SettingsScreen.personalInfo.weight.weight".tr(),
-                      data: "70" + "SettingsScreen.personalInfo.weight.kg".tr(),
+                      data: "${_userModel.getWeight()}" +
+                          "SettingsScreen.personalInfo.weight.kg".tr(),
                       onTap: () => {
-                        Dialogs.selectWeight(context)
-                            .then((value) => {if (value != null) print(value)})
+                        Dialogs.selectWeight(context, _userModel.getWeight())
+                            .then((value) =>
+                                {if (value != null) _setWeight(value)})
                       },
                     ),
                     PersonalSettingsButton(
                       name: "SettingsScreen.personalInfo.height.height".tr(),
-                      data:
-                          "174" + "SettingsScreen.personalInfo.height.cm".tr(),
+                      data: "${_userModel.getHeight()}" +
+                          "SettingsScreen.personalInfo.height.cm".tr(),
                       onTap: () => {
-                        Dialogs.selectHeight(
-                                context) //TODO: add current value
-                            .then((value) => {if (value != null) print(value)})
+                        Dialogs.selectHeight(context, _userModel.getHeight())
+                            .then((value) =>
+                                {if (value != null) _setHeight(value)})
                       },
                     ),
                     PersonalSettingsButton(
                       name:
                           "SettingsScreen.personalInfo.activity.activity".tr(),
-                      data: "SettingsScreen.personalInfo.activity.low".tr(),
+                      data: ('SettingsScreen.personalInfo.activity.' +
+                              _userModel.getActivity().name)
+                          .tr(),
                       onTap: () => {
                         Dialogs.showActivityScreen(context,
-                                5) //TODO: add current value
-                            .then((value) => {if (value != null) print(value)})
+                                _userModel.getActiveHoursPerWeek().toDouble())
+                            .then((value) =>
+                                {if (value != null) _setActivity(value)})
                       },
                     ),
                     PersonalSettingsButton(
                         name: "SettingsScreen.personalInfo.language.language"
                             .tr(),
-                        data: "SettingsScreen.personalInfo.language.en".tr(),
+                        data: EasyLocalization.of(context)
+                            .currentLocale
+                            .toString()
+                            .tr(),
                         onTap: () => {
-                              Dialogs.showLanguage(context, true).then(
-                                  (value) => {
-                                        if (value != null)
-                                          context.setLocale(
-                                              Locale(value ? 'en' : 'ru'))
-                                      })
-                            }), //TODO: add current value
+                              Dialogs.showLanguage(context).then((value) => {
+                                    if (value != null)
+                                      context.setLocale(
+                                          Locale(value ? 'en' : 'ru'))
+                                  })
+                            }),
                     PersonalSettingsButton(
                         name:
                             "SettingsScreen.personalInfo.account.account".tr(),

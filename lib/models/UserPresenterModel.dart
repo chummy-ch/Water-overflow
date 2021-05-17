@@ -1,4 +1,6 @@
-class UserPresenterModel {
+import 'package:water_overflow/models/Parcelable.dart';
+
+class UserPresenterModel implements Parcelable {
   static const USER_MODEL_KEY = "user_model";
 
   bool _gender;
@@ -24,6 +26,32 @@ class UserPresenterModel {
     _activeHoursPerWeek = activeHoursPerWeek;
   }
 
+  @override
+  String toString() {
+    String string = "$_gender?$_age?$_weight?$_height?$_activeHoursPerWeek";
+    return string;
+  }
+
+  void setActivity(int act) {
+    _activeHoursPerWeek = act;
+  }
+
+  void setHeight(int height) {
+    _height = height;
+  }
+
+  void setWeight(int weight) {
+    _weight = weight;
+  }
+
+  void setGender(bool gender) {
+    _gender = gender;
+  }
+
+  void setAge(int age) {
+    _age = age;
+  }
+
   int getAge() {
     return _age;
   }
@@ -38,6 +66,10 @@ class UserPresenterModel {
 
   bool getGender() {
     return _gender;
+  }
+
+  int getActiveHoursPerWeek() {
+    return _activeHoursPerWeek;
   }
 
   Activity getActivity() {
@@ -59,3 +91,18 @@ class UserPresenterModel {
 
 //Enum class to display user activity
 enum Activity { few, normal, enough, much }
+
+extension ActivityExtension on Activity {
+  String get name {
+    switch (this) {
+      case Activity.enough:
+        return "enough";
+      case Activity.few:
+        return "few";
+      case Activity.normal:
+        return "normal";
+      case Activity.much:
+        return "much";
+    }
+  }
+}

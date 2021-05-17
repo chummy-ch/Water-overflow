@@ -56,22 +56,22 @@ class Dialogs {
     );
   }
 
-  static Future<int> selectWeight(BuildContext context) {
+  static Future<int> selectWeight(BuildContext context, int initialValue) {
     return _showNumberDialog(
         context,
         'DialogScreen.enterWeight'.tr(),
         UserPresenterModel.MIN_WEIGHT_OF_USER,
         UserPresenterModel.MAX_WEIGHT_OF_USER,
-        60); // TODO: Add initial value
+        initialValue); // TODO: Add initial value
   }
 
-  static Future<int> selectHeight(BuildContext context) {
+  static Future<int> selectHeight(BuildContext context, int initialValue) {
     return _showNumberDialog(
         context,
         'DialogScreen.enterHeight'.tr(),
         UserPresenterModel.MIN_HEIGHT_OF_USER,
         UserPresenterModel.MAX_HEIGHT_OF_USER,
-        160); // TODO: Add initial value
+        initialValue); // TODO: Add initial value
   }
 
   static Future<int> _showNumberDialog(BuildContext context, String title,
