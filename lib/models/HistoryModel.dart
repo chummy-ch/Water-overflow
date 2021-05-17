@@ -18,7 +18,6 @@ class HistoryModel extends Parcelable {
     return DOUBLE_PROGRESS_KEY + timeString;
   }
 
-
   DateTime time;
   int volume;
   String liquid;

@@ -158,9 +158,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           msg: text,
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          backgroundColor: Colors.red,
+          backgroundColor: COLOR_WATER,
           textColor: Colors.white,
-          fontSize: 50);
+          fontSize: 20);
     }
 
     void _signGoogle() async {
@@ -268,6 +268,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: COLOR_BACKGROUND,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

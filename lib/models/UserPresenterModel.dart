@@ -1,6 +1,6 @@
 import 'package:water_overflow/models/Parcelable.dart';
 
-class UserPresenterModel implements Parcelable{
+class UserPresenterModel implements Parcelable {
   static const USER_MODEL_KEY = "user_model";
 
   bool _gender;
@@ -17,8 +17,8 @@ class UserPresenterModel implements Parcelable{
   static const int MIN_HEIGHT_OF_USER = 100;
   static const int MAX_HEIGHT_OF_USER = 220;
 
-  UserPresenterModel(bool gender, int age, int weight, int height,
-      int activeHoursPerWeek) {
+  UserPresenterModel(
+      bool gender, int age, int weight, int height, int activeHoursPerWeek) {
     _gender = gender;
     _age = age;
     _weight = weight;
@@ -68,6 +68,10 @@ class UserPresenterModel implements Parcelable{
     return _gender;
   }
 
+  int getActiveHoursPerWeek() {
+    return _activeHoursPerWeek;
+  }
+
   Activity getActivity() {
     if (_activeHoursPerWeek < 5) {
       return Activity.few;
@@ -86,21 +90,19 @@ class UserPresenterModel implements Parcelable{
 }
 
 //Enum class to display user activity
-enum Activity {
-  few,
-  normal,
-  enough,
-  much
-}
+enum Activity { few, normal, enough, much }
 
 extension ActivityExtension on Activity {
-
   String get name {
-    switch(this) {
-      case Activity.enough: return "enough";
-      case Activity.few: return "few";
-      case Activity.normal: return "normal";
-      case Activity.much: return "much";
+    switch (this) {
+      case Activity.enough:
+        return "enough";
+      case Activity.few:
+        return "few";
+      case Activity.normal:
+        return "normal";
+      case Activity.much:
+        return "much";
     }
   }
 }

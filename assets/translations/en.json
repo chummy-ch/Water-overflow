@@ -1,5 +1,6 @@
 {
   "language": "English",
+  "en": "@:language",
   "title": "Water Overflow",
   "WelcomeScreen": {
     "email": "Email",
@@ -42,9 +43,10 @@
       },
       "activity": {
         "activity": "Activity level",
-        "low": "low",
-        "middle": "middle",
-        "high": "high"
+        "few": "few",
+        "normal": "normal",
+        "enough": "enough",
+        "much": "much"
       },
       "language": {
         "language": "Language",
@@ -91,9 +93,9 @@
     "english" : "English",
     "russian" : "Russian",
     "chooseActivity" : "Choose your active hours per week",
-    "lowActivity" : "Low activity",
+    "lowActivity" : "Few activity",
     "normalActivity" : "Normal activity",
-    "highActivity" : "High activity",
-    "veryHighActivity" : "Very high activity"
+    "highActivity" : "Enough activity",
+    "veryHighActivity" : "Much activity"
   }
 }
