@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_overflow/models/HistoryModel.dart';
 import 'package:water_overflow/screens/StatisticsScreen.dart';
 import 'package:water_overflow/utils/Constants.dart';
@@ -19,6 +20,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     final Size size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -89,16 +91,60 @@ class Blocks extends StatefulWidget {
 
 class DynamicBlocks extends State<Blocks> {
   double v = 0;
+  int volumeGoal = 2000;
 
-  void _addLiquid(int volume) {
+  Future<void> _loadHistoryInfo() async {
+    final pref = await SharedPreferences.getInstance();
+    String history = pref.getString(HistoryModel.STRING_STORE_KEY);
+    if (history == null || history.length == 0) {
+      //TODO set default values
+    } else {
+      List<String> stringList = history.split(',');
+      historyList = [];
+      for (int i = 0; i < stringList.length; i++) {
+        String s = stringList[i].replaceAll("[", "").replaceAll("]", "");
+        List<String> valuesList = s.split('?');
+        DateTime time = DateTime.parse(valuesList[0]);
+        int volume = int.parse(valuesList[1]);
+        String liquid = valuesList[2];
+        historyList.add(HistoryModel(time, volume, liquid));
+      }
+    }
+  }
+
+  void _loadProgress() async {
+    final pref = await SharedPreferences.getInstance();
+    double progress = pref.getDouble(HistoryModel.DOUBLE_PROGRESS_KEY);
+    if (progress >= 0)
+      v = progress;
+    else
+      v = 0;
+  }
+
+  void _saveProgress() async {
+    final pref = await SharedPreferences.getInstance();
+    pref.setDouble(HistoryModel.DOUBLE_PROGRESS_KEY, v);
+  }
+
+  Future<void> _addLiquid(int volume) async {
     HistoryModel model = new HistoryModel(DateTime.now(), volume, "Water");
     historyList.add(model);
-    v += 0.1;
+    v += volume / volumeGoal;
+    _saveProgress();
     setState(() {});
+    final pref = await SharedPreferences.getInstance();
+    String st = "";
+    for (int i = 0; i < historyList.length; i++) {
+      st += "[${historyList[i].toString()}]";
+      if (i != historyList.length - 1) st += ",";
+    }
+    pref.setString(HistoryModel.STRING_STORE_KEY, st);
   }
 
   @override
   Widget build(BuildContext context) {
+    _loadProgress();
+    _loadHistoryInfo();
     return new Column(
       children: <Widget>[
         new Container(
@@ -129,11 +175,12 @@ class DynamicBlocks extends State<Blocks> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '50%',
+                      "${(v * 100).round()}%",
                       style: TEXT_THEME.headline1,
                     ),
                     Text(
-                      '1100/2200' + 'MainScreen.ml'.tr(),
+                      '${(v * volumeGoal).round()}/$volumeGoal' +
+                          'MainScreen.ml'.tr(),
                       style: TEXT_THEME.headline2,
                     ),
                   ],
