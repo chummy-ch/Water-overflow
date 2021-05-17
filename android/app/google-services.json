@@ -52,6 +52,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "372920051101-h1rfcju7i5jv3kqrlknkshi05i0jcq2n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.water_overflow1",
+            "certificate_hash": "cee4b7ab03e8ffbf0979c3fadbf160734060da79"
+          }
+        },
+        {
           "client_id": "372920051101-8so9ij1fc5bmhdmrqvdg18mn9pgad1t2.apps.googleusercontent.com",
           "client_type": 3
         }
