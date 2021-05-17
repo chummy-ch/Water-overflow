@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:water_overflow/models/UserPresenterModel.dart';
@@ -22,13 +23,13 @@ class Dialogs {
                   },
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(COLOR_BUTTON)),
-                  child: Text('Cancel')),
+                  child: Text('DialogScreen.cancel'.tr())),
               ElevatedButton(
                   onPressed: () {
                     Navigator.of(context)
                         .pop(textEditingController.text.toString());
                   },
-                  child: Text('OK')),
+                  child: Text('DialogScreen.ok'.tr())),
             ],
           );
         });
@@ -49,26 +50,26 @@ class Dialogs {
       firstDate: maxAge,
       lastDate: minAge,
       initialDate: minAge,
-      helpText: 'Enter your date of birth', // TODO: To localization
+      helpText: 'DialogScreen.enterBirthDate'.tr(),
     );
   }
 
   static Future<int> selectWeight(BuildContext context) {
     return _showNumberDialog(
         context,
-        'Enter your weight',
+        'DialogScreen.enterWeight'.tr(),
         UserPresenterModel.MIN_WEIGHT_OF_USER,
         UserPresenterModel.MAX_WEIGHT_OF_USER,
-        60); // TODO: To localization, initial
+        60); // TODO: Add initial value
   }
 
   static Future<int> selectHeight(BuildContext context) {
     return _showNumberDialog(
         context,
-        'Enter your height',
+        'DialogScreen.enterHeight'.tr(),
         UserPresenterModel.MIN_HEIGHT_OF_USER,
         UserPresenterModel.MAX_HEIGHT_OF_USER,
-        160); // TODO: To localization, initial
+        160); // TODO: Add initial value
   }
 
   static Future<int> _showNumberDialog(BuildContext context, String title,
@@ -95,12 +96,12 @@ class Dialogs {
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(COLOR_BUTTON)),
-                    child: Text('Cancel')),
+                    child: Text('DialogScreen.cancel'.tr())),
                 ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop(initialValue);
                     },
-                    child: Text('OK')),
+                    child: Text('DialogScreen.ok'.tr())),
               ],
             );
           });
@@ -112,7 +113,7 @@ class Dialogs {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Exit?'), //TODO: local
+            title: Text('DialogScreen.exit'.tr()),
             actions: [
               ElevatedButton(
                   onPressed: () {
@@ -120,25 +121,33 @@ class Dialogs {
                   },
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(COLOR_BUTTON)),
-                  child: Text('Cancel')),
+                  child: Text('DialogScreen.cancel'.tr())),
               ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop(true);
                   },
-                  child: Text('OK')),
+                  child: Text('DialogScreen.ok'.tr())),
             ],
           );
         });
   }
 
   static Future<bool> showGender(BuildContext context, bool initialValue) {
-    return _radioButtons(context, 'Choose you gender', initialValue, 'Male',
-        'Female'); //TODO: local
+    return _radioButtons(
+        context,
+        'DialogScreen.chooseGender'.tr(),
+        initialValue,
+        'DialogScreen.male'.tr(),
+        'DialogScreen.female'.tr());
   }
 
   static Future<bool> showLanguage(BuildContext context, bool initialValue) {
-    return _radioButtons(context, 'Choose language', initialValue, 'English',
-        'Russian'); //TODO: local
+    return _radioButtons(
+        context,
+        'DialogScreen.chooseLanguage'.tr(),
+        initialValue,
+        'DialogScreen.english'.tr(),
+        'DialogScreen.russian'.tr());
   }
 
   static Future<bool> _radioButtons(BuildContext context, String title,
@@ -187,12 +196,12 @@ class Dialogs {
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(COLOR_BUTTON)),
-                    child: Text('Cancel')),
+                    child: Text('DialogScreen.cancel'.tr())),
                 ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop(res);
                     },
-                    child: Text('OK')),
+                    child: Text('DialogScreen.ok'.tr())),
               ],
             );
           });
@@ -207,7 +216,7 @@ class Dialogs {
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
-              title: Text('Choose your active hours per week'),
+              title: Text('DialogScreen.chooseActivity'.tr()),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -235,30 +244,27 @@ class Dialogs {
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(COLOR_BUTTON)),
-                    child: Text('Cancel')),
+                    child: Text('DialogScreen.cancel'.tr())),
                 ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop(hpw);
                     },
-                    child: Text('OK')),
+                    child: Text('DialogScreen.ok'.tr())),
               ],
             );
           });
         });
   }
 
-  static String _getLevelOfActivityByHours(double value){
-    if(value < 5){
-      return 'Low activity';
-    }
-    else if(value < 10){
-      return 'Normal activity';
-    }
-    else if(value < 20){
-      return 'Enough activity';
-    }
-    else{
-      return 'Height activity';
+  static String _getLevelOfActivityByHours(double value) {
+    if (value < 5) {
+      return 'DialogScreen.lowActivity'.tr();
+    } else if (value < 10) {
+      return 'DialogScreen.normalActivity'.tr();
+    } else if (value < 20) {
+      return 'DialogScreen.highActivity'.tr();
+    } else {
+      return 'DialogScreen.veryHighActivity'.tr();
     }
   }
 }

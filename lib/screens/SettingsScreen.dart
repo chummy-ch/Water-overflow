@@ -65,10 +65,10 @@ class SettingsScreen extends StatelessWidget {
                       name: "SettingsScreen.personalInfo.gender.gender".tr(),
                       data: "SettingsScreen.personalInfo.gender.male".tr(),
                       onTap: () => {
-                        Dialogs.showGender(context,  true)
-                            .then((value) => {if (value != null) print(value)})//TODO: add current value and localization
-                      }
-                        ,
+                        Dialogs.showGender(context, true)
+                            .then((value) => {if (value != null) print(value)})
+                        //TODO: add current value
+                      },
                     ),
                     PersonalSettingsButton(
                       name: "SettingsScreen.personalInfo.age".tr(),
@@ -91,16 +91,18 @@ class SettingsScreen extends StatelessWidget {
                       data:
                           "174" + "SettingsScreen.personalInfo.height.cm".tr(),
                       onTap: () => {
-                        Dialogs.selectHeight(context) //TODO: add current value and localization
+                        Dialogs.selectHeight(
+                                context) //TODO: add current value
                             .then((value) => {if (value != null) print(value)})
                       },
                     ),
                     PersonalSettingsButton(
-                        name: "SettingsScreen.personalInfo.activity.activity"
-                            .tr(),
-                        data: "SettingsScreen.personalInfo.activity.low".tr(),
+                      name:
+                          "SettingsScreen.personalInfo.activity.activity".tr(),
+                      data: "SettingsScreen.personalInfo.activity.low".tr(),
                       onTap: () => {
-                        Dialogs.showActivityScreen(context, 5) //TODO: add current value and localization
+                        Dialogs.showActivityScreen(context,
+                                5) //TODO: add current value
                             .then((value) => {if (value != null) print(value)})
                       },
                     ),
@@ -109,11 +111,13 @@ class SettingsScreen extends StatelessWidget {
                             .tr(),
                         data: "SettingsScreen.personalInfo.language.en".tr(),
                         onTap: () => {
-                              Dialogs.showLanguage(
-                                      context, true)
-                                  .then((value) =>
-                                      {if (value != null) context.setLocale(Locale(value ? 'en' : 'ru'))})
-                            }), //TODO: add current value and localization
+                              Dialogs.showLanguage(context, true).then(
+                                  (value) => {
+                                        if (value != null)
+                                          context.setLocale(
+                                              Locale(value ? 'en' : 'ru'))
+                                      })
+                            }), //TODO: add current value
                     PersonalSettingsButton(
                         name:
                             "SettingsScreen.personalInfo.account.account".tr(),

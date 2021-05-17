@@ -3,7 +3,6 @@ class UserPresenterModel {
   int _age;
   int _weight;
   int _height;
-  Activity _activity;
   int _activeHoursPerWeek;
   static const int MIN_AGE_OF_USER = 16;
   static const int MAX_AGE_OF_USER = 100;
@@ -15,12 +14,12 @@ class UserPresenterModel {
   static const int MAX_HEIGHT_OF_USER = 220;
 
   UserPresenterModel(
-      bool gender, int age, int weight, int height, Activity activity) {
+      bool gender, int age, int weight, int height, int activeHoursPerWeek) {
     _gender = gender;
     _age = age;
     _weight = weight;
     _height = height;
-    _activity = activity;
+    _activeHoursPerWeek = activeHoursPerWeek;
   }
 
   int getAge() {
@@ -40,7 +39,19 @@ class UserPresenterModel {
   }
 
   Activity getActivity() {
-    return _activity;
+    if (_activeHoursPerWeek < 5) {
+      return Activity.few;
+    } else if (_activeHoursPerWeek < 10) {
+      return Activity.normal;
+    } else if (_activeHoursPerWeek < 20) {
+      return Activity.enough;
+    } else {
+      return Activity.much;
+    }
+  }
+
+  bool isCompleteDataFiling() {
+    return _gender != null && _age != 0 && _weight != 0 && _height != 0;
   }
 }
 

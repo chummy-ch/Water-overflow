@@ -76,5 +76,24 @@
     "weekly": "Недельное соревнование",
     "report": "Отчёт",
     "diagrams": "Диаграммы"
+  },
+  "DialogScreen": {
+    "cancel" : "Отмена",
+    "ok" : "OK",
+    "enterBirthDate" : "Введите дату рождения",
+    "enterWeight" : "Введите ваш вес",
+    "enterHeight" : "Введите ваш рост",
+    "exit" : "Выйти?",
+    "chooseGender" : "Выберите свой пол",
+    "male" : "Мужской",
+    "female" : "Женский",
+    "chooseLanguage" : "Выберите язык",
+    "english" : "Английский",
+    "russian" : "Русский",
+    "chooseActivity" : "Укажите количество часов тренировок в неделю",
+    "lowActivity" : "Низкая активность",
+    "normalActivity" : "Средняя активность",
+    "highActivity" : "Высокая активность",
+    "veryHighActivity" : "Очень высокая активность"
   }
 }
