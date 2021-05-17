@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/Block.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
+import 'package:water_overflow/widgets/SmallWaterBubble.dart';
 
 class StatisticsScreen extends StatelessWidget {
   @override
@@ -40,7 +41,7 @@ class StatisticsScreen extends StatelessWidget {
                 ),
               ),
               ButtonsBackgroundRectangle(
-                height: SizeConfig.blockSizeVertical * 15.7,
+                height: SizeConfig.blockSizeVertical * 20,
                 child: Column(
                   children: [
                     Row(
@@ -50,9 +51,14 @@ class StatisticsScreen extends StatelessWidget {
                               left: SizeConfig.blockSizeHorizontal * 3,
                               top: SizeConfig.blockSizeVertical * 1,
                               bottom: SizeConfig.blockSizeVertical * 1),
-                          child: Text(
-                            'StatisticsScreen.weekly'.tr(),
-                            style: TEXT_THEME.headline2,
+                          child: Column(
+                            children: [
+                              Text(
+                                'StatisticsScreen.weekly'.tr(),
+                                style: TEXT_THEME.headline2,
+                              ),
+                              DynamicWeek(),
+                            ],
                           ),
                         ),
                       ],

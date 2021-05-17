@@ -90,7 +90,7 @@ class Blocks extends StatefulWidget {
 
 class DynamicBlocks extends State<Blocks> {
   double v = 0;
-  int volumeGoal = 2000;
+  int volumeGoal = 2000; //TODO: EDIT
 
   _addLiquid(int volume) {
     HistoryModel model = new HistoryModel(DateTime.now(), volume, "Water");
