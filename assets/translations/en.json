@@ -72,15 +72,15 @@
     "liquid": {
       "title" : "Select your drink",
       "volume": "Select volume, ml",
-      "water" : "water",
-      "soda" : "soda",
-      "black_tea" : "black tea",
-      "coffee" : "coffee",
-      "green_tea" : "green tea",
-      "cola" : "cola",
-      "beer": "beer",
-      "wine": "wine",
-      "milk": "milk"
+      "Water" : "water",
+      "Soda" : "soda",
+      "Black tea" : "black tea",
+      "Coffee" : "coffee",
+      "Green tea" : "green tea",
+      "Cola" : "cola",
+      "Beer": "beer",
+      "Wine": "wine",
+      "Milk": "milk"
     }
   },
   "AlarmScreen": {

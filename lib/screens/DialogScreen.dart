@@ -296,7 +296,7 @@ class Dialogs {
                 children: <Widget>[
                   for (int i = 0; i < list.length; i++)
                     new LiquidChooseButton(
-                      text: ('MainScreen.liquid.' + list[i]).tr(),
+                      text: toBeginningOfSentenceCase(('MainScreen.liquid.' + list[i]).tr()),
                       onPressed: () {
                         res = i;
                         Navigator.of(context).pop(res);
