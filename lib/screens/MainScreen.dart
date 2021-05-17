@@ -95,7 +95,7 @@ class DynamicBlocks extends State<Blocks> {
 
   Future<void> _loadHistoryInfo() async {
     final pref = await SharedPreferences.getInstance();
-    String history = pref.getString(HistoryModel.STRING_STORE_KEY);
+    String history = pref.getString(HistoryModel.getStoreKeyWithDate());
     if (history == null || history.length == 0) {
       //TODO set default values
     } else {
@@ -114,7 +114,7 @@ class DynamicBlocks extends State<Blocks> {
 
   void _loadProgress() async {
     final pref = await SharedPreferences.getInstance();
-    double progress = pref.getDouble(HistoryModel.DOUBLE_PROGRESS_KEY);
+    double progress = pref.getDouble(HistoryModel.getPogressKeyWithDate());
     if (progress >= 0)
       v = progress;
     else
@@ -123,7 +123,7 @@ class DynamicBlocks extends State<Blocks> {
 
   void _saveProgress() async {
     final pref = await SharedPreferences.getInstance();
-    pref.setDouble(HistoryModel.DOUBLE_PROGRESS_KEY, v);
+    pref.setDouble(HistoryModel.getPogressKeyWithDate(), v);
   }
 
   Future<void> _addLiquid(int volume) async {
@@ -138,13 +138,15 @@ class DynamicBlocks extends State<Blocks> {
       st += "[${historyList[i].toString()}]";
       if (i != historyList.length - 1) st += ",";
     }
-    pref.setString(HistoryModel.STRING_STORE_KEY, st);
+    pref.setString(HistoryModel.getStoreKeyWithDate(), st);
   }
 
   @override
   Widget build(BuildContext context) {
     _loadProgress();
-    _loadHistoryInfo();
+    Future<void> f = _loadHistoryInfo();
+    f.whenComplete(() => setState(() {}));
+
     return new Column(
       children: <Widget>[
         new Container(
