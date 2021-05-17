@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_overflow/models/HistoryModel.dart';
 import 'package:water_overflow/screens/StatisticsScreen.dart';
+import 'package:water_overflow/userinformation/UserViewModel.dart';
 import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/AppIcons.dart';
 import 'package:water_overflow/widgets/Block.dart';
@@ -92,65 +92,27 @@ class DynamicBlocks extends State<Blocks> {
   double v = 0;
   int volumeGoal = 2000;
 
-  void _loadFirestore() {
-    _saveProgress();
-    setState(() {});
-  }
-
-  Future<void> _loadHistoryInfo() async {
-    final pref = await SharedPreferences.getInstance();
-    String history = pref.getString(HistoryModel.getStoreKeyWithDate());
-    if (history == null || history.length == 0) {
-      //TODO set default values
-    } else {
-      List<String> stringList = history.split(',');
-      historyList = [];
-      for (int i = 0; i < stringList.length; i++) {
-        String s = stringList[i].replaceAll("[", "").replaceAll("]", "");
-        List<String> valuesList = s.split('?');
-        DateTime time = DateTime.parse(valuesList[0]);
-        int volume = int.parse(valuesList[1]);
-        String liquid = valuesList[2];
-        historyList.add(HistoryModel(time, volume, liquid));
-      }
-    }
-  }
-
-  void _loadProgress() async {
-    final pref = await SharedPreferences.getInstance();
-    double progress = pref.getDouble(HistoryModel.getPogressKeyWithDate());
-    if (progress >= 0)
-      v = progress;
-    else
-      v = 0;
-  }
-
-  void _saveProgress() async {
-    final pref = await SharedPreferences.getInstance();
-    pref.setDouble(HistoryModel.getPogressKeyWithDate(), v);
-  }
-
-  Future<void> _addLiquid(int volume) async {
+  _addLiquid(int volume) {
     HistoryModel model = new HistoryModel(DateTime.now(), volume, "Water");
     historyList.add(model);
     v += volume / volumeGoal;
-    _saveProgress();
+    UserViewModel.setProgress(v);
     setState(() {});
-    final pref = await SharedPreferences.getInstance();
-    String st = "";
-    for (int i = 0; i < historyList.length; i++) {
-      st += "[${historyList[i].toString()}]";
-      if (i != historyList.length - 1) st += ",";
-    }
-    pref.setString(HistoryModel.getStoreKeyWithDate(), st);
+    UserViewModel.setHistory(historyList);
   }
 
   @override
   Widget build(BuildContext context) {
-    _loadProgress();
-    _loadFirestore();
-    Future<void> f = _loadHistoryInfo();
-    f.whenComplete(() => setState(() {}));
+    var p = UserViewModel.getProgress();
+    p.then((value) {
+      v = value;
+      setState(() {});
+    });
+    var f = UserViewModel.getHistory();
+    f.then((value) {
+      historyList = value;
+      setState(() {});
+    });
 
     return new Column(
       children: <Widget>[
