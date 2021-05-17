@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:water_overflow/models/User.dart' as MyUser;
 import 'package:water_overflow/screens/MainScreen.dart';
 
+import 'AuthenticationScreen.dart';
+
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key key}) : super(key: key);
 
@@ -11,7 +13,7 @@ class WelcomePage extends StatelessWidget {
     final MyUser.User user = Provider.of<MyUser.User>(context);
     final bool isLoggedIn = user != null;
 
-    //return isLoggedIn ? MainScreen() : AuthenticationScreen();
-    return MainScreen();
+    return isLoggedIn ? MainScreen() : AuthenticationScreen();
+    // return MainScreen();
   }
 }

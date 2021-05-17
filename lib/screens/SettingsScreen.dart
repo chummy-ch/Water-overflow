@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:water_overflow/screens/DialogScreen.dart';
+import 'package:water_overflow/utils/AuthService.dart';
 import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/Block.dart';
 import 'package:water_overflow/widgets/PSettingsButton.dart';
@@ -62,30 +64,71 @@ class SettingsScreen extends StatelessWidget {
                     PersonalSettingsButton(
                       name: "SettingsScreen.personalInfo.gender.gender".tr(),
                       data: "SettingsScreen.personalInfo.gender.male".tr(),
+                      onTap: () => {
+                        Dialogs.showGender(context,  true)
+                            .then((value) => {if (value != null) print(value)})//TODO: add current value and localization
+                      }
+                        ,
                     ),
                     PersonalSettingsButton(
-                        name: "SettingsScreen.personalInfo.age".tr(),
-                        data: "18"),
+                      name: "SettingsScreen.personalInfo.age".tr(),
+                      data: "18",
+                      onTap: () => {
+                        Dialogs.selectDate(context)
+                            .then((value) => {if (value != null) print(value)})
+                      },
+                    ),
                     PersonalSettingsButton(
-                        name: "SettingsScreen.personalInfo.weight.weight".tr(),
-                        data: "70" +
-                            "SettingsScreen.personalInfo.weight.kg".tr()),
+                      name: "SettingsScreen.personalInfo.weight.weight".tr(),
+                      data: "70" + "SettingsScreen.personalInfo.weight.kg".tr(),
+                      onTap: () => {
+                        Dialogs.selectWeight(context)
+                            .then((value) => {if (value != null) print(value)})
+                      },
+                    ),
                     PersonalSettingsButton(
-                        name: "SettingsScreen.personalInfo.height.height".tr(),
-                        data: "174" +
-                            "SettingsScreen.personalInfo.height.cm".tr()),
+                      name: "SettingsScreen.personalInfo.height.height".tr(),
+                      data:
+                          "174" + "SettingsScreen.personalInfo.height.cm".tr(),
+                      onTap: () => {
+                        Dialogs.selectHeight(context) //TODO: add current value and localization
+                            .then((value) => {if (value != null) print(value)})
+                      },
+                    ),
                     PersonalSettingsButton(
                         name: "SettingsScreen.personalInfo.activity.activity"
                             .tr(),
-                        data: "SettingsScreen.personalInfo.activity.low".tr()),
+                        data: "SettingsScreen.personalInfo.activity.low".tr(),
+                      onTap: () => {
+                        Dialogs.showActivityScreen(context, 5) //TODO: add current value and localization
+                            .then((value) => {if (value != null) print(value)})
+                      },
+                    ),
                     PersonalSettingsButton(
                         name: "SettingsScreen.personalInfo.language.language"
                             .tr(),
-                        data: "SettingsScreen.personalInfo.language.en".tr()),
+                        data: "SettingsScreen.personalInfo.language.en".tr(),
+                        onTap: () => {
+                              Dialogs.showLanguage(
+                                      context, true)
+                                  .then((value) =>
+                                      {if (value != null) context.setLocale(Locale(value ? 'en' : 'ru'))})
+                            }), //TODO: add current value and localization
                     PersonalSettingsButton(
                         name:
                             "SettingsScreen.personalInfo.account.account".tr(),
-                        data: "SettingsScreen.personalInfo.account.leave".tr()),
+                        data: "SettingsScreen.personalInfo.account.leave".tr(),
+                        onTap: () => {
+                              Dialogs.showExitScreenAndExit(context).then(
+                                (value) => {
+                                  if (value)
+                                    {
+                                      AuthService().logOut(),
+                                      Navigator.pop(context)
+                                    }
+                                },
+                              )
+                            }),
                   ],
                 ),
               ),
