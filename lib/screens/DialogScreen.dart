@@ -278,8 +278,22 @@ class Dialogs {
     return _showLiquidDialog(context, 'MainScreen.liquid.title'.tr(), names);
   }
 
+  static _addLiquidToMenu(context, list) {
+    List res = [];
+    for (int i = 0; i < list.length; i++)
+      res.add(LiquidChooseButton(
+        text: toBeginningOfSentenceCase(('MainScreen.liquid.' + list[i]).tr()),
+        onPressed: () {
+          var res = i;
+          Navigator.of(context).pop(res);
+        },
+      ));
+    return res;
+  }
+
   static Future<int> _showLiquidDialog(
       BuildContext context, String title, List<String> list) {
+    List liquidInMenu = _addLiquidToMenu(context, list);
     int res = 0;
     return showDialog(
         context: context,
@@ -291,18 +305,13 @@ class Dialogs {
                 title,
                 style: TEXT_THEME.headline2,
               ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  for (int i = 0; i < list.length; i++)
-                    new LiquidChooseButton(
-                      text: toBeginningOfSentenceCase(('MainScreen.liquid.' + list[i]).tr()),
-                      onPressed: () {
-                        res = i;
-                        Navigator.of(context).pop(res);
-                      },
-                    )
-                ],
+              content: Container(
+                height: SizeConfig.blockSizeVertical * 50,
+                width: SizeConfig.blockSizeHorizontal * 10,
+                child: ListView.builder(
+                  itemCount: list.length,
+                  itemBuilder: (context, index) => liquidInMenu[index],
+                ),
               ),
             );
           });
