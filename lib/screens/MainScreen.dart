@@ -16,7 +16,6 @@ import 'AlarmScreen.dart';
 import 'SettingsScreen.dart';
 
 class MainScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);

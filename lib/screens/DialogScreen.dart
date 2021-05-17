@@ -54,22 +54,22 @@ class Dialogs {
     );
   }
 
-  static Future<int> selectWeight(BuildContext context) {
+  static Future<int> selectWeight(BuildContext context, int initialValue) {
     return _showNumberDialog(
         context,
         'DialogScreen.enterWeight'.tr(),
         UserPresenterModel.MIN_WEIGHT_OF_USER,
         UserPresenterModel.MAX_WEIGHT_OF_USER,
-        60); // TODO: Add initial value
+        initialValue); // TODO: Add initial value
   }
 
-  static Future<int> selectHeight(BuildContext context) {
+  static Future<int> selectHeight(BuildContext context, int initialValue) {
     return _showNumberDialog(
         context,
         'DialogScreen.enterHeight'.tr(),
         UserPresenterModel.MIN_HEIGHT_OF_USER,
         UserPresenterModel.MAX_HEIGHT_OF_USER,
-        160); // TODO: Add initial value
+        initialValue); // TODO: Add initial value
   }
 
   static Future<int> _showNumberDialog(BuildContext context, String title,
@@ -133,19 +133,15 @@ class Dialogs {
   }
 
   static Future<bool> showGender(BuildContext context, bool initialValue) {
-    return _radioButtons(
-        context,
-        'DialogScreen.chooseGender'.tr(),
-        initialValue,
-        'DialogScreen.male'.tr(),
-        'DialogScreen.female'.tr());
+    return _radioButtons(context, 'DialogScreen.chooseGender'.tr(),
+        initialValue, 'DialogScreen.male'.tr(), 'DialogScreen.female'.tr());
   }
 
-  static Future<bool> showLanguage(BuildContext context, bool initialValue) {
+  static Future<bool> showLanguage(BuildContext context) {
     return _radioButtons(
         context,
         'DialogScreen.chooseLanguage'.tr(),
-        initialValue,
+        EasyLocalization.of(context).currentLocale == Locale('en'),
         'DialogScreen.english'.tr(),
         'DialogScreen.russian'.tr());
   }

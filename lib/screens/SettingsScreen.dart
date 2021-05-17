@@ -45,7 +45,7 @@ class SettingsScreen extends State<Settings> {
   }
 
   String _getGender() {
-    if (_userModel.getGender() == false)
+    if (_userModel.getGender() == true)
       return "SettingsScreen.personalInfo.gender.male".tr();
     else
       return "SettingsScreen.personalInfo.gender.female".tr();
@@ -136,8 +136,9 @@ class SettingsScreen extends State<Settings> {
                       data: "${_userModel.getWeight()}" +
                           "SettingsScreen.personalInfo.weight.kg".tr(),
                       onTap: () => {
-                        Dialogs.selectWeight(context).then(
-                            (value) => {if (value != null) _setWeight(value)})
+                        Dialogs.selectWeight(context, _userModel.getWeight())
+                            .then((value) =>
+                                {if (value != null) _setWeight(value)})
                       },
                     ),
                     PersonalSettingsButton(
@@ -145,31 +146,38 @@ class SettingsScreen extends State<Settings> {
                       data: "${_userModel.getHeight()}" +
                           "SettingsScreen.personalInfo.height.cm".tr(),
                       onTap: () => {
-                        Dialogs.selectHeight(context).then(
-                            (value) => {if (value != null) _setHeight(value)})
+                        Dialogs.selectHeight(context, _userModel.getHeight())
+                            .then((value) =>
+                                {if (value != null) _setHeight(value)})
                       },
                     ),
                     PersonalSettingsButton(
                       name:
                           "SettingsScreen.personalInfo.activity.activity".tr(),
-                      data: _userModel.getActivity().name.tr(),
+                      data: ('SettingsScreen.personalInfo.activity.' +
+                              _userModel.getActivity().name)
+                          .tr(),
                       onTap: () => {
-                        Dialogs.showActivityScreen(context, 5).then(
-                            (value) => {if (value != null) _setActivity(value)})
+                        Dialogs.showActivityScreen(context,
+                                _userModel.getActiveHoursPerWeek().toDouble())
+                            .then((value) =>
+                                {if (value != null) _setActivity(value)})
                       },
                     ),
                     PersonalSettingsButton(
                         name: "SettingsScreen.personalInfo.language.language"
                             .tr(),
-                        data: "SettingsScreen.personalInfo.language.en".tr(),
+                        data: EasyLocalization.of(context)
+                            .currentLocale
+                            .toString()
+                            .tr(),
                         onTap: () => {
-                              Dialogs.showLanguage(context, true).then(
-                                  (value) => {
-                                        if (value != null)
-                                          context.setLocale(
-                                              Locale(value ? 'en' : 'ru'))
-                                      })
-                            }), //TODO: add current value
+                              Dialogs.showLanguage(context).then((value) => {
+                                    if (value != null)
+                                      context.setLocale(
+                                          Locale(value ? 'en' : 'ru'))
+                                  })
+                            }),
                     PersonalSettingsButton(
                         name:
                             "SettingsScreen.personalInfo.account.account".tr(),
