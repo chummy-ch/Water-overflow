@@ -43,7 +43,7 @@ class MainScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SettingsScreen()),
+                              builder: (context) => Settings()),
                         );
                       },
                       child: Icon(AppIcons.settings, size: 24),

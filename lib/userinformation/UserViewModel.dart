@@ -13,7 +13,9 @@ class UserViewModel {
   }
 
   static UserPresenterModel getUserModel() {
+    if (_userPresenterModel != null)
     return _userPresenterModel;
+    else return UserPresenterModel(true, 18, 65, 175, 10);
   }
 
   static setUserPresenterModel(UserPresenterModel user) {
