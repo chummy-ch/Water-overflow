@@ -1,4 +1,6 @@
 class UserPresenterModel {
+  static const USER_MODEL_KEY = "user_model";
+
   bool _gender;
   int _age;
   int _weight;
