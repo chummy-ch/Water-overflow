@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:water_overflow/models/UserPresenterModel.dart';
@@ -300,6 +301,7 @@ class Dialogs {
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
+              contentPadding: EdgeInsets.all(10),
               backgroundColor: COLOR_BACKGROUND,
               title: Text(
                 title,
