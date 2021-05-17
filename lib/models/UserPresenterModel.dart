@@ -1,4 +1,6 @@
-class UserPresenterModel {
+import 'package:water_overflow/models/Parcelable.dart';
+
+class UserPresenterModel implements Parcelable{
   static const USER_MODEL_KEY = "user_model";
 
   bool _gender;
@@ -22,6 +24,12 @@ class UserPresenterModel {
     _weight = weight;
     _height = height;
     _activeHoursPerWeek = activeHoursPerWeek;
+  }
+
+  @override
+  String toString() {
+    String string = "$_gender?$_age?$_weight?$_height?$_activeHoursPerWeek";
+    return string;
   }
 
   void setActivity(int act) {

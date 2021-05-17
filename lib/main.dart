@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:water_overflow/models/User.dart';
 import 'package:water_overflow/screens/WelcomePage.dart';
+import 'package:water_overflow/userinformation/UserViewModel.dart';
 import 'package:water_overflow/utils/AuthService.dart';
 import 'package:water_overflow/utils/Constants.dart';
 
@@ -13,6 +14,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  UserViewModel.loadUserModel();
   runApp(
     EasyLocalization(
       child: MyApp(),
