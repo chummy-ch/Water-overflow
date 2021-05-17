@@ -14,7 +14,6 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  UserViewModel.loadUserModel();
   runApp(
     EasyLocalization(
       child: MyApp(),
