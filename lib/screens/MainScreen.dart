@@ -13,6 +13,7 @@ import 'package:water_overflow/widgets/LiquidButton.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
 
 import 'AlarmScreen.dart';
+import 'DialogScreen.dart';
 import 'SettingsScreen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -126,10 +127,22 @@ class DynamicBlocks extends State<Blocks> {
     pref.setDouble(HistoryModel.getPogressKeyWithDate(), v);
   }
 
-  Future<void> _addLiquid(int volume) async {
+//  ["water", "soda", "black_tea", "coffee", "green_tea", "cola", "beer", "wine", "milk"];
+  double calculateCoef(int index){
+    if(index == 0) return 1.0; //"water"
+    else if(index == 1 || index == 2 ||index == 4) return 0.8; //"soda", "black_tea", "green_tea"
+    else if(index == 3) return 0.3; //"coffee"
+    else if(index == 5) return 0.6; //"cola"
+    else if(index == 6) return -0.5; //"beer"
+    else if(index == 7) return -0.6;  // "wine"
+    else if(index == 8) return 0.4;  //"milk"
+  }
+
+
+  Future<void> _addLiquid(int volume, double coef) async {
     HistoryModel model = new HistoryModel(DateTime.now(), volume, "Water");
     historyList.add(model);
-    v += volume / volumeGoal;
+    v += volume*coef / volumeGoal;
     _saveProgress();
     setState(() {});
     final pref = await SharedPreferences.getInstance();
@@ -200,15 +213,16 @@ class DynamicBlocks extends State<Blocks> {
               children: <Widget>[
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
-                  onPressed: () {
-                    //_addLiquid();
-                  },
+                    onPressed: () async => {
+                      Dialogs.showVolume(context),
+                      _addLiquid(120, calculateCoef(await Dialogs.selectLiquid(context)))
+                    },
                   child: Icon(AppIcons.plus, size: 40),
                 ),
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
-                  onPressed: () {
-                    _addLiquid(120);
+                  onPressed: () async {
+                    _addLiquid(120, calculateCoef(await Dialogs.selectLiquid(context)));
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -220,8 +234,8 @@ class DynamicBlocks extends State<Blocks> {
                 ),
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
-                  onPressed: () {
-                    _addLiquid(240);
+                  onPressed: () async {
+                    _addLiquid(240, calculateCoef(await Dialogs.selectLiquid(context)));
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -233,8 +247,8 @@ class DynamicBlocks extends State<Blocks> {
                 ),
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
-                  onPressed: () {
-                    _addLiquid(340);
+                  onPressed: () async {
+                    _addLiquid(340, calculateCoef(await Dialogs.selectLiquid(context)));
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -246,8 +260,8 @@ class DynamicBlocks extends State<Blocks> {
                 ),
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
-                  onPressed: () {
-                    _addLiquid(500);
+                  onPressed: () async {
+                    _addLiquid(500, calculateCoef(await Dialogs.selectLiquid(context)));
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -291,8 +305,12 @@ class DyanamicList extends State<ListDisplay> {
           padding: EdgeInsets.symmetric(
               horizontal: SizeConfig.blockSizeHorizontal * 6.5,
               vertical: SizeConfig.blockSizeVertical),
-          child: new Text('MainScreen.history'.tr() + ':',
-              style: TEXT_THEME.headline4),
+          child: Row(
+            children: [
+              new Text('MainScreen.history'.tr() + ':',
+                  style: TEXT_THEME.headline4),
+            ],
+          ),
         ),
         new Expanded(
             child: new ListView.builder(
