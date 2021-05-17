@@ -172,11 +172,12 @@ class SettingsScreen extends State<Settings> {
                             .toString()
                             .tr(),
                         onTap: () => {
-                              Dialogs.showLanguage(context).then((value) => {
-                                    if (value != null)
-                                      context.setLocale(
-                                          Locale(value ? 'en' : 'ru'))
-                                  })
+                              Dialogs.showLanguage(context, true).then(
+                                  (value) => {
+                                        if (value != null)
+                                          context.setLocale(
+                                              Locale(value ? 'en' : 'ru'))
+                                      })
                             }),
                     PersonalSettingsButton(
                         name:

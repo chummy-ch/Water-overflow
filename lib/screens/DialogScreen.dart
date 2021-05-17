@@ -155,7 +155,8 @@ class Dialogs {
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
               backgroundColor: COLOR_BACKGROUND,
-              title: Text(title,
+              title: Text(
+                title,
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -215,7 +216,9 @@ class Dialogs {
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
               backgroundColor: COLOR_BACKGROUND,
-              title: Text('DialogScreen.chooseActivity'.tr(),),
+              title: Text(
+                'DialogScreen.chooseActivity'.tr(),
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -267,11 +270,12 @@ class Dialogs {
     }
   }
 
-  static List<String> list = ["water", "soda", "black_tea", "coffee", "green_tea",
-    "cola", "beer", "wine", "milk"];
+  /* static List<String> list = ["water", "soda", "black_tea", "coffee", "green_tea",
+    "cola", "beer", "wine", "milk"];*/
 
-  static Future<int> selectLiquid(BuildContext context) {
-    return _showLiquidDialog(context, 'MainScreen.liquid.title'.tr(), list);
+  static Future<int> selectLiquid(BuildContext context, List<String> names) {
+    print(names[0]);
+    return _showLiquidDialog(context, 'MainScreen.liquid.title'.tr(), names);
   }
 
   static Future<int> _showLiquidDialog(
@@ -283,8 +287,10 @@ class Dialogs {
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
               backgroundColor: COLOR_BACKGROUND,
-              title: Text(title,
-              style: TEXT_THEME.headline2,),
+              title: Text(
+                title,
+                style: TEXT_THEME.headline2,
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -304,11 +310,7 @@ class Dialogs {
   }
 
   static Future<int> selectVolume(BuildContext context) {
-    return _showNumberDialog(
-        context,
-        'MainScreen.liquid.volume'.tr(),
-        1,
-        1000,
+    return _showNumberDialog(context, 'MainScreen.liquid.volume'.tr(), 1, 1000,
         200); // TODO: Add initial value
   }
 
@@ -320,7 +322,9 @@ class Dialogs {
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
               backgroundColor: COLOR_BACKGROUND,
-              title: Text('MainScreen.liquid.volume'.tr(),),
+              title: Text(
+                'MainScreen.liquid.volume'.tr(),
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -345,7 +349,7 @@ class Dialogs {
                     },
                     style: ButtonStyle(
                         backgroundColor:
-                        MaterialStateProperty.all(COLOR_BUTTON)),
+                            MaterialStateProperty.all(COLOR_BUTTON)),
                     child: Text('DialogScreen.cancel'.tr())),
                 ElevatedButton(
                     onPressed: () {
