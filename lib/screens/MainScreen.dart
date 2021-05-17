@@ -83,6 +83,22 @@ class MainScreen extends StatelessWidget {
 }
 
 List<HistoryModel> historyList = [];
+//  ["water", "soda", "black_tea", "coffee", "green_tea", "cola", "beer", "wine", "milk"];
+double calculateCoef(int index) {
+  if (index == 0)
+    return 1.0; //"water"
+  else if (index == 1 || index == 2 || index == 4)
+    return 0.8; //"soda", "black_tea", "green_tea"
+  else if (index == 3)
+    return 0.3; //"coffee"
+  else if (index == 5)
+    return 0.6; //"cola"
+  else if (index == 6)
+    return -0.5; //"beer"
+  else if (index == 7)
+    return -0.6; // "wine"
+  else if (index == 8) return 0.4; //"milk"
+}
 
 class Blocks extends StatefulWidget {
   @override
@@ -93,10 +109,10 @@ class DynamicBlocks extends State<Blocks> {
   double v = 0;
   int volumeGoal = 2000;
 
-  _addLiquid(int volume) {
+  _addLiquid(int volume, coef) {
     HistoryModel model = new HistoryModel(DateTime.now(), volume, "Water");
     historyList.add(model);
-    v += volume*coef / volumeGoal;
+    v += volume * coef / volumeGoal;
     UserViewModel.setProgress(v);
     setState(() {});
     UserViewModel.setHistory(historyList);
@@ -168,16 +184,18 @@ class DynamicBlocks extends State<Blocks> {
               children: <Widget>[
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
-                    onPressed: () async => {
-                      Dialogs.showVolume(context),
-                      _addLiquid(120, calculateCoef(await Dialogs.selectLiquid(context)))
-                    },
+                  onPressed: () async => {
+                    Dialogs.showVolume(context),
+                    _addLiquid(
+                        120, calculateCoef(await Dialogs.selectLiquid(context)))
+                  },
                   child: Icon(AppIcons.plus, size: 40),
                 ),
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () async {
-                    _addLiquid(120, calculateCoef(await Dialogs.selectLiquid(context)));
+                    _addLiquid(120,
+                        calculateCoef(await Dialogs.selectLiquid(context)));
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -190,7 +208,8 @@ class DynamicBlocks extends State<Blocks> {
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () async {
-                    _addLiquid(240, calculateCoef(await Dialogs.selectLiquid(context)));
+                    _addLiquid(240,
+                        calculateCoef(await Dialogs.selectLiquid(context)));
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -203,7 +222,8 @@ class DynamicBlocks extends State<Blocks> {
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () async {
-                    _addLiquid(340, calculateCoef(await Dialogs.selectLiquid(context)));
+                    _addLiquid(340,
+                        calculateCoef(await Dialogs.selectLiquid(context)));
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -216,7 +236,8 @@ class DynamicBlocks extends State<Blocks> {
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () async {
-                    _addLiquid(500, calculateCoef(await Dialogs.selectLiquid(context)));
+                    _addLiquid(500,
+                        calculateCoef(await Dialogs.selectLiquid(context)));
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
