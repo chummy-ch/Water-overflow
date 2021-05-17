@@ -76,5 +76,24 @@
     "weekly": "Weekly completion",
     "report": "Drink water report",
     "diagrams": "Diagrams"
+  },
+  "DialogScreen": {
+    "cancel" : "Cancel",
+    "ok" : "OK",
+    "enterBirthDate" : "Enter your date of birth",
+    "enterWeight" : "Enter your weight",
+    "enterHeight" : "Enter your height",
+    "exit" : "Exit?",
+    "chooseGender" : "Choose you gender",
+    "male" : "Male",
+    "female" : "Female",
+    "chooseLanguage" : "Choose language",
+    "english" : "English",
+    "russian" : "Russian",
+    "chooseActivity" : "Choose your active hours per week",
+    "lowActivity" : "Low activity",
+    "normalActivity" : "Normal activity",
+    "highActivity" : "High activity",
+    "veryHighActivity" : "Very high activity"
   }
 }
