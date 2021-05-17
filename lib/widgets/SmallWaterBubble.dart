@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -12,7 +13,8 @@ class DynamicWeek extends StatelessWidget {
 
   static Future<double> _loadProgress() async {
     final pref = await SharedPreferences.getInstance();
-    return max(pref.getDouble(HistoryModel.getPogressKeyWithDate()), 0);
+    return max(
+        pref.getDouble(HistoryModel.getPogressKeyWithDate()), 0); // TODO:Day
   }
 
   Future _w() async {
@@ -31,11 +33,13 @@ class DynamicWeek extends StatelessWidget {
     );
   }
 
-  Widget _showBubble(DateTime dateTime) {
+  Widget _showBubble(DateTime dateTime, context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(DateFormat('EEEE').format(dateTime)),
+        Text(toBeginningOfSentenceCase(DateFormat(
+                'EEEE', EasyLocalization.of(context).currentLocale.toString())
+            .format(dateTime))),
         FutureBuilder(
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
@@ -48,28 +52,32 @@ class DynamicWeek extends StatelessWidget {
     );
   }
 
-  List<Widget> _showBubbles() {
+  List<Widget> _showBubbles(context) {
     DateTime today = DateTime.now();
     List<Widget> list = [];
     for (int i = 6; i >= 0; i--) {
-      list.add(
-          _showBubble(new DateTime(today.year, today.month, today.day - i)));
+      list.add(_showBubble(
+          new DateTime(today.year, today.month, today.day - i), context));
     }
     return list;
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> week = _showBubbles();
-    // print(week);
+    ScrollController _scrollController = new ScrollController();
+    List<Widget> week = _showBubbles(context);
+    Timer(Duration(milliseconds: 50), () => _scrollController.jumpTo(_scrollController.position.maxScrollExtent));
     return Container(
       width: SizeConfig.blockSizeHorizontal * 85.37,
       height: SizeConfig.blockSizeVertical * 13,
-      child:  ListView.builder(
+      child: ListView.separated(
+        controller: _scrollController,
+        separatorBuilder: (context, index) => VerticalDivider(),
         scrollDirection: Axis.horizontal,
         itemCount: 7, //TODO: Add infinity line
         itemBuilder: (context, index) => week[index],
-        ),
+      ),
     );
   }
 }
+

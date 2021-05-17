@@ -5,6 +5,7 @@ import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/Block.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
 import 'package:water_overflow/widgets/SmallWaterBubble.dart';
+import 'package:water_overflow/widgets/StatisticBlock.dart';
 
 class StatisticsScreen extends StatelessWidget {
   @override
@@ -84,6 +85,7 @@ class StatisticsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    StatisticBlock.printStatistic(),
                   ],
                 ),
               ),
