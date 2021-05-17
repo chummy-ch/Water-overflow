@@ -31,6 +31,7 @@ class UserViewModel {
 
   static Future<List<HistoryModel>> getHistory() async {
     if (_history == null) {
+      _history = [];
       await _loadHistoryInfo();
       return _history;
     }
@@ -67,10 +68,10 @@ class UserViewModel {
   static Future<void> _loadProgress() async {
     final pref = await SharedPreferences.getInstance();
     double progress = pref.getDouble(HistoryModel.getPogressKeyWithDate());
-    if (progress >= 0)
-      _progress = progress;
-    else
+    if (progress == null || progress < 0)
       _progress = 0;
+    else
+      _progress = progress;
   }
 
   static setHistory(List<HistoryModel> history) {
@@ -107,14 +108,16 @@ class UserViewModel {
   static Future<void> loadUserModel() async {
     final pref = await SharedPreferences.getInstance();
     String string = pref.getString(STRING_USER_MODEL_KEY);
-    List<String> stringList = string.split("?");
-    UserPresenterModel model = UserPresenterModel(
-        stringList[0] == "true",
-        int.parse(stringList[1]),
-        int.parse(stringList[2]),
-        int.parse(stringList[3]),
-        int.parse(stringList[4]));
-    _userPresenterModel = model;
+    if (string != null && string.isNotEmpty ) {
+      List<String> stringList = string.split("?");
+      UserPresenterModel model = UserPresenterModel(
+          stringList[0] == "true",
+          int.parse(stringList[1]),
+          int.parse(stringList[2]),
+          int.parse(stringList[3]),
+          int.parse(stringList[4]));
+      _userPresenterModel = model;
+    }
   }
 
   static void _saveUserModel() async {

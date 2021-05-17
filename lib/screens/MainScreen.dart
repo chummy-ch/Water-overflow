@@ -191,7 +191,7 @@ class DynamicBlocks extends State<Blocks> {
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () async {
-                    List<String> names;
+                    List<String> names = [];
                     liquids.forEach((element) {
                       names.add(element.name);
                     });
@@ -214,7 +214,7 @@ class DynamicBlocks extends State<Blocks> {
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () async {
-                    List<String> names;
+                    List<String> names = [];
                     liquids.forEach((element) {
                       names.add(element.name);
                     });
@@ -237,7 +237,7 @@ class DynamicBlocks extends State<Blocks> {
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () async {
-                    List<String> names;
+                    List<String> names = [];
                     liquids.forEach((element) {
                       names.add(element.name);
                     });
@@ -260,7 +260,7 @@ class DynamicBlocks extends State<Blocks> {
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () async {
-                    List<String> names;
+                    List<String> names = [];
                     liquids.forEach((element) {
                       names.add(element.name);
                     });
