@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_overflow/models/HistoryModel.dart';
 import 'package:water_overflow/screens/StatisticsScreen.dart';
 import 'package:water_overflow/utils/Constants.dart';
+import 'package:water_overflow/utils/DBService.dart';
 import 'package:water_overflow/widgets/AppIcons.dart';
 import 'package:water_overflow/widgets/Block.dart';
 import 'package:water_overflow/widgets/HistoryButton.dart';
@@ -128,6 +129,8 @@ class DynamicBlocks extends State<Blocks> {
   void _saveProgress() async {
     final pref = await SharedPreferences.getInstance();
     pref.setDouble(HistoryModel.getPogressKeyWithDate(), v);
+    DBService()
+        .saveProgress(HistoryModel.getPogressKeyWithDate(), v.toString());
   }
 
   Future<void> _addLiquid(int volume) async {
@@ -143,6 +146,7 @@ class DynamicBlocks extends State<Blocks> {
       if (i != historyList.length - 1) st += ",";
     }
     pref.setString(HistoryModel.getStoreKeyWithDate(), st);
+    DBService().saveHistory(HistoryModel.getStoreKeyWithDate(), st);
   }
 
   @override

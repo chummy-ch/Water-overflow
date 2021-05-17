@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_overflow/models/UserPresenterModel.dart';
+import 'package:water_overflow/utils/DBService.dart';
 
 import '../models/User.dart';
 
@@ -46,5 +47,6 @@ class UserViewModel {
   static void _saveUserModel() async {
     final pref = await SharedPreferences.getInstance();
     pref.setString(STRING_USER_MODEL_KEY, _userPresenterModel.toString());
+    DBService().saveUserInfo(_userPresenterModel.toString());
   }
 }
