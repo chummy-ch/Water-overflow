@@ -98,14 +98,15 @@ class MainScreen extends StatelessWidget {
 List<HistoryModel> historyList = [];
 List<Liquid> liquids = [];
 
+double v = 0;
+int volumeGoal = 0;
+
 class Blocks extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => DynamicBlocks();
 }
 
 class DynamicBlocks extends State<Blocks> {
-  double v = 0;
-  int volumeGoal = 0;
 
   void _addLiquid(int volume, Liquid liquid) {
     HistoryModel model = new HistoryModel(DateTime.now(), volume, liquid.name);
@@ -323,10 +324,26 @@ class DyanamicList extends State<ListDisplay> {
                 itemBuilder: (BuildContext ctxt, int Index) {
                   return new HistoryButton(
                       time: getDate(historyList[Index].time),
-                      info: getInfo(Index));
+                      info: getInfo(Index),
+                    trashPress: () { _removeLiquid(Index); },);
                 }))
       ],
     ));
+  }
+
+  void _removeLiquid(int index) {
+    var h = historyList.elementAt(index);
+    historyList.removeAt(index);
+    Liquid l;
+    liquids.forEach((element) {if (element.name == h.liquid) l = element;});
+    var oldV = h.volume * l.coef / volumeGoal;
+    v -= oldV;
+    if (v < 0) v = 0;
+    UserViewModel.setHistory(historyList);
+    UserViewModel.setProgress(v);
+    setState(() {
+
+    });
   }
 
   String getInfo(int i) {
