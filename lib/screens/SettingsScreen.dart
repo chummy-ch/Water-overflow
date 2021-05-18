@@ -84,7 +84,7 @@ class SettingsScreen extends State<Settings> {
               //PanelButton
               Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: SizeConfig.blockSizeHorizontal * 6.3,
+                    horizontal: SizeConfig.blockSizeHorizontal *1,
                     vertical: SizeConfig.blockSizeVertical * 3.5),
                 child: Row(
                   children: [

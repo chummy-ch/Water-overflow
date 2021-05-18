@@ -2,14 +2,22 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:water_overflow/models/AlarmModel.dart';
+import 'package:water_overflow/userinformation/AlarmViewModel.dart';
 import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/Alarm.dart';
 import 'package:water_overflow/widgets/CustomPicker.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
 
-class AlarmScreen extends StatelessWidget {
+List<AlarmModel> list = [];
+
+class AlarmScreenState extends State<AlarmScreen> {
   @override
   Widget build(BuildContext context) {
+    AlarmViewModel.loadAlarms().then((value) {
+      list = value;
+      setState(() {});
+    });
     SizeConfig().init(context);
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -17,11 +25,8 @@ class AlarmScreen extends StatelessWidget {
         body: Container(
           width: size.width,
           height: size.height,
-          child: ListView(
-            padding: EdgeInsets.symmetric(
-                horizontal: SizeConfig.blockSizeHorizontal * 4.7),
-            scrollDirection: Axis.vertical,
-            children: [
+          child: Column(
+            children: <Widget>[
               //PanelButton
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -54,23 +59,38 @@ class AlarmScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Alarm(),
-              Alarm(),
-              Alarm(),
-              Alarm(),
-              Alarm(),
-              Alarm(),
-              Alarm(),
-              Alarm(),
-              Alarm(),
+              new Expanded(
+                  child: new ListView.builder(
+                      itemCount: list.length,
+                      itemBuilder: (BuildContext ctxt, int Index) {
+                        return Alarm(
+                          isOn: list[Index].isON,
+                          text: list[Index].time,
+                          change: (bool value) {
+                            list[Index].isON = value;
+                            AlarmViewModel.setAlarms(list);
+                          },
+                          remove: () {
+                            print("remove");
+                            if (list.length > 1) {
+                              list.removeAt(Index);
+                              AlarmViewModel.setAlarms(list);
+                              setState(() {});
+                            }
+                          },
+                        );
+                      })),
               RawMaterialButton(
                 onPressed: () {
                   DatePicker.showPicker(context, showTitleActions: true,
                       onChanged: (date) {
-                    print('change $date in time zone ' +
-                        date.timeZoneOffset.inHours.toString());
+                    //print('change $date in time zone ' +
+                    //date.timeZoneOffset.inHours.toString());
                   }, onConfirm: (date) {
-                    print('confirm $date');
+                    list.add(AlarmModel(DateFormat.Hm().format(date), true));
+                    AlarmViewModel.setAlarms(list)
+                        .then((value) => setState(() {}));
+                    //print('confirm $date');
                   },
                       theme: DatePickerTheme(
                         backgroundColor: COLOR_BACKGROUND,
@@ -98,11 +118,16 @@ class AlarmScreen extends StatelessWidget {
   }
 
   LocaleType lan() {
-    print('AlarmScreen.picker'.tr());
+    //print('AlarmScreen.picker'.tr());
     if ('AlarmScreen.picker'.tr() == 'ru') {
       return LocaleType.ru;
     } else {
       return LocaleType.en;
     }
   }
+}
+
+class AlarmScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => new AlarmScreenState();
 }

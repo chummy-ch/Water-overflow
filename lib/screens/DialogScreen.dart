@@ -346,6 +346,8 @@ class Dialogs {
                 height: SizeConfig.blockSizeVertical * 50,
                 width: SizeConfig.blockSizeHorizontal * 10,
                 child: ListView.builder(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.blockSizeHorizontal * 4.7),
                   itemCount: list.length,
                   itemBuilder: (context, index) => liquidInMenu[index],
                 ),
