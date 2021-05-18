@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:water_overflow/models/UserPresenterModel.dart';
 import 'package:water_overflow/utils/Constants.dart';
+import 'package:water_overflow/widgets/LiquidChooseButton.dart';
 
 class Dialogs {
   static Future<String> createDialog(BuildContext context, String title) {
@@ -12,6 +14,7 @@ class Dialogs {
         context: context,
         builder: (context) {
           return AlertDialog(
+            backgroundColor: COLOR_BACKGROUND,
             title: Text(title),
             content: TextField(
               controller: textEditingController,
@@ -79,6 +82,7 @@ class Dialogs {
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
+              backgroundColor: COLOR_BACKGROUND,
               title: Text(title),
               content: NumberPicker(
                 value: initialValue,
@@ -113,6 +117,7 @@ class Dialogs {
         context: context,
         builder: (context) {
           return AlertDialog(
+            backgroundColor: COLOR_BACKGROUND,
             title: Text('DialogScreen.exit'.tr()),
             actions: [
               ElevatedButton(
@@ -137,13 +142,9 @@ class Dialogs {
         initialValue, 'DialogScreen.male'.tr(), 'DialogScreen.female'.tr());
   }
 
-  static Future<bool> showLanguage(BuildContext context) {
-    return _radioButtons(
-        context,
-        'DialogScreen.chooseLanguage'.tr(),
-        EasyLocalization.of(context).currentLocale == Locale('en'),
-        'DialogScreen.english'.tr(),
-        'DialogScreen.russian'.tr());
+  static Future<bool> showLanguage(BuildContext context, bool initialValue) {
+    return _radioButtons(context, 'DialogScreen.chooseLanguage'.tr(),
+        initialValue, 'DialogScreen.english'.tr(), 'DialogScreen.russian'.tr());
   }
 
   static Future<bool> _radioButtons(BuildContext context, String title,
@@ -154,7 +155,10 @@ class Dialogs {
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
-              title: Text(title),
+              backgroundColor: COLOR_BACKGROUND,
+              title: Text(
+                title,
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -212,7 +216,10 @@ class Dialogs {
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
-              title: Text('DialogScreen.chooseActivity'.tr()),
+              backgroundColor: COLOR_BACKGROUND,
+              title: Text(
+                'DialogScreen.chooseActivity'.tr(),
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -262,5 +269,106 @@ class Dialogs {
     } else {
       return 'DialogScreen.veryHighActivity'.tr();
     }
+  }
+
+  /* static List<String> list = ["water", "soda", "black_tea", "coffee", "green_tea",
+    "cola", "beer", "wine", "milk"];*/
+
+  static Future<int> selectLiquid(BuildContext context, List<String> names) {
+    return _showLiquidDialog(context, 'MainScreen.liquid.title'.tr(), names);
+  }
+
+  static _addLiquidToMenu(context, list) {
+    List res = [];
+    for (int i = 0; i < list.length; i++)
+      res.add(LiquidChooseButton(
+        text: toBeginningOfSentenceCase(('MainScreen.liquid.' + list[i]).tr()),
+        onPressed: () {
+          var res = i;
+          Navigator.of(context).pop(res);
+        },
+      ));
+    return res;
+  }
+
+  static Future<int> _showLiquidDialog(
+      BuildContext context, String title, List<String> list) {
+    List liquidInMenu = _addLiquidToMenu(context, list);
+    int res = 0;
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (context, setState) {
+            return AlertDialog(
+              contentPadding: EdgeInsets.all(10),
+              backgroundColor: COLOR_BACKGROUND,
+              title: Text(
+                title,
+                style: TEXT_THEME.headline2,
+              ),
+              content: Container(
+                height: SizeConfig.blockSizeVertical * 50,
+                width: SizeConfig.blockSizeHorizontal * 10,
+                child: ListView.builder(
+                  itemCount: list.length,
+                  itemBuilder: (context, index) => liquidInMenu[index],
+                ),
+              ),
+            );
+          });
+        });
+  }
+
+  static Future<int> selectVolume(BuildContext context) {
+    return _showNumberDialog(context, 'MainScreen.liquid.volume'.tr(), 1, 1000,
+        200); // TODO: Add initial value
+  }
+
+  static showVolume(BuildContext context) {
+    double hpw = 200;
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (context, setState) {
+            return AlertDialog(
+              backgroundColor: COLOR_BACKGROUND,
+              title: Text(
+                'MainScreen.liquid.volume'.tr(),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Slider(
+                    value: hpw,
+                    onChanged: (value) => {
+                      setState(() {
+                        hpw = value;
+                      })
+                    },
+                    min: 10,
+                    max: 1000,
+                    label: hpw.round().toString(),
+                    divisions: 50,
+                  )
+                ],
+              ),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(null);
+                    },
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(COLOR_BUTTON)),
+                    child: Text('DialogScreen.cancel'.tr())),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(hpw);
+                    },
+                    child: Text('DialogScreen.ok'.tr())),
+              ],
+            );
+          });
+        });
   }
 }

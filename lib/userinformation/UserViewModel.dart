@@ -32,6 +32,7 @@ class UserViewModel {
 
   static Future<List<HistoryModel>> getHistory() async {
     if (_history == null) {
+      _history = [];
       await _loadHistoryInfo();
       return _history;
     }
@@ -73,10 +74,10 @@ class UserViewModel {
   static Future<void> _loadProgress() async {
     final pref = await SharedPreferences.getInstance();
     double progress = pref.getDouble(HistoryModel.getPogressKeyWithDate());
-    if (progress >= 0)
-      _progress = progress;
-    else
+    if (progress == null || progress < 0)
       _progress = 0;
+    else
+      _progress = progress;
   }
 
   static setHistory(List<HistoryModel> history) {
