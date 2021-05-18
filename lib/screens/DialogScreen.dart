@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:water_overflow/models/UserPresenterModel.dart';
 import 'package:water_overflow/utils/Constants.dart';
@@ -58,7 +59,15 @@ class Dialogs {
     );
   }
 
-
+  static void showToast(String text) {
+    Fluttertoast.showToast(
+        msg: text,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        backgroundColor: COLOR_WATER,
+        textColor: Colors.white,
+        fontSize: 20);
+  }
 
   static Future<String> showPremium(context){
     TextEditingController textEditingController = TextEditingController();
