@@ -137,8 +137,7 @@ class UserViewModel {
           int.parse(stringList[1]),
           int.parse(stringList[2]),
           int.parse(stringList[3]),
-          int.parse(stringList[4])
-      );
+          int.parse(stringList[4]));
       _userPresenterModel = model;
     }
   }
