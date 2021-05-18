@@ -97,8 +97,6 @@ class MainScreen extends StatelessWidget {
 
 List<HistoryModel> historyList = [];
 List<Liquid> liquids = [];
-double v = 0;
-int volumeGoal = 0;
 
 class Blocks extends StatefulWidget {
   @override
@@ -106,6 +104,8 @@ class Blocks extends StatefulWidget {
 }
 
 class DynamicBlocks extends State<Blocks> {
+  double v = 0;
+  int volumeGoal = 0;
 
   void _addLiquid(int volume, Liquid liquid) {
     HistoryModel model = new HistoryModel(DateTime.now(), volume, liquid.name);
@@ -300,21 +300,6 @@ class ListDisplay extends StatefulWidget {
 class DyanamicList extends State<ListDisplay> {
   final TextEditingController eCtrl = new TextEditingController();
 
-
-  void _removeLiquid(int index) {
-    var l = historyList[index];
-    Liquid li ;
-    liquids.forEach((element) {if (l.liquid == element.name) li = element;});
-    historyList.removeAt(index);
-    UserViewModel.setHistory(historyList);
-    v -= l.volume * li.coef / volumeGoal;
-    UserViewModel.setProgress(v);
-    setState(() {
-
-    });
-  }
-
-
   @override
   Widget build(BuildContext ctxt) {
     return new Scaffold(
@@ -337,9 +322,6 @@ class DyanamicList extends State<ListDisplay> {
                 itemCount: historyList.length,
                 itemBuilder: (BuildContext ctxt, int Index) {
                   return new HistoryButton(
-                      trashPress: () {
-                        _removeLiquid(Index);
-                      },
                       time: getDate(historyList[Index].time),
                       info: getInfo(Index));
                 }))
