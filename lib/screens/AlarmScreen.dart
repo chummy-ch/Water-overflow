@@ -12,14 +12,11 @@ import 'package:water_overflow/widgets/PanelButton.dart';
 List<AlarmModel> list = [];
 
 class AlarmScreenState extends State<AlarmScreen> {
-
   @override
   Widget build(BuildContext context) {
     AlarmViewModel.loadAlarms().then((value) {
       list = value;
-      setState(() {
-
-      });
+      setState(() {});
     });
     SizeConfig().init(context);
     final Size size = MediaQuery.of(context).size;
@@ -73,6 +70,14 @@ class AlarmScreenState extends State<AlarmScreen> {
                             list[Index].isON = value;
                             AlarmViewModel.setAlarms(list);
                           },
+                          remove: () {
+                            print("remove");
+                            if (list.length > 1) {
+                              list.removeAt(Index);
+                              AlarmViewModel.setAlarms(list);
+                              setState(() {});
+                            }
+                          },
                         );
                       })),
               RawMaterialButton(
@@ -83,10 +88,8 @@ class AlarmScreenState extends State<AlarmScreen> {
                     //date.timeZoneOffset.inHours.toString());
                   }, onConfirm: (date) {
                     list.add(AlarmModel(DateFormat.Hm().format(date), true));
-                    AlarmViewModel.setAlarms(list);
-                    setState(() {
-                      
-                    });
+                    AlarmViewModel.setAlarms(list)
+                        .then((value) => setState(() {}));
                     //print('confirm $date');
                   },
                       theme: DatePickerTheme(

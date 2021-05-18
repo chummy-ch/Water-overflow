@@ -13,7 +13,7 @@ class AlarmViewModel {
   static Future<List<AlarmModel>> loadAlarms() async {
     final pref = await SharedPreferences.getInstance();
     String st = pref.getString(STRING_ALARM_KEY);
-    if (st != null) _alarms = toList(st);
+    if (st != null && st.length > 2) _alarms = toList(st);
     return _alarms;
   }
 
@@ -28,7 +28,7 @@ class AlarmViewModel {
     return list;
   }
 
-  static setAlarms(List<AlarmModel> alarms) async {
+  static Future<void> setAlarms(List<AlarmModel> alarms) async {
     _alarms = alarms;
     final pref = await SharedPreferences.getInstance();
     await pref.setString(STRING_ALARM_KEY, getString());

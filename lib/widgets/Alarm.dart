@@ -10,6 +10,7 @@ class Alarm extends StatelessWidget {
   final String text;
   bool isOn;
   ValueChanged<bool> change;
+  VoidCallback remove;
 
   Alarm(
       {Key key,
@@ -18,6 +19,7 @@ class Alarm extends StatelessWidget {
       this.width,
       this.child,
       @required this.change,
+      @required this.remove,
       @required this.isOn})
       : super(key: key);
 
@@ -46,7 +48,7 @@ class Alarm extends StatelessWidget {
           ),
           RawMaterialButton(
             onPressed: () {
-              //TODO delete
+              remove();
             },
             child: Icon(
               AppIcons.trash,
