@@ -275,7 +275,6 @@ class Dialogs {
     "cola", "beer", "wine", "milk"];*/
 
   static Future<int> selectLiquid(BuildContext context, List<String> names) {
-    print(names[0]);
     return _showLiquidDialog(context, 'MainScreen.liquid.title'.tr(), names);
   }
 

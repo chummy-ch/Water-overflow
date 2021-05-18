@@ -173,16 +173,19 @@ class DynamicBlocks extends State<Blocks> {
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () async {
-                    Dialogs.showVolume(context);
+                    var volume = await Dialogs.showVolume(context);
+                    if (volume == null || volume < 0) return;
                     List<String> names = [];
                     liquids.forEach((element) {
                       names.add(element.name);
                     });
+                    if (names == null || names.length == 0) return;
                     var nameIndex = await Dialogs.selectLiquid(context, names);
+                    if (nameIndex == null || nameIndex < 0) return;
                     String name = liquids[nameIndex].name;
                     liquids.forEach((element) {
                       if (element.name == name) {
-                        _addLiquid(120, element);
+                        _addLiquid(volume.round(), element);
                       }
                     });
                   },
@@ -196,6 +199,7 @@ class DynamicBlocks extends State<Blocks> {
                       names.add(element.name);
                     });
                     var nameIndex = await Dialogs.selectLiquid(context, names);
+                    if (nameIndex == null || nameIndex < 0) return;
                     String name = liquids[nameIndex].name;
                     liquids.forEach((element) {
                       if (element.name == name) {
@@ -219,6 +223,7 @@ class DynamicBlocks extends State<Blocks> {
                       names.add(element.name);
                     });
                     var nameIndex = await Dialogs.selectLiquid(context, names);
+                    if (nameIndex == null || nameIndex < 0) return;
                     String name = liquids[nameIndex].name;
                     liquids.forEach((element) {
                       if (element.name == name) {
@@ -242,6 +247,7 @@ class DynamicBlocks extends State<Blocks> {
                       names.add(element.name);
                     });
                     var nameIndex = await Dialogs.selectLiquid(context, names);
+                    if (nameIndex == null || nameIndex < 0) return;
                     String name = liquids[nameIndex].name;
                     liquids.forEach((element) {
                       if (element.name == name) {
@@ -265,6 +271,7 @@ class DynamicBlocks extends State<Blocks> {
                       names.add(element.name);
                     });
                     var nameIndex = await Dialogs.selectLiquid(context, names);
+                    if (nameIndex == null || nameIndex < 0) return;
                     String name = liquids[nameIndex].name;
                     liquids.forEach((element) {
                       if (element.name == name) {
