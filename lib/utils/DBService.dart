@@ -19,6 +19,7 @@ class DBService {
   Future<void> checkVersion() async {
     var doc = await _usersReference.doc(UserViewModel.getUserId()).get();
     Map<String, dynamic> m = doc.data();
+    if (m == null) return;
     if (m.containsKey(VERSION_KEY)) {
       final pref = await SharedPreferences.getInstance();
       var version = pref.getInt(VERSION_KEY);
