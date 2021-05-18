@@ -5,8 +5,9 @@ import 'AppIcons.dart';
 
 class HistoryButton extends StatelessWidget {
   final String time, info;
+  final VoidCallback trashPress;
 
-  const HistoryButton({Key key, @required this.time, @required this.info})
+  const HistoryButton({Key key, @required this.time, @required this.info, @required this.trashPress})
       : super(key: key);
 
   @override
@@ -45,9 +46,12 @@ class HistoryButton extends StatelessWidget {
         SizedBox(
           width: 10,
         ),
-        Icon(
-          AppIcons.trash,
-          size: 16,
+        RawMaterialButton(
+          onPressed: trashPress,
+          child: Icon(
+            AppIcons.trash,
+            size: 16,
+          ),
         ),
         SizedBox(
           width: 10,
