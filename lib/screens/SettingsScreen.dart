@@ -6,7 +6,6 @@ import 'package:water_overflow/screens/DialogScreen.dart';
 import 'package:water_overflow/userinformation/UserViewModel.dart';
 import 'package:water_overflow/utils/AuthService.dart';
 import 'package:water_overflow/utils/Constants.dart';
-import 'package:water_overflow/utils/DBService.dart';
 import 'package:water_overflow/widgets/Block.dart';
 import 'package:water_overflow/widgets/PSettingsButton.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
@@ -186,12 +185,12 @@ class SettingsScreen extends State<Settings> {
                         data: "SettingsScreen.personalInfo.account.leave".tr(),
                         onTap: () => {
                               Dialogs.showExitScreenAndExit(context).then(
-                                (value) {
-                                  if (value) {
-                                    DBService.removeVersion();
-                                    AuthService().logOut();
-                                    Navigator.pop(context);
-                                  }
+                                (value) => {
+                                  if (value)
+                                    {
+                                      AuthService().logOut(),
+                                      Navigator.pop(context)
+                                    }
                                 },
                               )
                             }),
