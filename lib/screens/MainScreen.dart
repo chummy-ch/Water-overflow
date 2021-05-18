@@ -96,13 +96,28 @@ class DynamicBlocks extends State<Blocks> {
   double v = 0;
   int volumeGoal = 2000;
 
-  _addLiquid(int volume, Liquid liquid) {
+  void _addLiquid(int volume, Liquid liquid) {
     HistoryModel model = new HistoryModel(DateTime.now(), volume, liquid.name);
     historyList.add(model);
     v += volume * liquid.coef / volumeGoal;
     UserViewModel.setProgress(v);
     setState(() {});
     UserViewModel.setHistory(historyList);
+  }
+
+  void _bindLiquidWindowAndSetResult(int volume) async {
+    List<String> names = [];
+    liquids.forEach((element) {
+      names.add(element.name);
+    });
+    var nameIndex = await Dialogs.selectLiquid(context, names);
+    if (nameIndex == null || nameIndex < 0) return;
+    String name = liquids[nameIndex].name;
+    liquids.forEach((element) {
+      if (element.name == name) {
+        _addLiquid(volume, element);
+      }
+    });
   }
 
   @override
@@ -193,19 +208,8 @@ class DynamicBlocks extends State<Blocks> {
                 ),
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
-                  onPressed: () async {
-                    List<String> names = [];
-                    liquids.forEach((element) {
-                      names.add(element.name);
-                    });
-                    var nameIndex = await Dialogs.selectLiquid(context, names);
-                    if (nameIndex == null || nameIndex < 0) return;
-                    String name = liquids[nameIndex].name;
-                    liquids.forEach((element) {
-                      if (element.name == name) {
-                        _addLiquid(120, element);
-                      }
-                    });
+                  onPressed: () {
+                    _bindLiquidWindowAndSetResult(120);
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -217,19 +221,8 @@ class DynamicBlocks extends State<Blocks> {
                 ),
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
-                  onPressed: () async {
-                    List<String> names = [];
-                    liquids.forEach((element) {
-                      names.add(element.name);
-                    });
-                    var nameIndex = await Dialogs.selectLiquid(context, names);
-                    if (nameIndex == null || nameIndex < 0) return;
-                    String name = liquids[nameIndex].name;
-                    liquids.forEach((element) {
-                      if (element.name == name) {
-                        _addLiquid(240, element);
-                      }
-                    });
+                  onPressed: () {
+                    _bindLiquidWindowAndSetResult(240);
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -241,19 +234,8 @@ class DynamicBlocks extends State<Blocks> {
                 ),
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
-                  onPressed: () async {
-                    List<String> names = [];
-                    liquids.forEach((element) {
-                      names.add(element.name);
-                    });
-                    var nameIndex = await Dialogs.selectLiquid(context, names);
-                    if (nameIndex == null || nameIndex < 0) return;
-                    String name = liquids[nameIndex].name;
-                    liquids.forEach((element) {
-                      if (element.name == name) {
-                        _addLiquid(340, element);
-                      }
-                    });
+                  onPressed: () {
+                    _bindLiquidWindowAndSetResult(340);
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -265,19 +247,8 @@ class DynamicBlocks extends State<Blocks> {
                 ),
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
-                  onPressed: () async {
-                    List<String> names = [];
-                    liquids.forEach((element) {
-                      names.add(element.name);
-                    });
-                    var nameIndex = await Dialogs.selectLiquid(context, names);
-                    if (nameIndex == null || nameIndex < 0) return;
-                    String name = liquids[nameIndex].name;
-                    liquids.forEach((element) {
-                      if (element.name == name) {
-                        _addLiquid(500, element);
-                      }
-                    });
+                  onPressed: () {
+                    _bindLiquidWindowAndSetResult(500);
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
