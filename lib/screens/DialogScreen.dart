@@ -5,6 +5,7 @@ import 'package:numberpicker/numberpicker.dart';
 import 'package:water_overflow/models/UserPresenterModel.dart';
 import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/LiquidChooseButton.dart';
+import 'package:auto_size_text_field/auto_size_text_field.dart';
 
 class Dialogs {
   static Future<String> createDialog(BuildContext context, String title) {
@@ -55,6 +56,41 @@ class Dialogs {
       initialDate: minAge,
       helpText: 'DialogScreen.enterBirthDate'.tr(),
     );
+  }
+
+
+
+  static Future<String> showPremium(context){
+    TextEditingController textEditingController = TextEditingController();
+
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: COLOR_BACKGROUND,
+            title: Text('Purchase Premium'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Left your contact. We will contact with you as soon as possible'),
+              ],
+            ),
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+
+                  },
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(COLOR_BUTTON)),
+                  child: Text('DialogScreen.cancel'.tr())),
+              ElevatedButton(
+                  onPressed: () {
+                    print(textEditingController.text.toString());
+                  },
+                  child: Text('DialogScreen.ok'.tr())),
+            ],
+          );
+        });
   }
 
   static Future<int> selectWeight(BuildContext context, int initialValue) {

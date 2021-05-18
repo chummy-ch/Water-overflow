@@ -110,5 +110,8 @@
     "normalActivity" : "Normal activity",
     "highActivity" : "Enough activity",
     "veryHighActivity" : "Much activity"
+  },
+  "InitialScreen": {
+    "fillData" : "Fill your data"
   }
 }

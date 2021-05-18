@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_overflow/models/Liquid.dart';
 import 'package:water_overflow/userinformation/UserViewModel.dart';
@@ -10,21 +9,21 @@ class DBService {
   static const String VERSION_KEY = "version";
 
   void saveUserInfo(String userInfo) {
-    _updateFirestore(UserViewModel.STRING_USER_MODEL_KEY, userInfo);
+    updateFirestore(UserViewModel.STRING_USER_MODEL_KEY, userInfo);
   }
 
   void saveHistory(String date, String history) {
-    _updateFirestore(date, history);
+    updateFirestore(date, history);
   }
 
   Future<void> checkVersion() async {
     var doc = await _usersReference.doc(UserViewModel.getUserId()).get();
     Map<String, dynamic> m = doc.data();
+    if (m == null) return;
     if (m.containsKey(VERSION_KEY)) {
       final pref = await SharedPreferences.getInstance();
       var version = pref.getInt(VERSION_KEY);
       if (version == null || version < m[VERSION_KEY]) {
-        Fluttertoast.showToast(msg: "Синхронизация данных с Firestore");
         m.forEach((key, value) {
           if (value is String)
             pref.setString(key, value);
@@ -37,6 +36,13 @@ class DBService {
         pref.setInt(VERSION_KEY, version);
       }
     }
+  }
+
+  Future<bool> hasFirestoreData() async {
+    var doc = await _usersReference.doc(UserViewModel.getUserId()).get();
+    Map<String, dynamic> m = doc.data();
+    if (m == null) return false;
+    return true;
   }
 
   Future<List<Liquid>> loadLiquid() async {
@@ -56,13 +62,14 @@ class DBService {
     ref.setInt(VERSION_KEY, -1);
   }
 
-  void saveProgress(String date, dynamic progress) {
-    _updateFirestore(date, progress);
+  void saveProgress(String date, double progress) {
+    updateFirestore(date, progress);
   }
 
-  void _updateFirestore(String key, String data) async {
+  Future<void> updateFirestore(String key, dynamic data) async {
     var doc = await _usersReference.doc(UserViewModel.getUserId()).get();
     Map<String, dynamic> m = doc.data();
+    if (m == null) m = {};
     m[key] = data;
     int version = 0;
     if (m.containsKey(VERSION_KEY)) {

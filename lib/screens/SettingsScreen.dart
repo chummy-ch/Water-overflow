@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:water_overflow/models/UserPresenterModel.dart';
 import 'package:water_overflow/screens/DialogScreen.dart';
 import 'package:water_overflow/userinformation/UserViewModel.dart';
@@ -19,6 +21,8 @@ class Settings extends StatefulWidget {
 
 class SettingsScreen extends State<Settings> {
   UserPresenterModel _userModel = UserViewModel.getUserModel();
+
+  void _launchURL(url) async => await launch(url);
 
   void _setActivity(double act) {
     _userModel.setActivity(act.round());
@@ -173,8 +177,13 @@ class SettingsScreen extends State<Settings> {
                             .toString()
                             .tr(),
                         onTap: () => {
-                              Dialogs.showLanguage(context, true).then(
-                                  (value) => {
+                              Dialogs.showLanguage(
+                                      context,
+                                      EasyLocalization.of(context)
+                                              .currentLocale
+                                              .toString() ==
+                                          'en')
+                                  .then((value) => {
                                         if (value != null)
                                           context.setLocale(
                                               Locale(value ? 'en' : 'ru'))
@@ -184,17 +193,21 @@ class SettingsScreen extends State<Settings> {
                         name:
                             "SettingsScreen.personalInfo.account.account".tr(),
                         data: "SettingsScreen.personalInfo.account.leave".tr(),
-                        onTap: () => {
-                              Dialogs.showExitScreenAndExit(context).then(
-                                (value) {
-                                  if (value) {
-                                    DBService.removeVersion();
-                                    AuthService().logOut();
-                                    Navigator.pop(context);
-                                  }
-                                },
-                              )
-                            }),
+                        onTap: () {
+                          Dialogs.showExitScreenAndExit(context).then(
+                            (value) async {
+                              if (value) {
+                                DBService.removeVersion();
+                                var pref =
+                                    await SharedPreferences.getInstance();
+                                await pref.clear();
+                                UserViewModel.wipeData();
+                                AuthService().logOut();
+                                Navigator.pop(context);
+                              }
+                            },
+                          );
+                        }),
                   ],
                 ),
               ),
@@ -218,10 +231,24 @@ class SettingsScreen extends State<Settings> {
                         ],
                       ),
                       SettingsButton(
-                          name: "SettingsScreen.info.premiumVersion".tr()),
-                      SettingsButton(name: "SettingsScreen.info.about".tr()),
-                      SettingsButton(name: "SettingsScreen.info.contact".tr()),
-                      SettingsButton(name: "SettingsScreen.info.private".tr()),
+                          name: "SettingsScreen.info.premiumVersion".tr(),
+                          onTap: () => {
+                                Dialogs.showPremium(context)}),
+                      SettingsButton(
+                        name: "SettingsScreen.info.about".tr(),
+                        onTap: () =>
+                            _launchURL('https://water-overflow-c1a22.web.app/'),
+                      ),
+                      SettingsButton(
+                        name: "SettingsScreen.info.contact".tr(),
+                        onTap: () => _launchURL(
+                            'https://github.com/chummy-ch/Water-overflow'),
+                      ),
+                      SettingsButton(
+                        name: "SettingsScreen.info.private".tr(),
+                        onTap: () =>
+                            _launchURL('https://water-overflow-c1a22.web.app/'),
+                      ),
                     ],
                   )),
             ],

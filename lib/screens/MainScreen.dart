@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:water_overflow/models/HistoryModel.dart';
 import 'package:water_overflow/models/Liquid.dart';
+import 'package:water_overflow/screens/InitialScreen.dart';
 import 'package:water_overflow/screens/StatisticsScreen.dart';
 import 'package:water_overflow/userinformation/LiqiudVieModel.dart';
 import 'package:water_overflow/userinformation/UserViewModel.dart';
@@ -22,9 +23,18 @@ import 'SettingsScreen.dart';
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Future.delayed(
+        Duration(milliseconds: 500),
+        () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LogInStep())));
     SizeConfig().init(context);
     final Size size = MediaQuery.of(context).size;
-
+    var future = UserViewModel.getWeekProgress();
+    future.then((value) {
+      value.forEach((element) {
+        print(element);
+      });
+    });
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -95,15 +105,15 @@ class Blocks extends StatefulWidget {
 
 class DynamicBlocks extends State<Blocks> {
   double v = 0;
-  int volumeGoal = 2000;
+  int volumeGoal = 0;
 
   void _addLiquid(int volume, Liquid liquid) {
     HistoryModel model = new HistoryModel(DateTime.now(), volume, liquid.name);
     historyList.add(model);
     v += volume * liquid.coef / volumeGoal;
+    UserViewModel.setHistory(historyList);
     UserViewModel.setProgress(v);
     setState(() {});
-    UserViewModel.setHistory(historyList);
   }
 
   void _bindLiquidWindowAndSetResult(int volume) async {
@@ -133,6 +143,7 @@ class DynamicBlocks extends State<Blocks> {
       historyList = value;
       setState(() {});
     });
+    volumeGoal = UserViewModel.getVolumeGoal();
   }
 
   @override
@@ -141,7 +152,6 @@ class DynamicBlocks extends State<Blocks> {
     versionFuture.then((value) {
       updateData();
     });
-
     return new Column(
       children: <Widget>[
         new Container(
