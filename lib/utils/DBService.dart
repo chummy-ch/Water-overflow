@@ -51,6 +51,11 @@ class DBService {
     return l;
   }
 
+  static void removeVersion() async {
+    final ref = await SharedPreferences.getInstance();
+    ref.setInt(VERSION_KEY, -1);
+  }
+
   void saveProgress(String date, dynamic progress) {
     _updateFirestore(date, progress);
   }
