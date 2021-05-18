@@ -24,7 +24,10 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     final Size size = MediaQuery.of(context).size;
-
+    var future = UserViewModel.getWeekProgress();
+    future.then((value)  {
+      value.forEach((element) {print(element);});
+    });
     return SafeArea(
       child: Scaffold(
         body: Container(

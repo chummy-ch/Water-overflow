@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_overflow/models/HistoryModel.dart';
 import 'package:water_overflow/models/UserPresenterModel.dart';
@@ -47,14 +48,19 @@ class UserViewModel {
       List<String> stringList = history.split(',');
       _history = [];
       for (int i = 0; i < stringList.length; i++) {
-        String s = stringList[i].replaceAll("[", "").replaceAll("]", "");
-        List<String> valuesList = s.split('?');
-        DateTime time = DateTime.parse(valuesList[0]);
-        int volume = int.parse(valuesList[1]);
-        String liquid = valuesList[2];
-        _history.add(HistoryModel(time, volume, liquid));
+        var historyModel = getHistoryFromString(stringList[i]);
+        _history.add(historyModel);
       }
     }
+  }
+
+  static HistoryModel getHistoryFromString(String h) {
+    String s = h.replaceAll("[", "").replaceAll("]", "");
+    List<String> valuesList = s.split('?');
+    DateTime time = DateTime.parse(valuesList[0]);
+    int volume = int.parse(valuesList[1]);
+    String liquid = valuesList[2];
+    return HistoryModel(time, volume, liquid);
   }
 
   static Future<double> getProgress() async {
@@ -105,10 +111,26 @@ class UserViewModel {
     _user = user;
   }
 
+  static Future<List<double>> getWeekProgress() async {
+    final pref = await SharedPreferences.getInstance();
+    var timeNow = DateTime.now();
+    List<double> progressList = [];
+    for (int i = 0; i < 7; i++) {
+      var time = timeNow.subtract(new Duration(days: i));
+      print(DateFormat.yMd().format(time));
+      String key =
+          HistoryModel.DOUBLE_PROGRESS_KEY + DateFormat.yMd().format(time);
+      var progress = pref.getDouble(key);
+      if (progress == null || progress < 0) return progressList;
+      progressList.add(progress);
+    }
+    return progressList;
+  }
+
   static Future<void> loadUserModel() async {
     final pref = await SharedPreferences.getInstance();
     String string = pref.getString(STRING_USER_MODEL_KEY);
-    if (string != null && string.isNotEmpty) {
+    if (string != null) {
       List<String> stringList = string.split("?");
       UserPresenterModel model = UserPresenterModel(
           stringList[0] == "true",
