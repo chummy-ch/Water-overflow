@@ -80,7 +80,7 @@ class _LogInStepState extends State<LogInStep> {
               return Scaffold(
                 appBar: AppBar(
                   automaticallyImplyLeading: false,
-                  title: Text('Fill your data'),
+                  title: Text('InitialScreen.fillData'.tr()),
                   centerTitle: true,
                 ),
                 body: Container(
@@ -94,7 +94,7 @@ class _LogInStepState extends State<LogInStep> {
                           onStepContinue: continued,
                           steps: <Step>[
                             Step(
-                              title: new Text('Gender'),
+                              title: new Text('SettingsScreen.personalInfo.gender.gender'.tr()),
                               content: PersonalSettingsButton(
                                 name:
                                     "SettingsScreen.personalInfo.gender.gender"
@@ -114,7 +114,7 @@ class _LogInStepState extends State<LogInStep> {
                                   : StepState.disabled,
                             ),
                             Step(
-                              title: new Text('Address'),
+                              title: new Text("SettingsScreen.personalInfo.age".tr()),
                               content: PersonalSettingsButton(
                                 name: "SettingsScreen.personalInfo.age".tr(),
                                 data: "${_userModel.getAge()}",
@@ -131,7 +131,8 @@ class _LogInStepState extends State<LogInStep> {
                                   : StepState.disabled,
                             ),
                             Step(
-                              title: new Text('Mobile Number'),
+                              title: new Text("SettingsScreen.personalInfo.weight.weight"
+                                  .tr()),
                               content: PersonalSettingsButton(
                                 name:
                                     "SettingsScreen.personalInfo.weight.weight"
@@ -153,7 +154,7 @@ class _LogInStepState extends State<LogInStep> {
                                   : StepState.disabled,
                             ),
                             Step(
-                              title: new Text('Mobile Number'),
+                              title: new Text("SettingsScreen.personalInfo.height.height".tr()),
                               content: PersonalSettingsButton(
                                 name:
                                     "SettingsScreen.personalInfo.height.height"
@@ -175,7 +176,8 @@ class _LogInStepState extends State<LogInStep> {
                                   : StepState.disabled,
                             ),
                             Step(
-                              title: new Text('Mobile Number'),
+                              title: new Text("SettingsScreen.personalInfo.activity.activity"
+                                  .tr()),
                               content: PersonalSettingsButton(
                                 name:
                                     "SettingsScreen.personalInfo.activity.activity"

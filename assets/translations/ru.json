@@ -110,5 +110,8 @@
     "normalActivity" : "Средняя активность",
     "highActivity" : "Высокая активность",
     "veryHighActivity" : "Очень высокая активность"
+  },
+  "InitialScreen": {
+    "fillData" : "Введите свои данные"
   }
 }
