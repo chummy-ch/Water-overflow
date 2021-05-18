@@ -68,7 +68,20 @@
   },
   "MainScreen": {
     "ml": "ml",
-    "history": "History"
+    "history": "History",
+    "liquid": {
+      "title" : "Select your drink",
+      "volume": "Select volume, ml",
+      "Water" : "water",
+      "Soda" : "soda",
+      "Black tea" : "black tea",
+      "Coffee" : "coffee",
+      "Green tea" : "green tea",
+      "Cola" : "cola",
+      "Beer": "beer",
+      "Wine": "wine",
+      "Milk": "milk"
+    }
   },
   "AlarmScreen": {
     "alarms": "Your Alarms",

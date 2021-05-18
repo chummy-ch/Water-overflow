@@ -68,7 +68,20 @@
   },
   "MainScreen": {
     "ml": "мл",
-    "history": "История"
+    "history": "История",
+    "liquid": {
+      "title" : "Выберите напиток",
+      "volume": "Выберите объем, мл",
+      "Water" : "вода",
+      "Soda" : "газировка",
+      "Black tea" : "черный чай",
+      "Coffee" : "кофе",
+      "Green tea" : "зеленый чай",
+      "Cola" : "кола",
+      "Beer": "пиво",
+      "Wine": "вино",
+      "Milk": "молоко"
+    }
   },
   "AlarmScreen": {
     "alarms": "Будильники",

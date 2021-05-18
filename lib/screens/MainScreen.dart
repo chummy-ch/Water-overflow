@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:water_overflow/models/HistoryModel.dart';
+import 'package:water_overflow/models/Liquid.dart';
 import 'package:water_overflow/screens/StatisticsScreen.dart';
+import 'package:water_overflow/userinformation/LiqiudVieModel.dart';
 import 'package:water_overflow/userinformation/UserViewModel.dart';
 import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/AppIcons.dart';
@@ -13,6 +15,7 @@ import 'package:water_overflow/widgets/LiquidButton.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
 
 import 'AlarmScreen.dart';
+import 'DialogScreen.dart';
 import 'SettingsScreen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -82,6 +85,7 @@ class MainScreen extends StatelessWidget {
 }
 
 List<HistoryModel> historyList = [];
+List<Liquid> liquids = [];
 
 class Blocks extends StatefulWidget {
   @override
@@ -92,18 +96,34 @@ class DynamicBlocks extends State<Blocks> {
   double v = 0;
   int volumeGoal = 2000;
 
-  _addLiquid(int volume) {
-    HistoryModel model = new HistoryModel(DateTime.now(), volume, "Water");
+  void _addLiquid(int volume, Liquid liquid) {
+    HistoryModel model = new HistoryModel(DateTime.now(), volume, liquid.name);
     historyList.add(model);
-    v += volume / volumeGoal;
+    v += volume * liquid.coef / volumeGoal;
     UserViewModel.setProgress(v);
     setState(() {});
     UserViewModel.setHistory(historyList);
   }
 
+  void _bindLiquidWindowAndSetResult(int volume) async {
+    List<String> names = [];
+    liquids.forEach((element) {
+      names.add(element.name);
+    });
+    var nameIndex = await Dialogs.selectLiquid(context, names);
+    if (nameIndex == null || nameIndex < 0) return;
+    String name = liquids[nameIndex].name;
+    liquids.forEach((element) {
+      if (element.name == name) {
+        _addLiquid(volume, element);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var p = UserViewModel.getProgress();
+    liquids = LiquidViewModel.getLiquidList();
     p.then((value) {
       v = value;
       setState(() {});
@@ -167,15 +187,29 @@ class DynamicBlocks extends State<Blocks> {
               children: <Widget>[
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
-                  onPressed: () {
-                    //_addLiquid();
+                  onPressed: () async {
+                    var volume = await Dialogs.showVolume(context);
+                    if (volume == null || volume < 0) return;
+                    List<String> names = [];
+                    liquids.forEach((element) {
+                      names.add(element.name);
+                    });
+                    if (names == null || names.length == 0) return;
+                    var nameIndex = await Dialogs.selectLiquid(context, names);
+                    if (nameIndex == null || nameIndex < 0) return;
+                    String name = liquids[nameIndex].name;
+                    liquids.forEach((element) {
+                      if (element.name == name) {
+                        _addLiquid(volume.round(), element);
+                      }
+                    });
                   },
                   child: Icon(AppIcons.plus, size: 40),
                 ),
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () {
-                    _addLiquid(120);
+                    _bindLiquidWindowAndSetResult(120);
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -188,7 +222,7 @@ class DynamicBlocks extends State<Blocks> {
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () {
-                    _addLiquid(240);
+                    _bindLiquidWindowAndSetResult(240);
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -201,7 +235,7 @@ class DynamicBlocks extends State<Blocks> {
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () {
-                    _addLiquid(340);
+                    _bindLiquidWindowAndSetResult(340);
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -214,7 +248,7 @@ class DynamicBlocks extends State<Blocks> {
                 SizedBox(width: SizeConfig.blockSizeVertical * 1.6),
                 new LiquidButton(
                   onPressed: () {
-                    _addLiquid(500);
+                    _bindLiquidWindowAndSetResult(500);
                   },
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -258,8 +292,12 @@ class DyanamicList extends State<ListDisplay> {
           padding: EdgeInsets.symmetric(
               horizontal: SizeConfig.blockSizeHorizontal * 6.5,
               vertical: SizeConfig.blockSizeVertical),
-          child: new Text('MainScreen.history'.tr() + ':',
-              style: TEXT_THEME.headline4),
+          child: Row(
+            children: [
+              new Text('MainScreen.history'.tr() + ':',
+                  style: TEXT_THEME.headline4),
+            ],
+          ),
         ),
         new Expanded(
             child: new ListView.builder(
