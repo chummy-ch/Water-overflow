@@ -6,24 +6,28 @@ import 'package:flutter/material.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_overflow/models/HistoryModel.dart';
+import 'package:water_overflow/userinformation/UserViewModel.dart';
 import 'package:water_overflow/utils/Constants.dart';
+import 'package:water_overflow/widgets/AppIcons.dart';
 
 class DynamicWeek extends StatelessWidget {
   const DynamicWeek({Key key}) : super(key: key);
 
-  static Future<double> _loadProgress() async {
-    final pref = await SharedPreferences.getInstance();
+  static Future<double> _loadProgress(int index) async {
+    var pastWeek = await UserViewModel.getWeekProgress();
+    print(pastWeek);
     return max(
-        pref.getDouble(HistoryModel.getPogressKeyWithDate()), 0); // TODO:Day
+        pastWeek[index], 0); // TODO:Day
   }
 
-  Future _w() async {
+  Future _w(int index) async {
+    UserViewModel.getWeekProgress().then((value) => print("\n~~~~~~~" + value.toString() + "~~~~~~~\n"));
     return Center(
       child: Container(
         width: SizeConfig.blockSizeVertical * 10,
         height: SizeConfig.blockSizeVertical * 10,
         child: LiquidCircularProgressIndicator(
-          value: await _loadProgress(),
+          value: await _loadProgress(index),
           // Defaults to 0.5.
           valueColor: AlwaysStoppedAnimation(Colors.lightBlue[200]),
           backgroundColor: COLOR_TRANSPARENT,
@@ -33,7 +37,7 @@ class DynamicWeek extends StatelessWidget {
     );
   }
 
-  Widget _showBubble(DateTime dateTime, context) {
+  Widget _showBubble(DateTime dateTime, int index, context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -43,11 +47,23 @@ class DynamicWeek extends StatelessWidget {
         FutureBuilder(
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return Container(child: CircularProgressIndicator());
+                return Center(
+                  child: Container(
+                    width: SizeConfig.blockSizeVertical * 10,
+                    height: SizeConfig.blockSizeVertical * 10,
+                    child: LiquidCircularProgressIndicator(
+                        value: 0,
+                    // Defaults to 0.5.
+                    valueColor: AlwaysStoppedAnimation(Colors.lightBlue[200]),
+                    backgroundColor: COLOR_TRANSPARENT,
+                    direction: Axis.vertical,
+                  ),
+                ),
+              );
               }
               return snapshot.data;
             },
-            future: _w()),
+            future: _w(index)),
       ],
     );
   }
@@ -57,7 +73,7 @@ class DynamicWeek extends StatelessWidget {
     List<Widget> list = [];
     for (int i = 6; i >= 0; i--) {
       list.add(_showBubble(
-          new DateTime(today.year, today.month, today.day - i), context));
+          new DateTime(today.year, today.month, today.day - i), i, context));
     }
     return list;
   }

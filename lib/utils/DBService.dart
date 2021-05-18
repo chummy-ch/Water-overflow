@@ -63,10 +63,10 @@ class DBService {
   }
 
   void saveProgress(String date, dynamic progress) {
-    _updateFirestore(date, progress);
+    _updateFirestore(date, progress.toString());
   }
 
-  void _updateFirestore(String key, String data) async {
+  void _updateFirestore(String key, dynamic data) async {
     var doc = await _usersReference.doc(UserViewModel.getUserId()).get();
     Map<String, dynamic> m = doc.data();
     if (m == null) m = {};
