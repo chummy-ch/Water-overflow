@@ -89,6 +89,20 @@ class UserViewModel {
       _progress = progress;
   }
 
+  static int getVolumeGoal() {
+    if (_userPresenterModel.getGender()) {
+      double goal = ((_userPresenterModel.getWeight() * 0.03) +
+              (_userPresenterModel.getActiveHoursPerWeek() / 7 * 0.5)) *
+          1000;
+      return goal.round();
+    } else {
+      double goal = ((_userPresenterModel.getWeight() * 0.025) +
+              (_userPresenterModel.getActiveHoursPerWeek() / 7 * 0.4)) *
+          1000;
+      return goal.round();
+    }
+  }
+
   static setHistory(List<HistoryModel> history) {
     _history = history;
     _saveHistory();
