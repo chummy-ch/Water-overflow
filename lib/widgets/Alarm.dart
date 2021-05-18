@@ -9,6 +9,7 @@ class Alarm extends StatelessWidget {
   final double height, width;
   final String text;
   bool isOn;
+  ValueChanged<bool> change;
 
   Alarm(
       {Key key,
@@ -16,6 +17,7 @@ class Alarm extends StatelessWidget {
       this.height,
       this.width,
       this.child,
+      @required this.change,
       @required this.isOn})
       : super(key: key);
 
@@ -39,6 +41,7 @@ class Alarm extends StatelessWidget {
             value: isOn,
             onChanged: (value) {
               isOn = !isOn;
+              change(isOn);
             },
           ),
           RawMaterialButton(

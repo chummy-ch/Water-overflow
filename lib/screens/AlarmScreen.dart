@@ -69,6 +69,10 @@ class AlarmScreenState extends State<AlarmScreen> {
                         return Alarm(
                           isOn: list[Index].isON,
                           text: list[Index].time,
+                          change: (bool value) {
+                            list[Index].isON = value;
+                            AlarmViewModel.setAlarms(list);
+                          },
                         );
                       })),
               RawMaterialButton(
