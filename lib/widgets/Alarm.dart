@@ -7,15 +7,17 @@ import 'AppIcons.dart';
 class Alarm extends StatelessWidget {
   final Widget child;
   final double height, width;
+  final String text;
+  bool isOn;
 
-  Alarm({
-    Key key,
-    this.height,
-    this.width,
-    this.child,
-  }) : super(key: key);
-
-  bool isOn = true;
+  Alarm(
+      {Key key,
+      @required this.text,
+      this.height,
+      this.width,
+      this.child,
+      @required this.isOn})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class Alarm extends StatelessWidget {
         children: [
           SizedBox(width: 25),
           Text(
-            '08:00',
+            text,
             style: TEXT_THEME.headline2,
           ),
           Spacer(flex: 1),
