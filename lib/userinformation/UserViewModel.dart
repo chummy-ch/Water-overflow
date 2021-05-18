@@ -18,6 +18,11 @@ class UserViewModel {
     return _user.id;
   }
 
+  static void wipeData() {
+    _progress = 0;
+    _history = [];
+  }
+
   static UserPresenterModel getUserModel() {
     if (_userPresenterModel != null)
       return _userPresenterModel;
@@ -90,14 +95,14 @@ class UserViewModel {
   }
 
   static int getVolumeGoal() {
-    if (_userPresenterModel.getGender()) {
-      double goal = ((_userPresenterModel.getWeight() * 0.03) +
-              (_userPresenterModel.getActiveHoursPerWeek() / 7 * 0.5)) *
+    if (getUserModel().getGender()) {
+      double goal = ((getUserModel().getWeight() * 0.03) +
+              (getUserModel().getActiveHoursPerWeek() / 7 * 0.5)) *
           1000;
       return goal.round();
     } else {
-      double goal = ((_userPresenterModel.getWeight() * 0.025) +
-              (_userPresenterModel.getActiveHoursPerWeek() / 7 * 0.4)) *
+      double goal = ((getUserModel().getWeight() * 0.025) +
+              (getUserModel().getActiveHoursPerWeek() / 7 * 0.4)) *
           1000;
       return goal.round();
     }
@@ -181,7 +186,7 @@ class UserViewModel {
 
   static void _saveUserModel() async {
     final pref = await SharedPreferences.getInstance();
-    pref.setString(STRING_USER_MODEL_KEY, _userPresenterModel.toString());
-    db.saveUserInfo(_userPresenterModel.toString());
+    pref.setString(STRING_USER_MODEL_KEY, getUserModel().toString());
+    db.saveUserInfo(getUserModel().toString());
   }
 }

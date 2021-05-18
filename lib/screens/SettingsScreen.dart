@@ -1,6 +1,10 @@
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:water_overflow/models/HistoryModel.dart';
 import 'package:water_overflow/models/UserPresenterModel.dart';
 import 'package:water_overflow/screens/DialogScreen.dart';
 import 'package:water_overflow/userinformation/UserViewModel.dart';
@@ -184,17 +188,21 @@ class SettingsScreen extends State<Settings> {
                         name:
                             "SettingsScreen.personalInfo.account.account".tr(),
                         data: "SettingsScreen.personalInfo.account.leave".tr(),
-                        onTap: () => {
-                              Dialogs.showExitScreenAndExit(context).then(
-                                (value) {
-                                  if (value) {
-                                    DBService.removeVersion();
-                                    AuthService().logOut();
-                                    Navigator.pop(context);
-                                  }
-                                },
-                              )
-                            }),
+                        onTap: () {
+                          Dialogs.showExitScreenAndExit(context).then(
+                            (value) async {
+                              if (value) {
+                                DBService.removeVersion();
+                                var pref =
+                                    await SharedPreferences.getInstance();
+                                await pref.clear();
+                                UserViewModel.wipeData();
+                                AuthService().logOut();
+                                Navigator.pop(context);
+                              }
+                            },
+                          );
+                        }),
                   ],
                 ),
               ),
