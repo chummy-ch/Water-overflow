@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_overflow/models/Liquid.dart';
 import 'package:water_overflow/userinformation/UserViewModel.dart';
@@ -24,8 +23,6 @@ class DBService {
       final pref = await SharedPreferences.getInstance();
       var version = pref.getInt(VERSION_KEY);
       if (version == null || version < m[VERSION_KEY]) {
-        //TODO Add localization
-        Fluttertoast.showToast(msg: "Синхронизация данных с Firestore");
         m.forEach((key, value) {
           if (value is String)
             pref.setString(key, value);
