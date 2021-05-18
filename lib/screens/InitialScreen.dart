@@ -16,6 +16,15 @@ class _LogInStepState extends State<LogInStep> {
   int _currentStep = 0;
   StepperType stepperType = StepperType.vertical;
   UserPresenterModel _userModel = UserViewModel.getUserModel();
+  bool _isCalc = false;
+
+  Future<bool> _isNew(){
+    if(!_isCalc) {
+      _isCalc = true;
+      return UserViewModel.isFirstEntry();
+    }
+    return Future<bool>.value(true);
+  }
 
   void _updateViewModelUserModel() {
     UserViewModel.setUserPresenterModel(_userModel);
@@ -59,10 +68,11 @@ class _LogInStepState extends State<LogInStep> {
     return (days / 365).round() - 1;
   }
 
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: UserViewModel.isFirstEntry(),
+        future: _isNew(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             print(snapshot.data);
@@ -186,7 +196,7 @@ class _LogInStepState extends State<LogInStep> {
                                 },
                               ),
                               isActive: _currentStep >= 0,
-                              state: _currentStep >= 3
+                              state: _currentStep >= 4
                                   ? StepState.complete
                                   : StepState.disabled,
                             ),
