@@ -8,6 +8,7 @@ import 'package:water_overflow/screens/StatisticsScreen.dart';
 import 'package:water_overflow/userinformation/LiqiudVieModel.dart';
 import 'package:water_overflow/userinformation/UserViewModel.dart';
 import 'package:water_overflow/utils/Constants.dart';
+import 'package:water_overflow/utils/DBService.dart';
 import 'package:water_overflow/widgets/AppIcons.dart';
 import 'package:water_overflow/widgets/Block.dart';
 import 'package:water_overflow/widgets/HistoryButton.dart';
@@ -120,8 +121,7 @@ class DynamicBlocks extends State<Blocks> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
+  void updateData() {
     var p = UserViewModel.getProgress();
     liquids = LiquidViewModel.getLiquidList();
     p.then((value) {
@@ -132,6 +132,14 @@ class DynamicBlocks extends State<Blocks> {
     f.then((value) {
       historyList = value;
       setState(() {});
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var versionFuture = DBService().checkVersion();
+    versionFuture.then((value) {
+      updateData();
     });
 
     return new Column(

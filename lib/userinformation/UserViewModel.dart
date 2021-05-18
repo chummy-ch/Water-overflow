@@ -98,7 +98,7 @@ class UserViewModel {
   static _saveProgress(double v) async {
     final pref = await SharedPreferences.getInstance();
     pref.setDouble(HistoryModel.getPogressKeyWithDate(), v);
-    db.saveProgress(HistoryModel.getPogressKeyWithDate(), v.toString());
+    db.saveProgress(HistoryModel.getPogressKeyWithDate(), v);
   }
 
   static setUser(User user) {
@@ -108,7 +108,7 @@ class UserViewModel {
   static Future<void> loadUserModel() async {
     final pref = await SharedPreferences.getInstance();
     String string = pref.getString(STRING_USER_MODEL_KEY);
-    if (string != null && string.isNotEmpty ) {
+    if (string != null && string.isNotEmpty) {
       List<String> stringList = string.split("?");
       UserPresenterModel model = UserPresenterModel(
           stringList[0] == "true",
