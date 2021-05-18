@@ -94,20 +94,34 @@ class UserViewModel {
     _saveHistory();
   }
 
-  static _saveHistory() async {
-    final pref = await SharedPreferences.getInstance();
+  static String getStringFromHistoryList() {
     String st = "";
     for (int i = 0; i < _history.length; i++) {
       st += "[${_history[i].toString()}]";
       if (i != _history.length - 1) st += ",";
     }
+    return st;
+  }
+
+  static _saveHistory() async {
+    final pref = await SharedPreferences.getInstance();
+    var st = getStringFromHistoryList();
     pref.setString(HistoryModel.getStoreKeyWithDate(), st);
-    db.saveHistory(HistoryModel.getStoreKeyWithDate(), st);
+    //db.saveHistory(HistoryModel.getStoreKeyWithDate(), st);
   }
 
   static setProgress(double p) {
     _progress = p;
-    _saveProgress(p);
+    //_saveProgress(p);
+    saveHistoryAndProgressToFirestore();
+  }
+
+  static saveHistoryAndProgressToFirestore() async {
+    var db = DBService();
+    var st = getStringFromHistoryList();
+    await db.updateFirestore(HistoryModel.getStoreKeyWithDate(), st).then(
+        (value) => db.updateFirestore(
+            HistoryModel.getPogressKeyWithDate(), _progress));
   }
 
   static _saveProgress(double v) async {

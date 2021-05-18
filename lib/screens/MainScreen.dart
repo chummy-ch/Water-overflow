@@ -106,9 +106,9 @@ class DynamicBlocks extends State<Blocks> {
     HistoryModel model = new HistoryModel(DateTime.now(), volume, liquid.name);
     historyList.add(model);
     v += volume * liquid.coef / volumeGoal;
+    UserViewModel.setHistory(historyList);
     UserViewModel.setProgress(v);
     setState(() {});
-    UserViewModel.setHistory(historyList);
   }
 
   void _bindLiquidWindowAndSetResult(int volume) async {

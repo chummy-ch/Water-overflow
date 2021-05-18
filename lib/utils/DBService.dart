@@ -9,11 +9,11 @@ class DBService {
   static const String VERSION_KEY = "version";
 
   void saveUserInfo(String userInfo) {
-    _updateFirestore(UserViewModel.STRING_USER_MODEL_KEY, userInfo);
+    updateFirestore(UserViewModel.STRING_USER_MODEL_KEY, userInfo);
   }
 
   void saveHistory(String date, String history) {
-    _updateFirestore(date, history);
+    updateFirestore(date, history);
   }
 
   Future<void> checkVersion() async {
@@ -62,11 +62,11 @@ class DBService {
     ref.setInt(VERSION_KEY, -1);
   }
 
-  void saveProgress(String date, dynamic progress) {
-    _updateFirestore(date, progress.toString());
+  void saveProgress(String date, double progress) {
+    updateFirestore(date, progress);
   }
 
-  void _updateFirestore(String key, dynamic data) async {
+  Future<void> updateFirestore(String key, dynamic data) async {
     var doc = await _usersReference.doc(UserViewModel.getUserId()).get();
     Map<String, dynamic> m = doc.data();
     if (m == null) m = {};
