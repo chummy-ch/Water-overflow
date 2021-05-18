@@ -38,6 +38,13 @@ class DBService {
     }
   }
 
+  Future<bool> hasFirestoreData() async {
+    var doc = await _usersReference.doc(UserViewModel.getUserId()).get();
+    Map<String, dynamic> m = doc.data();
+    if (m == null) return false;
+    return true;
+  }
+
   Future<List<Liquid>> loadLiquid() async {
     var liquidsCollection = FirebaseFirestore.instance.collection("liquids");
     var doc = await liquidsCollection.doc("LuqidsCoef").get();

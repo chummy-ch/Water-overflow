@@ -54,6 +54,15 @@ class UserViewModel {
     }
   }
 
+  //if false then this is not the first entry
+  static Future<bool> isFirstEntry() async {
+    final ref = await SharedPreferences.getInstance();
+    var version = ref.getInt(DBService.VERSION_KEY);
+    if (version != null) return false;
+    var hasFirestoreData = await DBService().hasFirestoreData();
+    return !hasFirestoreData;
+  }
+
   static HistoryModel getHistoryFromString(String h) {
     String s = h.replaceAll("[", "").replaceAll("]", "");
     List<String> valuesList = s.split('?');
