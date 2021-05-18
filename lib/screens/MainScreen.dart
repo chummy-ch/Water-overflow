@@ -146,7 +146,6 @@ class DynamicBlocks extends State<Blocks> {
     versionFuture.then((value) {
       updateData();
     });
-
     return new Column(
       children: <Widget>[
         new Container(

@@ -69,6 +69,7 @@ class DBService {
   void _updateFirestore(String key, String data) async {
     var doc = await _usersReference.doc(UserViewModel.getUserId()).get();
     Map<String, dynamic> m = doc.data();
+    if (m == null) m = {};
     m[key] = data;
     int version = 0;
     if (m.containsKey(VERSION_KEY)) {
