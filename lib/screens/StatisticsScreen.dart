@@ -98,7 +98,7 @@ class StatisticsScreen extends StatelessWidget {
                 ),
               ),
               ButtonsBackgroundRectangle(
-                height: SizeConfig.blockSizeVertical * 41.7,
+                height: SizeConfig.blockSizeVertical * 20,
                 child: Column(
                   children: [
                     Row(
@@ -114,6 +114,17 @@ class StatisticsScreen extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.blockSizeHorizontal * 3,
+                          top: SizeConfig.blockSizeVertical * 1,
+                          bottom: SizeConfig.blockSizeVertical * 1),
+                      child: Text(
+                        'You must buy premium version to see more',
+                        style: TextStyle(fontWeight: FontWeight.bold,
+                          fontSize: 20,),
+                      ),
                     ),
                   ],
                 ),

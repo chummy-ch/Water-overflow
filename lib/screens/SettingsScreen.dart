@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:water_overflow/models/UserPresenterModel.dart';
 import 'package:water_overflow/screens/DialogScreen.dart';
 import 'package:water_overflow/userinformation/UserViewModel.dart';
@@ -20,6 +21,8 @@ class Settings extends StatefulWidget {
 
 class SettingsScreen extends State<Settings> {
   UserPresenterModel _userModel = UserViewModel.getUserModel();
+
+  void _launchURL(url) async => await launch(url);
 
   void _setActivity(double act) {
     _userModel.setActivity(act.round());
@@ -228,10 +231,24 @@ class SettingsScreen extends State<Settings> {
                         ],
                       ),
                       SettingsButton(
-                          name: "SettingsScreen.info.premiumVersion".tr()),
-                      SettingsButton(name: "SettingsScreen.info.about".tr()),
-                      SettingsButton(name: "SettingsScreen.info.contact".tr()),
-                      SettingsButton(name: "SettingsScreen.info.private".tr()),
+                          name: "SettingsScreen.info.premiumVersion".tr(),
+                          onTap: () => {
+                                Dialogs.showPremium(context)}),
+                      SettingsButton(
+                        name: "SettingsScreen.info.about".tr(),
+                        onTap: () =>
+                            _launchURL('https://water-overflow-c1a22.web.app/'),
+                      ),
+                      SettingsButton(
+                        name: "SettingsScreen.info.contact".tr(),
+                        onTap: () => _launchURL(
+                            'https://github.com/chummy-ch/Water-overflow'),
+                      ),
+                      SettingsButton(
+                        name: "SettingsScreen.info.private".tr(),
+                        onTap: () =>
+                            _launchURL('https://water-overflow-c1a22.web.app/'),
+                      ),
                     ],
                   )),
             ],

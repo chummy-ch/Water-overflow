@@ -3,14 +3,18 @@ import 'package:water_overflow/utils/Constants.dart';
 
 import 'PSettingsButton.dart';
 
-class SettingsButton extends PersonalSettingsButton {
+class SettingsButton extends StatelessWidget {
   final String name;
 
-  const SettingsButton({Key key, @required this.name}) : super(key: key);
+  final VoidCallback onTap;
+
+  const SettingsButton({Key key, @required this.name,  this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+        onTap: this.onTap,
+      child:  Container(
       width: SizeConfig.blockSizeHorizontal * 80.73,
       height: SizeConfig.blockSizeVertical * 5.19,
       margin: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical * 2),
@@ -28,6 +32,6 @@ class SettingsButton extends PersonalSettingsButton {
           ),
         ],
       ),
-    );
+    ));
   }
 }
