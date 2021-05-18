@@ -1,10 +1,7 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:water_overflow/models/HistoryModel.dart';
 import 'package:water_overflow/models/UserPresenterModel.dart';
 import 'package:water_overflow/screens/DialogScreen.dart';
 import 'package:water_overflow/userinformation/UserViewModel.dart';
@@ -177,8 +174,13 @@ class SettingsScreen extends State<Settings> {
                             .toString()
                             .tr(),
                         onTap: () => {
-                              Dialogs.showLanguage(context, true).then(
-                                  (value) => {
+                              Dialogs.showLanguage(
+                                      context,
+                                      EasyLocalization.of(context)
+                                              .currentLocale
+                                              .toString() ==
+                                          'en')
+                                  .then((value) => {
                                         if (value != null)
                                           context.setLocale(
                                               Locale(value ? 'en' : 'ru'))

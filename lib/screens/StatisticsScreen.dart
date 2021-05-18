@@ -85,7 +85,15 @@ class StatisticsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    StatisticBlock.printStatistic(),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: SizeConfig.blockSizeHorizontal * 3,
+                        top: SizeConfig.blockSizeVertical * 1,
+                        bottom: SizeConfig.blockSizeVertical * 1,
+                        right: SizeConfig.blockSizeHorizontal * 3,
+                      ),
+                      child: StatisticBlock.printStatistic(),
+                    ),
                   ],
                 ),
               ),
