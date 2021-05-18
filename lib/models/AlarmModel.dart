@@ -1,4 +1,6 @@
-class AlarmModel{
+import 'package:water_overflow/models/Parcelable.dart';
+
+class AlarmModel implements Parcelable{
     String time;
     bool isON;
 
@@ -6,4 +8,10 @@ class AlarmModel{
       this.time = t;
       this.isON = isON;
     }
+
+    @override
+  String toString() {
+      return "$time?$isON";
+    }
+
 }

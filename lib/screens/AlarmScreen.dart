@@ -3,16 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:water_overflow/models/AlarmModel.dart';
+import 'package:water_overflow/userinformation/AlarmViewModel.dart';
 import 'package:water_overflow/utils/Constants.dart';
 import 'package:water_overflow/widgets/Alarm.dart';
 import 'package:water_overflow/widgets/CustomPicker.dart';
 import 'package:water_overflow/widgets/PanelButton.dart';
 
-List<AlarmModel> list = [AlarmModel("8:00", true)];
+List<AlarmModel> list = [];
 
 class AlarmScreenState extends State<AlarmScreen> {
+
   @override
   Widget build(BuildContext context) {
+    AlarmViewModel.loadAlarms().then((value) {
+      list = value;
+      setState(() {
+
+      });
+    });
     SizeConfig().init(context);
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -60,7 +68,7 @@ class AlarmScreenState extends State<AlarmScreen> {
                       itemBuilder: (BuildContext ctxt, int Index) {
                         return Alarm(
                           isOn: list[Index].isON,
-                          text: list[Index].time.toString(),
+                          text: list[Index].time,
                         );
                       })),
               RawMaterialButton(
@@ -70,6 +78,11 @@ class AlarmScreenState extends State<AlarmScreen> {
                     //print('change $date in time zone ' +
                     //date.timeZoneOffset.inHours.toString());
                   }, onConfirm: (date) {
+                    list.add(AlarmModel(DateFormat.Hm().format(date), true));
+                    AlarmViewModel.setAlarms(list);
+                    setState(() {
+                      
+                    });
                     //print('confirm $date');
                   },
                       theme: DatePickerTheme(
