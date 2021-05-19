@@ -2,7 +2,7 @@
     package="com.example.water_overflow1">
    <application
         android:label="water_overflow"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/bottle_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
