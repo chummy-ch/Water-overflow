@@ -46,8 +46,8 @@ class HistoryButton extends StatelessWidget {
         SizedBox(
           width: 10,
         ),
-        RawMaterialButton(
-          onPressed: trashPress,
+        GestureDetector(
+          onTap: trashPress,
           child: Icon(
             AppIcons.trash,
             size: 16,
