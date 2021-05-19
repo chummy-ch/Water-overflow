@@ -246,8 +246,10 @@ class SettingsScreen extends State<Settings> {
                       ),
                       SettingsButton(
                         name: "SettingsScreen.info.private".tr(),
-                        onTap: () =>
-                            _launchURL('https://water-overflow-c1a22.web.app/'),
+                        onTap: () {
+                          _launchURL('https://water-overflow-c1a22.web.app/');
+                          Dialogs.showToast('Congratulations\nYou are very curious');
+                        },
                       ),
                     ],
                   )),

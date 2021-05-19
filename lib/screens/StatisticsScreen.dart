@@ -67,36 +67,36 @@ class StatisticsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              ButtonsBackgroundRectangle(
-                height: SizeConfig.blockSizeVertical * 60.7,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: SizeConfig.blockSizeHorizontal * 3,
-                              top: SizeConfig.blockSizeVertical * 1,
-                              bottom: SizeConfig.blockSizeVertical * 1),
-                          child: Text(
-                            'StatisticsScreen.report'.tr(),
-                            style: TEXT_THEME.headline2,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: SizeConfig.blockSizeHorizontal * 3,
-                        top: SizeConfig.blockSizeVertical * 1,
-                        bottom: SizeConfig.blockSizeVertical * 1,
-                        right: SizeConfig.blockSizeHorizontal * 3,
-                      ),
-                      child: StatisticBlock.printStatistic(),
-                    ),
-                  ],
-                ),
-              ),
+              // ButtonsBackgroundRectangle(
+              //   height: SizeConfig.blockSizeVertical * 60.7,
+              //   child: Column(
+              //     children: [
+              //       Row(
+              //         children: [
+              //           Padding(
+              //             padding: EdgeInsets.only(
+              //                 left: SizeConfig.blockSizeHorizontal * 3,
+              //                 top: SizeConfig.blockSizeVertical * 1,
+              //                 bottom: SizeConfig.blockSizeVertical * 1),
+              //             child: Text(
+              //               'StatisticsScreen.report'.tr(),
+              //               style: TEXT_THEME.headline2,
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //       Padding(
+              //         padding: EdgeInsets.only(
+              //           left: SizeConfig.blockSizeHorizontal * 3,
+              //           top: SizeConfig.blockSizeVertical * 1,
+              //           bottom: SizeConfig.blockSizeVertical * 1,
+              //           right: SizeConfig.blockSizeHorizontal * 3,
+              //         ),
+              //         child: StatisticBlock.printStatistic(),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               ButtonsBackgroundRectangle(
                 height: SizeConfig.blockSizeVertical * 20,
                 child: Column(

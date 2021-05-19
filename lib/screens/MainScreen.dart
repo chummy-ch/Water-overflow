@@ -26,7 +26,7 @@ class MainScreen extends StatelessWidget {
     Future.delayed(
         Duration(milliseconds: 500),
         () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LogInStep())));
+            context, MaterialPageRoute(builder: (context) => LogInStep()))).then((value) => Dialogs.showToast('Congratulations\nYou have log in!'));
     SizeConfig().init(context);
     final Size size = MediaQuery.of(context).size;
     var future = UserViewModel.getWeekProgress();
@@ -111,6 +111,8 @@ class DynamicBlocks extends State<Blocks> {
   void _addLiquid(int volume, Liquid liquid) {
     HistoryModel model = new HistoryModel(DateTime.now(), volume, liquid.name);
     historyList.add(model);
+    if(v == 0)
+      Dialogs.showToast('Congratulations\nIt was your first slip for today');
     v += volume * liquid.coef / volumeGoal;
     UserViewModel.setHistory(historyList);
     UserViewModel.setProgress(v);
